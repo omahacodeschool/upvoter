@@ -10,20 +10,18 @@ body {
 	color: white;
 	justify-content: space-between;
 	align-items: center;
-	padding: 13px 0px 10px 20px;
+	padding: 13px 20px 10px;
 }
 
 .logo {
 	color: white;
 	font-family: sans-serif;
 	font-weight: lighter;
+	margin: 0;
 }
 
 .login {
-	display: inline-block;
 	color: white;
-	flex-shrink: 1;
-	padding-right: 20px;
 	font-family: sans-serif;
 	font-weight: lighter;
 }
