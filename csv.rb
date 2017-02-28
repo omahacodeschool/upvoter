@@ -28,7 +28,7 @@ class UpvoteCSVManipulator
 		the_hash = {}
 		CSV.foreach(file_name, {headers: true, return_headers: false}) do |row|
 			key = row[key_result_by];
-			posts_hash[key] = row.to_hash
+			the_hash[key] = row.to_hash
 		end
 		return the_hash
 	end
