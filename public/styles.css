@@ -12,6 +12,10 @@ body {
 	padding: 0;
 }
 
+.roundCorner{
+	border-radius: 10px;
+}
+
 .header {
 	display: flex;
 	background-color: rgb(30, 30, 30);
@@ -46,6 +50,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	flex-grow: 1;
+	margin-right: 20px;
 }
 
 .featuredImg img {
@@ -63,7 +68,6 @@ body {
 	max-width: 100%;
 	padding: 30px 0px 30px 0px;
 	margin-bottom: 10px;
-	border-radius: 10px;
 }
 
 .featuredText {
@@ -82,7 +86,6 @@ body {
 	margin: 7px 0px 7px 0px;
 	padding: 20px 0px 20px 0px;
 	min-width: 100%;
-	border-radius: 10px;
 }
 
 .articleImg img {
@@ -97,26 +100,23 @@ body {
 	flex-direction: column;
 }
 
-.userSideBar {
-	display: inline-block;
-	background-color: rgb(200, 200, 200);
-	border-radius: 10px;
+.sidebarBox{
 	padding: 20px;
+	margin-bottom: 20px;
+}
+
+.userSideBar {
+	background-color: rgb(200, 200, 200);
 }
 
 .lowerSideBar {
-	display: inline-block;
-	height: 500px;
 	background-color: rgb(200, 200, 200);
-	margin-top: 10px;
-	border-radius: 10px;
-	padding: 10px;
 }
 
 .searchBar {
 }
 
-.searchBar input#searchBar {
+#searchBar {
 	padding: 3px 9px 3px 40px;
 	border-style: solid;
 	border-width: 1px;
@@ -138,7 +138,6 @@ body {
 	border-style: none;
 	margin-left: 5px;
 	padding: 7px;
-	border-radius: 5px;
 }
 
 
