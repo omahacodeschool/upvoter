@@ -129,7 +129,7 @@ body {
 	padding: 10px 15px;
 }
 
-.searchBar input[type=text] {
+.searchBar input#searchBar {
 	display: inline-block;
 	width: 81%;
 	padding: 3px 9px;
@@ -138,11 +138,25 @@ body {
 	border-color: rgb(30, 30, 30);
 	margin-right: auto;
 	margin-left: auto;
+	font-size: 1.5em;
 	background: url("images/magnifyGray.png") no-repeat;
 	background-position: 4% 50%;
 	background-size: 20px 20px;
 	background-color: white;
-	font-size: 1.5em;
+}
+
+.searchBar input#searchBar::placeholder {
+	
+}
+
+.searchBar input#searchBar:focus {
+	background-color: #ffffff;
+	background-image: none;
+}
+
+.searchBar input#searchBar:active {
+	background-color: #ffffff;
+	background-image: none;
 }
 
 .searchBar input[type=button] {
