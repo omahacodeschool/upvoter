@@ -1,3 +1,11 @@
+/* apply a natural box layout model to all elements, but allowing components to change */
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 body {
 	background-color: rgb(220, 220, 220);
 	margin: 0;
@@ -11,6 +19,7 @@ body {
 	justify-content: space-between;
 	align-items: center;
 	padding: 13px 20px 10px;
+	margin-bottom: 30px;
 }
 
 .logo {
@@ -30,17 +39,13 @@ body {
 	display: flex;
 	justify-content: space-between;
 	flex-direction: row;
-	max-width: 99.5%;
+	padding: 0 20px;
 }
 
 .articles {
 	display: flex;
-	max-width: 69%;
-	min-width: 69%;
-	margin: 0;
 	flex-direction: column;
-	padding-top: 30px;
-	padding-right: 10px;
+	flex-grow: 1;
 }
 
 .featuredImg img {
@@ -57,7 +62,7 @@ body {
 	min-width: 100%;
 	max-width: 100%;
 	padding: 30px 0px 30px 0px;
-	margin: 20px 0px 10px 0px;
+	margin-bottom: 10px;
 	border-radius: 10px;
 }
 
@@ -89,21 +94,14 @@ body {
 
 .sideBars {
 	display: flex;
-	max-width: 30%;
-	min-width: 30%;
-	margin-left: 10px;
-	margin-top: 10px;
 	flex-direction: column;
-	padding-top: 40px;
-	padding-right: -10px;
 }
 
 .userSideBar {
 	display: inline-block;
-	height: 300px;
 	background-color: rgb(200, 200, 200);
 	border-radius: 10px;
-	padding: 10px;
+	padding: 20px;
 }
 
 .lowerSideBar {
@@ -116,37 +114,18 @@ body {
 }
 
 .searchBar {
-	padding: 10px 15px;
 }
 
 .searchBar input#searchBar {
-	display: inline-block;
-	width: 81%;
-	padding: 3px 9px;
+	padding: 3px 9px 3px 40px;
 	border-style: solid;
 	border-width: 1px;
 	border-color: rgb(30, 30, 30);
-	margin-right: auto;
-	margin-left: auto;
 	font-size: 1.5em;
 	background: url("images/magnifyGray.png") no-repeat;
 	background-position: 4% 50%;
 	background-size: 20px 20px;
 	background-color: white;
-}
-
-.searchBar input#searchBar::placeholder {
-	
-}
-
-.searchBar input#searchBar:focus {
-	background-color: #ffffff;
-	background-image: none;
-}
-
-.searchBar input#searchBar:active {
-	background-color: #ffffff;
-	background-image: none;
 }
 
 .searchBar input[type=button] {
