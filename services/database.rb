@@ -51,10 +51,14 @@ class Database
 		for row in hash
 			append(table,hash[row])
 		end
-
 	end
 
 	def emptyTable(table)
 		file_name = "./data/#{table}.csv"
+		headers = CSV.read(file_name,headers: true).headers.join(",")
+		open(file_name 'w') do |f|
+			f.puts headers
+		end
+	end
 
 end
