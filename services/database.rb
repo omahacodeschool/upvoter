@@ -33,12 +33,13 @@ class Database
 		return the_hash
 	end
 
-	def editPostEntry(post_id, post_info)
-		#Can we do this without rewriting the entire csv every time?
+	# TODO
+	def delete
+
 	end
 
-	def editUserEntry(user_id, user_info)
-
+	# TODO
+	def edit
 	end
 
 end
