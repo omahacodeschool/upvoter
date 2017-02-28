@@ -9,6 +9,8 @@ class Database
 	def append(table, row)
 		file_name = "./data/#{file_name}.csv"
 
+		# TODO Auto-generate ID as first col.
+
 		open(csv_file, 'a') do |f|
 			f.puts row
 		end
@@ -37,22 +39,6 @@ class Database
 			the_hash[key] = row.to_hash
 		end
 		return the_hash
-	end
-
-	def addUserEntry(user_id, user_info)		
-		#userID,username,email,password
-		entry_string = "#{user_id},\"#{user_info["username"]}\","
-		entry_string += "\"#{user_info["email"]}\",\"#{user_info["password"]}\""
-		append("users", entry_string)
-	end
-
-	def addPostEntry(post_id, post_info)
-		#timestamp,userID,score,likedIDs,dislikeIDs,title,content
-		entry_string = "#{post_id},\"#{post_info["userID"]}\","
-		entry_string += "\"#{post_info["score"]}\",\"#{post_info["likedIDs"]}\""
-		entry_string += "\"#{post_info["dislikeIDs"]}\",\"#{post_info["title"]}\""
-		entry_string += "\"#{post_info["content"]}\""
-		append("posts", entry_string)
 	end
 
 	def editPostEntry(post_id, post_info)
