@@ -1,4 +1,4 @@
-timestamp,userID,score,likedID,dislikeID,title,content
+timestamp,userID,score,likedIDs,dislikeIDs,title,content
 1488296341.177927,2,4,"3,6,10,2,8,9","4,5","Check this out!","awesome.url/sample"
 1488296375.136349,2,1,"2,5","8","A reddit for ants?","reallyreallyreallyridiculouslygoodlooking.zoo"
 1488296383.0044649,4,-3,"4","2,6,10,8","Make money working from home","lamescam.pyramid.lol"
