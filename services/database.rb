@@ -7,11 +7,11 @@ class Database
 	# table - Table name String
 	# row   - String row to add.
 	def append(table, row)
-		file_name = "./data/#{file_name}.csv"
+		file_name = "./data/#{table}.csv"
 
 		# TODO Auto-generate ID as first col.
 
-		open(csv_file, 'a') do |f|
+		open(file_name 'a') do |f|
 			f.puts row
 		end
 	end
@@ -23,7 +23,7 @@ class Database
 	# 
 	# Returns a Hash containing each row's information.
 	def all(table, key_result_by)
-		file_name = "./data/#{file_name}.csv"
+		file_name = "./data/#{table}.csv"
 
 		the_hash = {}
 		CSV.foreach(file_name, {headers: true, return_headers: false}) do |row|
@@ -34,12 +34,27 @@ class Database
 	end
 
 	# TODO
-	def delete
-
+	def delete(table, key_name, key_value)
+		the_hash = all(table, key_name)
+		the_hash.delete(key_value)
+		writeAll(table, the_hash)
 	end
 
 	# TODO
-	def edit
+	def edit(table, key_name, key_value, new_row)
+		delete(table,key_name,key_value)
+		append(table, new_row)	
 	end
+
+	def writeAll(table, hash) 
+		emptyTable(table)
+		for row in hash
+			append(table,hash[row])
+		end
+
+	end
+
+	def emptyTable(table)
+		file_name = "./data/#{table}.csv"
 
 end
