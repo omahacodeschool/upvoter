@@ -150,6 +150,18 @@ body {
 }
 
 .searchBox input[type=button] {
+	background-color: rgb(50, 50, 50);
+	border-style: none;
+}
+
+.searchBox span {
+	font-family: sans-serif;
+	line-height: 3em;
+	font-size: 1.2em;
+	color: #424242;
+}
+
+#searchButton {
 	background: url("images/magnify.png") no-repeat;
 	background-color: rgb(220, 220, 220);
 	background-size: 20px 20px;
@@ -164,6 +176,20 @@ body {
 #newsearch {
 	display: flex;
 	align-items: center;
+}
+
+#sortBy {
+   -webkit-border-radius: 5px;
+   -moz-border-radius: 5px;
+   border-radius: 5px;
+   font-size: 14px;
+   line-height: 18px;
+   background-color: #0d86c6;
+   color: white;
+   font-weight: lighter;
+   letter-spacing: 0.5px;
+   height: 29px;
+   margin: 0px 10px;
 }
 
 

@@ -105,9 +105,19 @@
 					<div class="searchBox">
 						<form id="newsearch" method="get" action="http://www.google.com">
 						        <input type="search" id="searchBar" placeholder="Search...">
-						        <input type="button">
+						        <input type="button" id="searchButton">
 						</form>
+						<span>Sort by </span>
+						<select id="sortBy">
+						  <option value="popular">Popular</option>
+						  <option value="highRated">Highest Rated</option>
+						  <option value="newest">Newest</option>
+						</select>
+						<input type="button" value="New Post">
+						
 					</div>
+
+
 				</div>
 
 				<div class="profPic sidebarBox roundCorner"></div>
