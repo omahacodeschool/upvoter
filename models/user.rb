@@ -1,4 +1,8 @@
 class User
+
+  # Create a user.
+  # 
+  # user_info - Hash of user info
   def create(user_info)
     db = Database.new
     

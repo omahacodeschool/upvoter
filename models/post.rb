@@ -1,15 +1,8 @@
-post "/new_post" do
-  params["title"]
-
-  post = Post.new
-  post.create(params)
-end
-
-
-
-
-
 class Post
+
+  # Create a post.
+  # 
+  # post_info - Hash of post info.
   def create(post_info)
     db = Database.new
 
@@ -21,8 +14,11 @@ class Post
     db.append("posts", info)
   end
 
+  # Get all posts.
+  # 
+  # Returns a Hash of all posts.
   def all
     db = Database.new
-    dbbuildHash("posts", "timestamp");
+    db.all("posts", "timestamp");
   end
 end
