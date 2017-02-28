@@ -7,6 +7,8 @@ This is a Reddit-like news sharing website for the students of Omaha Code School
 The site is built in Sinatra and stores data in a CSV file.
 
 
+## Stories
+
 Story #1:
 The user visits the page, and the page displays the top 25 stories sorted by default.
 
