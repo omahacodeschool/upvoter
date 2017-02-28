@@ -125,6 +125,39 @@ body {
 	padding: 10px;
 }
 
+.searchBar {
+	padding: 10px 15px;
+}
+
+.searchBar input[type=text] {
+	display: inline-block;
+	width: 81%;
+	padding: 3px 9px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: rgb(30, 30, 30);
+	margin-right: auto;
+	margin-left: auto;
+	background: url("images/magnifyGray.png") no-repeat;
+	background-position: 4% 50%;
+	background-size: 20px 20px;
+	background-color: white;
+	font-size: 1.5em;
+}
+
+.searchBar input[type=button] {
+	background: url("images/magnify.png") no-repeat;
+	background-color: rgb(220, 220, 220);
+	background-size: 20px 20px;
+	background-position: 50% 50%;
+	width: 32px;
+	height: 32px;
+	border-style: none;
+	margin-left: 5px;
+	padding: 7px;
+	border-radius: 5px;
+}
+
 
 
 
