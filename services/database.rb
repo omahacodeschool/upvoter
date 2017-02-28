@@ -16,14 +16,6 @@ class Database
 		end
 	end
 
-	# def buildUserIDHash
-	# 	return buildHash(@users_file, "userID")
-	# end
-
-	# def buildUserNameHash
-	# 	return buildHash(@users_file, "username")
-	# end
-
 	# Get all rows from a table.
 	# 
 	# table         - Table name String
