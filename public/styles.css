@@ -13,7 +13,7 @@ body {
 }
 
 .roundCorner{
-	border-radius: 10px;
+	border-radius: 5px;
 }
 
 .header {
@@ -51,12 +51,12 @@ body {
 	flex-direction: column;
 	flex-grow: 1;
 	margin-right: 20px;
+	box-sizing: initial;
 }
 
 .featuredImg img {
 	display: inline-block;
 	width: 70px;
-	padding-right: 40px;
 	padding-left: 40px;
 }
 
@@ -74,6 +74,7 @@ body {
 	font-size: 2em;
 	font-family: sans-serif;
 	font-weight: bold;
+	padding-left: 40px;
 }
 
 .article {
@@ -88,11 +89,16 @@ body {
 	min-width: 100%;
 }
 
+.articleText a {
+	padding-left: 40px;
+	text-decoration: none;
+	color: #0d86c6;
+}
+
 .articleImg img {
 	display: inline-block;
 	width: 40px;
-	padding-right: 20px;
-	padding-left: 20px;
+	padding-left: 30px;
 }
 
 .sideBars {
@@ -113,11 +119,26 @@ body {
 	background-color: rgb(200, 200, 200);
 }
 
-.searchBar {
+::-webkit-input-placeholder { /* Chrome */
+	font-size: 0.7em;
+}
+:-ms-input-placeholder { /* IE 10+ */
+	font-size: 0.7em;
+}
+::-moz-placeholder { /* Firefox 19+ */
+	font-size: 0.7em;
+}
+:-moz-placeholder { /* Firefox 4 - 18 */
+	font-size: 0.7em;
+}
+
+.searchBox {
+	padding: 0;
+	margin: 0;
 }
 
 #searchBar {
-	padding: 3px 9px 3px 40px;
+	padding: 6px 9px 12px 40px;
 	border-style: solid;
 	border-width: 1px;
 	border-color: rgb(30, 30, 30);
@@ -128,16 +149,21 @@ body {
 	background-color: white;
 }
 
-.searchBar input[type=button] {
+.searchBox input[type=button] {
 	background: url("images/magnify.png") no-repeat;
 	background-color: rgb(220, 220, 220);
 	background-size: 20px 20px;
 	background-position: 50% 50%;
-	width: 32px;
-	height: 32px;
+	width: 48px;
+	height: 48px;
 	border-style: none;
 	margin-left: 5px;
 	padding: 7px;
+}
+
+#newsearch {
+	display: flex;
+	align-items: center;
 }
 
 
