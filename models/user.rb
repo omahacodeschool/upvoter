@@ -1,3 +1,5 @@
+require_relative "../services/database.rb"
+
 class User
 
   # Create a user.
@@ -7,7 +9,7 @@ class User
     db = Database.new
     entry_string = "\"#{user_info["username"]}\","
     entry_string += "\"#{user_info["email"]}\",\"#{user_info["password"]}\""
-    db.newEntry(entry_string)
+    db.newEntry("users", entry_string)
   end
 
   def newPassword(currUser, newPass)
