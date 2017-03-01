@@ -21,4 +21,45 @@ class Post
     db = Database.new
     db.all("posts", "timestamp");
   end
+
+  def getData(postID)
+    db = Database.new
+    hash = db.all("posts", "postID")
+    return hash[postID]
+  end
+
+  def sort(method)
+    if method == "newest"
+      return newest()
+    elsif method == "top"
+      return top()
+    else
+      return popular()
+    end
+  end
+
+  def buildArr(sorted)
+    result = []
+    sorted.each do |k, v|
+      result.push(v)
+    end
+    return result
+  end
+
+  def newest()
+    db = Database.new
+    hash = db.all("posts", "timestamp")
+    hash = hash.sort
+    return buildArr(hash).reverse
+  end
+
+  def top()
+    db = Database.new
+    
+  end
+
+  def popular()
+
+  end
+
 end
