@@ -44,11 +44,3 @@ The user visits the page and scrolls to the bottom. There is a "next" button whi
 
 Story #12:
 The user visits the page and scrolls to the bottom. There is a "previous" button which they can click. The user clicks the "previous" button, and the page refreshes with the previous 25 posts available.
-
-
-
-
-
-
-
-

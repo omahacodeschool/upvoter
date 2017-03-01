@@ -16,6 +16,12 @@ class Database
 		end
 	end
 
+	def newEntry(table, row)
+		# GET TIMESTAMP
+		# row = PREPEND TIMESTAMP TO ROW
+		append(table, row)
+	end
+
 	# Get all rows from a table.
 	# 
 	# table         - Table name String
