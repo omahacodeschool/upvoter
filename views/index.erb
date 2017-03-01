@@ -2,7 +2,7 @@
 <html lang="en-us">
 	<head>
 		<meta charset="utf-8">
-		<title>Upvote</title>
+		<title>Upvoter</title>
 		<link rel="stylesheet" href="/styles.css">
 		<script type="text/javascript" src="/scripts.js"></script>
 	</head>
@@ -10,8 +10,14 @@
 	<body>
 
 		<div class="header">
-			<h1 class="logo"><img src="" alt="Upvoter"></h1>
-			<div class="login">Login | Sign Up</div>
+			<div class="logo">
+				<a href="/"><img src="/images/logo.png" alt="Upvoter"></a>
+			</div>
+			<div class="login">
+				<a href="#">Login</a>
+				<span>&nbsp;  |  &nbsp;</span>
+				<a href="#">Sign Up</a>
+			</div>
 		</div>
 
 		<div class="bodyContent">
@@ -22,7 +28,7 @@
 						<img src="/images/articleIcon.png"> 
 					</div>
 					<div class="featuredText">
-						FEATURED
+						<a href="#">FEATURED</a>
 					</div>
 				</div>
 				<div class="article roundCorner">
@@ -104,20 +110,21 @@
 				<div class="userSideBar sidebarBox roundCorner">
 					<div class="searchBox">
 						<form id="newsearch" method="get" action="http://www.google.com">
-						        <input type="search" id="searchBar" placeholder="Search...">
-						        <input type="button" id="searchButton">
+						        <input type="search" class="selected" id="searchBar" placeholder="Search...">
+						        <input type="button" class="selected" id="searchButton">
 						</form>
-						<span>Sort by </span>
-						<select id="sortBy">
-						  <option value="popular">Popular</option>
-						  <option value="highRated">Highest Rated</option>
-						  <option value="newest">Newest</option>
-						</select>
-						<input type="button" value="New Post">
-						
 					</div>
-
-
+					<div class="underSearch">
+						<div class="sortByBlock">
+							<span>Sort by - </span>
+							<select id="sortBy" class="selected">
+							  <option value="popular">Popular</option>
+							  <option value="topRated">Top Rated</option>
+							  <option value="newest">Newest</option>
+							</select>
+						</div>
+						<input type="button" value="New Post" class="roundCorner selected" id="newPostButton">
+					</div>
 				</div>
 
 				<div class="profPic sidebarBox roundCorner"></div>

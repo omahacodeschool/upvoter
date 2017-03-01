@@ -18,25 +18,45 @@ body {
 
 .header {
 	display: flex;
-	background-color: rgb(30, 30, 30);
+	background-color: #1b0f2b;
 	color: white;
 	justify-content: space-between;
 	align-items: center;
-	padding: 13px 20px 10px;
+	padding: 6px 20px 4px;
 	margin-bottom: 30px;
 }
 
-.logo {
-	color: white;
+.logo img {
+	color: rgb(220, 220, 220);
 	font-family: sans-serif;
 	font-weight: lighter;
 	margin: 0;
+	width: 120px;
 }
 
 .login {
-	color: white;
+	display: flex;
+	align-items: center;
+}
+
+.login a {
+	color: rgb(220, 220, 220);
 	font-family: sans-serif;
 	font-weight: lighter;
+	text-decoration: none;
+}
+
+.login a:hover {
+	color: #cc0000;
+	font-family: sans-serif;
+	font-weight: lighter;
+	text-decoration: none;
+}
+
+.login span {
+	font-size: 1.7em;
+	font-weight: 100;
+	color: rgb(220, 220, 220);
 }
 
 .bodyContent {
@@ -70,11 +90,13 @@ body {
 	margin-bottom: 10px;
 }
 
-.featuredText {
+.featuredText a {
 	font-size: 2em;
 	font-family: sans-serif;
 	font-weight: bold;
 	padding-left: 40px;
+	color: #cc0000;
+	text-decoration: none;
 }
 
 .article {
@@ -92,7 +114,7 @@ body {
 .articleText a {
 	padding-left: 40px;
 	text-decoration: none;
-	color: #0d86c6;
+	color: #210049;
 }
 
 .articleImg img {
@@ -134,15 +156,16 @@ body {
 
 .searchBox {
 	padding: 0;
-	margin: 0;
+	margin-bottom: 13px;
 }
 
 #searchBar {
-	padding: 6px 9px 12px 40px;
+	padding: 9px 9px 12px 40px;
 	border-style: solid;
 	border-width: 1px;
 	border-color: rgb(30, 30, 30);
 	font-size: 1.5em;
+	color: #cc0000;
 	background: url("images/magnifyGray.png") no-repeat;
 	background-position: 4% 50%;
 	background-size: 20px 20px;
@@ -152,13 +175,6 @@ body {
 .searchBox input[type=button] {
 	background-color: rgb(50, 50, 50);
 	border-style: none;
-}
-
-.searchBox span {
-	font-family: sans-serif;
-	line-height: 3em;
-	font-size: 1.2em;
-	color: #424242;
 }
 
 #searchButton {
@@ -171,25 +187,67 @@ body {
 	border-style: none;
 	margin-left: 5px;
 	padding: 7px;
+	border-radius: 2px;
 }
 
 #newsearch {
 	display: flex;
 	align-items: center;
+	margin-bottom: 10px;
 }
 
 #sortBy {
    -webkit-border-radius: 5px;
+   -webkit-appearance: none;
    -moz-border-radius: 5px;
    border-radius: 5px;
    font-size: 14px;
    line-height: 18px;
-   background-color: #0d86c6;
-   color: white;
-   font-weight: lighter;
+   background-color: rgb(220, 220, 220) !important;
+   background: url(/images/menuArrow.png) no-repeat right;
+   color: #424242;
    letter-spacing: 0.5px;
+   width: 126px;
    height: 29px;
-   margin: 0px 10px;
+   margin: 0px 4px;
+   padding-left: 5px;
+}
+
+.selected:focus {
+	outline: none !important;
+	border-style: solid;
+	border-width: 2px;
+	border-color: #cc0000;
+	box-shadow: 0 0 5px #cc0000;
+}
+
+input[type=button].selected:focus {
+	border-style: solid;
+	border-width: 2px;
+	border-color: white;
+	box-shadow: 0 0 5px 3px white;
+}
+
+.underSearch {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.underSearch span {
+	font-family: sans-serif;
+	font-size: 1.2em;
+	color: #424242;
+}
+
+#newPostButton {
+	font-family: sans-serif;
+	font-size: 1.3em;
+	font-weight: lighter;
+	color: white;
+	background-color: #cc0000;
+	padding: 10px 15px;
+	border-style: none;
 }
 
 
