@@ -10,6 +10,7 @@ class User
     db.newEntry("users", entry_string)
   end
 
+  # TODO Documentation
   def newPassword(currUser, newPass)
   	db = Database.new
   	hash = db.all("users", "username")
@@ -18,12 +19,14 @@ class User
   	db.edit("users", "username", currUser, newLine)
   end
 
+  # TODO Documentation
   def getID(username)
   	db = Database.new
   	hash = db.all("users", "username")
   	return hash[username]["userID"]
   end
 
+  # TODO Documentation
   def posts(username)
   	userID = getID(username)
   	db = Database.new
