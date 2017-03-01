@@ -42,12 +42,12 @@ class Database
 
 	# Delete a row from a table
 	#
-	# table 		- Table name String
-	# key_name		- Name of key to delete
-	# key_value		- Value of key_name to delete
+	# table     - Table name String
+	# key_name  - Name of key to delete
+	# key_value - Value of key_name to delete
 	# 
-	# Examples:    	- delete(users, username, "bruce")
-	# 				- delete(users, userID, 1234567890.123456)
+	# Examples: - delete(users, username, "bruce")
+	#           - delete(users, userID, 1234567890.123456)
 	def delete(table, key_name, key_value)
 		the_hash = all(table, key_name)
 		the_hash.delete(key_value)
@@ -56,10 +56,10 @@ class Database
 
 	# Edit a row from a table
 	# 
-	# table 		- Table name string
-	# key_name		- Name of key to edit
-	# key_value		- Value of key_name to edit
-	# new_row		- csv string containing data for new row
+	# table     - Table name string
+	# key_name  - Name of key to edit
+	# key_value - Value of key_name to edit
+	# new_row   - csv string containing data for new row
 	def edit(table, key_name, key_value, new_row)
 		delete(table,key_name,key_value)
 		append(table, new_row)	
@@ -67,8 +67,8 @@ class Database
 
 	# Write all values from a hash of table rows into a table
 	#
-	# table 		- Table name string
-	# hash 			- Hash wth all the rows
+	# table - Table name string
+	# hash  - Hash wth all the rows
 	def writeAll(table, hash) 
 		emptyTable(table)
 		hash.each do |k,v|
