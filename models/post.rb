@@ -1,10 +1,15 @@
 class Post
   DATABASE = Database.new
 
+  def initialize(id)
+    @id = id
+    @info = DATABASE.find("posts", "timestamp", @id)
+  end
+
   # Create a post.
   # 
   # post_info - Hash of post info.
-  def create(post_info)
+  def Post.create(post_info)
     info = "\"#{post_info["userID"]}\","
     info += "\"#{post_info["score"]}\",\"#{post_info["likedIDs"]}\""
     info += "\"#{post_info["dislikeIDs"]}\",\"#{post_info["title"]}\""
@@ -16,16 +21,11 @@ class Post
   # Get all posts.
   # 
   # Returns a Hash of all posts.
-  def all
+  def Post.all
     DATABASE.all("posts", "timestamp");
   end
 
-  def getData(postID)
-    hash = DATABASE.all("posts", "postID")
-    return hash[postID]
-  end
-
-  def sort(method)
+  def Post.sort(method)
     if method == "newest"
       return newest()
     elsif method == "top"
@@ -35,28 +35,26 @@ class Post
     end
   end
 
-  def buildArr(sorted)
-    result = []
-    sorted.each do |k, v|
-      result.push(v)
-    end
-    return result
-  end
-
-  def newest()
-    
+  def Post.newest()
     hash = DATABASE.all("posts", "timestamp")
     hash = hash.sort
     return buildArr(hash).reverse
   end
 
-  def top()
-    
-    
+  def Post.top()
   end
 
-  def popular()
+  def Post.popular()
+  end
 
+  private
+
+  def Post.buildArr(sorted)
+    result = []
+    sorted.each do |k, v|
+      result.push(v)
+    end
+    return result
   end
 
 end
