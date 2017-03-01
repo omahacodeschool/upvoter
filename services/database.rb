@@ -5,13 +5,13 @@ class Database
 	# Add a row to the database.
 	# 
 	# table - Table name String
-	# row   - String row to add.
+	# row   - CSV string row to add.
 	def append(table, row)
-		file_name = "./data/#{table}.csv"
+		file_name = "../data/#{table}.csv"
 
 		# TODO Auto-generate ID as first col.
 
-		open(file_name 'a') do |f|
+		open(file_name, 'a') do |f|
 			f.puts row
 		end
 	end
@@ -23,7 +23,7 @@ class Database
 	# 
 	# Returns a Hash containing each row's information.
 	def all(table, key_result_by)
-		file_name = "./data/#{table}.csv"
+		file_name = "../data/#{table}.csv"
 
 		the_hash = {}
 		CSV.foreach(file_name, {headers: true, return_headers: false}) do |row|
@@ -64,8 +64,8 @@ class Database
 	# hash 			- Hash wth all the rows
 	def writeAll(table, hash) 
 		emptyTable(table)
-		for row in hash
-			append(table,hash[row])
+		hash.each do |k,v|
+			append(table,v.values.join(","))
 		end
 	end
 
@@ -73,9 +73,9 @@ class Database
 	#
 	# table 		- Table name string
 	def emptyTable(table)
-		file_name = "./data/#{table}.csv"
+		file_name = "../data/#{table}.csv"
 		headers = CSV.read(file_name,headers: true).headers.join(",")
-		open(file_name 'w') do |f|
+		open(file_name, 'w') do |f|
 			f.puts headers
 		end
 	end
