@@ -21,8 +21,7 @@ class Post
   end
 
   def getData(postID)
-    db = Database.new
-    hash = db.all("posts", "postID")
+    hash = DATABASE.all("posts", "postID")
     return hash[postID]
   end
 
@@ -45,14 +44,14 @@ class Post
   end
 
   def newest()
-    db = Database.new
-    hash = db.all("posts", "timestamp")
+    
+    hash = DATABASE.all("posts", "timestamp")
     hash = hash.sort
     return buildArr(hash).reverse
   end
 
   def top()
-    db = Database.new
+    
     
   end
 
