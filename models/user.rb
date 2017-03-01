@@ -1,5 +1,3 @@
-require_relative "../services/database.rb"
-
 class User
 
   # Create a user.
