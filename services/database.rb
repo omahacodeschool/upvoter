@@ -23,6 +23,25 @@ class Database
 
 	end
 
+	# Get a single row based on a key and value.
+	# 
+	# table         - Table name String
+	# key           - String of the column header to search upon.
+	# key_result_by - Primary value to identify each row by.
+	# 
+	# Returns a Hash of the row's information, or Nil.
+	def find(table, key, key_result_by)
+		file_name = "../data/#{table}.csv"
+
+		CSV.foreach(file_name, {headers: true, return_headers: false}) do |row|
+			if row[key] == key_result_by
+				return row.to_hash
+			end
+		end
+
+		return nil
+	end
+
 	# Get all rows from a table.
 	# 
 	# table         - Table name String

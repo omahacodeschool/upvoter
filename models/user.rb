@@ -1,30 +1,42 @@
 class User
   DATABASE = Database.new
 
+  def initialize(username)
+    @username = username
+
+    @info = DATABASE.find("users", "username", @username)
+  end
+
   # Create a user.
   # 
   # user_info - Hash of user info
-  def create(user_info)
+  def User.create(user_info)
     entry_string = "\"#{user_info["username"]}\","
     entry_string += "\"#{user_info["email"]}\",\"#{user_info["password"]}\""
     DATABASE.newEntry("users", entry_string)
   end
 
   # TODO Documentation
-  def newPassword(currUser, newPass)
-  	all[currUser]["password"] = newPass
-  	newLine = all[currUser].values.join(",")
-  	DATABASE.edit("users", "username", currUser, newLine)
+  def newPassword(newPass)
+    @info["password"] = newPass
+
+    DATABASE.edit("users", "username", @username, format_for_database)
+  end
+
+  # Format user's info for the database.
+  def format_for_database
+    @info.values.join(",")
   end
 
   # TODO Documentation
-  def getID(username)
-  	return all.[username]["userID"]
+  def getID
+  	return @info["userID"]
   end
 
   # TODO Documentation
-  def posts(username)
-  	userID = getID(username)
+  def posts
+  	userID = getID
+
   	results = []
   	posts = DATABASE.all("posts", "timestamp")
   	posts.each do |k, v|
