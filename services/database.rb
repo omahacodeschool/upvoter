@@ -20,6 +20,7 @@ class Database
 		# GET TIMESTAMP
 		# row = PREPEND TIMESTAMP TO ROW
 		append(table, row)
+
 	end
 
 	# Get all rows from a table.
