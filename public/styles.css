@@ -129,7 +129,7 @@ body {
 }
 
 .sidebarBox{
-	padding: 20px;
+	padding: 19px 20px;
 	margin-bottom: 20px;
 }
 
@@ -163,7 +163,7 @@ body {
 	padding: 9px 9px 12px 40px;
 	border-style: solid;
 	border-width: 1px;
-	border-color: rgb(30, 30, 30);
+	border-color: #1b0f2b;
 	font-size: 1.5em;
 	color: #cc0000;
 	background: url("images/magnifyGray.png") no-repeat;
