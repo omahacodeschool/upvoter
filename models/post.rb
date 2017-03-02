@@ -1,5 +1,10 @@
 class Post
   DATABASE = Database.new
+  MINUTE = 60
+  HOUR = 60*MINUTE
+  DAY = 24*HOUR
+  WEEK = 7*DAY
+  MONTH = 4*WEEK
 
   def initialize(id)
     @id = id
@@ -54,7 +59,12 @@ class Post
 
   # Defines method to sort posts by score adjusted by age.
   def Post.popular()
-    # TODO
+    result = {}
+    Post.all.each do |k, v|
+      result[k] = Post.new(k).popular_score
+    end
+    result = result.sort_by {|k, v| v}.to_h
+    return result.keys.reverse
   end
   
   # Returns amount of likes for particular post
@@ -69,13 +79,35 @@ class Post
     return score
   end
 
-  private
-
-  def Post.buildArr(sorted)
-    result = []
-    sorted.each do |k, v|
-      result.push(v)
+  def popular_score()
+    postTime = @info["postID"].to_f
+    currently = Time.now.to_f
+    age = currently - postTime
+    case
+    when age < HOUR # Full score when newer than 1 hour
+      return score
+    when age < 8*HOUR # 95% score when between 1 and 8 hours
+      return score*0.95
+    when age < DAY # 75% score when less than 1 day
+      return score*0.75
+    when age < WEEK # 50% score when less than 1 week
+      return score*0.5
+    when age < MONTH # 25% score when less than 1 month
+      return score*0.25
+    when age < 12*MONTH # 15% score when less than 1 year
+      return score*0.15
+    else # 5% score when older than 1 year
+      return score*0.05
     end
-    return result
   end
+
+  private
+  # OBSOLETE BECAUSE OF 'RESULT.KEYS' ??
+  # def Post.buildArr(sorted)
+  #   result = []
+  #   sorted.each do |k, v|
+  #     result.push(v)
+  #   end
+  #   return result
+  # end
 end

@@ -29,6 +29,7 @@ DATABASE = Database.new
     @info.values.join(",")
   end
 
+  # OBSOLETE BECAUSE OF '@INFO' ??
   # # Gather data for a specific user
   # def getID
   # 	return @info["userID"]
