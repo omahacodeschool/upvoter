@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
-
-</body>
 <html lang="en-us">
-
 	<head>
 		<meta charset="utf-8">
 		<title>Upvoter</title>
@@ -27,91 +18,28 @@
 					<div class="featuredImg">
 						<img src="/images/articleIcon.png"> 
 					</div>
+
 					<div class="featuredText">
-						<a href="#">FEATURED</a>
+						<a href="<%= @featured_post["content"] %>"><%= @featured_post["title"] %></a>
 					</div>
 				</div>
 
-				<div class="article roundCorner">
-					<div class="articleImg">
-						<img src="/images/articleIcon.png">
-					</div>
-					<div class="articleText">
-						<h3><a href="#">ARTICLE 01</a></h3>
-					</div>
-				</div>
+				<%# TODO Move this complexity into the controller or model. %>
+				<% for i in 1..@posts.length - 1 %>
+					<% post = Post.new(@posts[i]) %>
 
-				<div class="article roundCorner">
-					<div class="articleImg">
-						<img src="/images/articleIcon.png">
-					</div>
-					<div class="articleText">
-						<h3><a href="#">ARTICLE 02</a></h3>
-					</div>
-				</div>
+				<%# DREAM: @posts_except_features_paginated.each_with_index do |post, i| %>
 
-				<div class="article roundCorner">
-					<div class="articleImg">
-						<img src="/images/articleIcon.png">
+					<div class="article roundCorner">
+						<div class="articleImg">
+							<img src="/images/articleIcon.png">
+						</div>
+						<div class="articleText">
+							<h3><a href="<%= post.info["content"] %>"><%= post.info["title"] %></a></h3>
+						</div>
 					</div>
-					<div class="articleText">
-						<h3><a href="#">ARTICLE 03</a></h3>
-					</div>
-				</div>
 
-				<div class="article roundCorner">
-					<div class="articleImg">
-						<img src="/images/articleIcon.png">
-					</div>
-					<div class="articleText">
-						<h3><a href="#">ARTICLE 04</a></h3>
-					</div>
-				</div>
-
-				<div class="article roundCorner">
-					<div class="articleImg">
-						<img src="/images/articleIcon.png">
-					</div>
-					<div class="articleText">
-						<h3><a href="#">ARTICLE 05</a></h3>
-					</div>
-				</div>
-
-				<div class="article roundCorner">
-					<div class="articleImg">
-						<img src="/images/articleIcon.png">
-					</div>
-					<div class="articleText">
-						<h3><a href="#">ARTICLE 06</a></h3>
-					</div>
-				</div>
-
-				<div class="article roundCorner">
-					<div class="articleImg">
-						<img src="/images/articleIcon.png">
-					</div>
-					<div class="articleText">
-						<h3><a href="#">ARTICLE 07</a></h3>
-					</div>
-				</div>
-
-				<div class="article roundCorner">
-					<div class="articleImg">
-						<img src="/images/articleIcon.png">
-					</div>
-					<div class="articleText">
-						<h3><a href="#">ARTICLE 08</a></h3>
-					</div>
-				</div>
-
-				<div class="article roundCorner">
-					<div class="articleImg">
-						<img src="/images/articleIcon.png">
-					</div>
-					<div class="articleText">
-						<h3><a href="#">ARTICLE 09</a></h3>
-					</div>
-				</div>
+				<% end %>
 
 			</div>
 
@@ -121,8 +49,8 @@
 
 					<div class="searchBox">
 						<form id="newsearch" method="get" action="http://www.google.com">
-						        <input type="search" class="selected" id="searchBar" placeholder="Search...">
-						        <input type="button" class="selected" id="searchButton">
+					        <input type="search" class="selected" id="searchBar" placeholder="Search...">
+					        <input type="button" class="selected" id="searchButton">
 						</form>
 					</div>
 
@@ -137,7 +65,7 @@
 							</select>
 						</div>
 
-						<form id="newPostForm" action="http://localhost:4567/newPost">
+						<form id="newPostForm" action="/newPost">
 							<input type="submit" value="New Post" class="roundCorner selected" id="newPostButton">
 						</form>
 
@@ -156,9 +84,7 @@
 			<div class="modalWindow">
 
 				<div class="modalHeader">
-					<div class="modalTitle">
-						<h1>New Post</h1>
-					</div>
+					<h1>New Post</h1>
 				</div>
 
 				<div class="newPostContent">

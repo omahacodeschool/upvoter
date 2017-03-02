@@ -271,12 +271,10 @@ input[type=submit] {
 /*-------------------------------------------------FOOTER----------------------------------------------------*/
 
 .footer {
-	display: flex;
 	background-color: #1b0f2b;
-	justify-content: center;
-	align-items: center;
-	padding: 6px 20px 4px;
+	padding: 6px 0 4px;
 	margin-top: 10px;
+	text-align: center;
 }
 
 .footer span {
@@ -312,18 +310,17 @@ input[type=submit] {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin: 45px 120px
+	padding: 45px 120px
 }
 
 /*---------------------------------------------MODAL HEADER--------------------------------------------------*/
 
 .modalHeader {
-	display: block;
 	background-color: #1b0f2b;
 	padding: 9px 0px 12px;
 }
 
-.modalTitle h1 {
+.modalHeader h1 {
 	font-family: sans-serif;
 	color: rgb(220, 220, 220);
 	text-align: center;
@@ -353,6 +350,9 @@ input[type=submit] {
 	margin-left: 20px;
 }
 
+// TODO DRY this up, and move articleLine's margin-bottom to an additional
+//      class... Or find a way to use a CSS pseudo-selected to automatically
+//      target the last form field in the modal.
 .titleLine {
 	display: flex;
 	justify-content: space-between;
@@ -367,8 +367,7 @@ input[type=submit] {
 }
 
 #submitButton {
-	display: flex;
-	justify-content: center;
+	text-align: center;
 }
 
 /*------------------------------------------PLACEHOLDER TEXT-------------------------------------------------*/
