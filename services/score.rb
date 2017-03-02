@@ -1,4 +1,7 @@
 class Score
+	attr_reader :value
+	attr_reader :popular_value
+
 	DATABASE = Database.new
 	MINUTE = 60
 	HOUR = 60*MINUTE
@@ -8,6 +11,8 @@ class Score
 
 	def initialize(postID)
 		@postID = postID
+		@value = score
+		@popular_value = popular_score
 	end
 
 	def score()
@@ -22,11 +27,10 @@ class Score
 	end
 
 	def popular_score()
-	    postTime = @info["postID"].to_f
+	    postTime = @postID.to_f
 	    currently = Time.now.to_f
 	    age = currently - postTime
-	    decay(age)
-
+	    return decay(age)
 	end
 
 	def decay(age)
