@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
+
 	<head>
 		<meta charset="utf-8">
 		<title>Upvoter</title>
@@ -9,20 +10,12 @@
 
 	<body>
 	
-		<div class="header">
-			<div class="logo">
-				<a href="/"><img src="/images/logo.png" alt="Upvoter"></a>
-			</div>
-			<div class="login">
-				<a href="#">Login</a>
-				<span>&nbsp;  |  &nbsp;</span>
-				<a href="#">Sign Up</a>
-			</div>
-		</div>
+		<%= erb :header %>
 
 		<div class="bodyContent">
 
 			<div class="articles">
+
 				<div class="featured roundCorner">
 					<div class="featuredImg">
 						<img src="/images/articleIcon.png"> 
@@ -31,6 +24,7 @@
 						<a href="#">FEATURED</a>
 					</div>
 				</div>
+
 				<div class="article roundCorner">
 					<div class="articleImg">
 						<img src="/images/articleIcon.png">
@@ -39,6 +33,7 @@
 						<h3><a href="#">ARTICLE 01</a></h3>
 					</div>
 				</div>
+
 				<div class="article roundCorner">
 					<div class="articleImg">
 						<img src="/images/articleIcon.png">
@@ -47,6 +42,7 @@
 						<h3><a href="#">ARTICLE 02</a></h3>
 					</div>
 				</div>
+
 				<div class="article roundCorner">
 					<div class="articleImg">
 						<img src="/images/articleIcon.png">
@@ -55,6 +51,7 @@
 						<h3><a href="#">ARTICLE 03</a></h3>
 					</div>
 				</div>
+
 				<div class="article roundCorner">
 					<div class="articleImg">
 						<img src="/images/articleIcon.png">
@@ -63,6 +60,7 @@
 						<h3><a href="#">ARTICLE 04</a></h3>
 					</div>
 				</div>
+
 				<div class="article roundCorner">
 					<div class="articleImg">
 						<img src="/images/articleIcon.png">
@@ -71,6 +69,7 @@
 						<h3><a href="#">ARTICLE 05</a></h3>
 					</div>
 				</div>
+
 				<div class="article roundCorner">
 					<div class="articleImg">
 						<img src="/images/articleIcon.png">
@@ -79,6 +78,7 @@
 						<h3><a href="#">ARTICLE 06</a></h3>
 					</div>
 				</div>
+
 				<div class="article roundCorner">
 					<div class="articleImg">
 						<img src="/images/articleIcon.png">
@@ -87,6 +87,7 @@
 						<h3><a href="#">ARTICLE 07</a></h3>
 					</div>
 				</div>
+
 				<div class="article roundCorner">
 					<div class="articleImg">
 						<img src="/images/articleIcon.png">
@@ -95,6 +96,7 @@
 						<h3><a href="#">ARTICLE 08</a></h3>
 					</div>
 				</div>
+
 				<div class="article roundCorner">
 					<div class="articleImg">
 						<img src="/images/articleIcon.png">
@@ -103,18 +105,22 @@
 						<h3><a href="#">ARTICLE 09</a></h3>
 					</div>
 				</div>
+
 			</div>
 
 			<div class="sideBars">
 				
 				<div class="userSideBar sidebarBox roundCorner">
+
 					<div class="searchBox">
 						<form id="newsearch" method="get" action="http://www.google.com">
 						        <input type="search" class="selected" id="searchBar" placeholder="Search...">
 						        <input type="button" class="selected" id="searchButton">
 						</form>
 					</div>
+
 					<div class="underSearch">
+
 						<div class="sortByBlock">
 							<span>Sort by - </span>
 							<select id="sortBy" class="selected">
@@ -123,7 +129,11 @@
 							  <option value="newest">Newest</option>
 							</select>
 						</div>
-						<input type="button" value="New Post" class="roundCorner selected" id="newPostButton">
+
+						<form id="newPostForm" action="http://localhost:4567/newPost">
+							<input type="submit" value="New Post" class="roundCorner selected" id="newPostButton">
+						</form>
+
 					</div>
 				</div>
 
@@ -135,8 +145,22 @@
 			</div>
 		</div>
 
-		<div class="footer">
+		<div class="modalBackground">
+			<div class="modalWindow">
+				<div class="newPostModalForm">
+					<h1>New Post:</h1>
+					<form class="newPostForm">
+						<span>Title: </span>
+						<input type="text" name="postTitle" class="selected" placeholder="Article title...">
+						<br>
+						<span>Article Link:</span>
+						<input type="text" name="postLink" class="selected" placeholder="Article link...">
+					</form>
+				</div>
+			</div>
 		</div>
+
+		<%= erb :footer %>
 
 	</body>
 </html>

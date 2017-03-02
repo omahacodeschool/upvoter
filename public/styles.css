@@ -9,12 +9,15 @@ html {
 body {
 	background-color: rgb(220, 220, 220);
 	margin: 0;
-	padding: 0;
 }
+
+/*---------------------------------------------ROUNDED CORNERS-----------------------------------------------*/
 
 .roundCorner{
 	border-radius: 5px;
 }
+
+/*-------------------------------------------------HEADER----------------------------------------------------*/
 
 .header {
 	display: flex;
@@ -54,6 +57,8 @@ body {
 	color: rgb(220, 220, 220);
 }
 
+/*-------------------------------------------------BODY------------------------------------------------------*/
+
 .bodyContent {
 	display: flex;
 	justify-content: space-between;
@@ -61,11 +66,17 @@ body {
 	padding: 0 20px;
 }
 
+/*-----------------------------------------------ARTICLES----------------------------------------------------*/
+
 .articles {
 	display: flex;
 	flex-direction: column;
 	flex-grow: 1;
 	margin-right: 20px;
+}
+
+.featuredImg {
+	margin-right: 40px;
 }
 
 .featuredImg img {
@@ -77,16 +88,8 @@ body {
 	background-color: rgb(200, 200, 200);
 	display: flex;
 	align-items: center;
-
-	// Todo - Clean up old CSS that's no longer needed.
-	min-width: 100%;
-	max-width: 100%;
 	padding: 30px 40px;
-	margin-bottom: 10px;
-}
-
-.featuredText{
-	margin-left: 40px;
+	margin-bottom: 20px;
 }
 
 .featuredText a {
@@ -104,22 +107,25 @@ body {
 	font-size: 1.3em;
 	font-family: sans-serif;
 	text-align: center;
-	margin: 7px 0px 7px 0px;
-	padding: 20px 0px 20px 0px;
-	min-width: 100%;
+	margin-bottom: 10px;
+	padding: 20px 30px;
 }
 
 .articleText a {
-	padding-left: 40px;
 	text-decoration: none;
 	color: #210049;
+}
+
+.articleImg {
+	margin-right: 40px; 
 }
 
 .articleImg img {
 	display: inline-block;
 	width: 40px;
-	padding-left: 30px;
 }
+
+/*-----------------------------------------------SIDE BARS---------------------------------------------------*/
 
 .sideBars {
 	display: flex;
@@ -131,11 +137,7 @@ body {
 	margin-bottom: 20px;
 }
 
-.userSideBar {
-	background-color: rgb(200, 200, 200);
-}
-
-.lowerSideBar {
+.userSideBar, .lowerSideBar {
 	background-color: rgb(200, 200, 200);
 }
 
@@ -152,8 +154,9 @@ body {
 	font-size: 0.7em;
 }
 
+/*----------------------------------------------SEARCH BAR---------------------------------------------------*/
+
 .searchBox {
-	padding: 0;
 	margin-bottom: 13px;
 }
 
@@ -167,10 +170,14 @@ body {
 	background: url("images/magnifyGray.png") no-repeat;
 	background-position: 4% 50%;
 	background-size: 20px 20px;
+	background-color: rgb(220, 220, 220);
+}
+
+#searchBar:active,  #searchBar:focus {
 	background-color: white;
 }
 
-.searchBox input[type=button] {
+.searchBox input[type=submit] {
 	background-color: rgb(50, 50, 50);
 	border-style: none;
 }
@@ -194,6 +201,22 @@ body {
 	margin-bottom: 10px;
 }
 
+/*----------------------------------------UNDERNEATH SEARCH BAR----------------------------------------------*/
+
+.underSearch {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.underSearch span {
+	font-family: sans-serif;
+	font-size: 1.2em;
+	color: #424242;
+}
+
+/*--------------------------------------------SORT DROP-DOWN-------------------------------------------------*/
+
 #sortBy {
    -webkit-border-radius: 5px;
    -webkit-appearance: none;
@@ -211,6 +234,14 @@ body {
    padding-left: 5px;
 }
 
+#sortBy.selected:focus {
+	outline: none !important;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #cc0000;
+	box-shadow: 0 0 5px #cc0000;
+}
+
 .selected:focus {
 	outline: none !important;
 	border-style: solid;
@@ -219,24 +250,14 @@ body {
 	box-shadow: 0 0 5px #cc0000;
 }
 
-input[type=button].selected:focus {
+input[type=submit].selected:focus {
 	border-style: solid;
 	border-width: 2px;
 	border-color: white;
 	box-shadow: 0 0 5px 3px white;
 }
 
-.underSearch {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
-
-.underSearch span {
-	font-family: sans-serif;
-	font-size: 1.2em;
-	color: #424242;
-}
+/*---------------------------------------------NEW POST BUTTON-----------------------------------------------*/
 
 #newPostButton {
 	font-family: sans-serif;
@@ -247,6 +268,94 @@ input[type=button].selected:focus {
 	padding: 10px 15px;
 	border-style: none;
 }
+
+/*-------------------------------------------------FOOTER----------------------------------------------------*/
+
+.footer {
+	display: flex;
+	background-color: #1b0f2b;
+	justify-content: center;
+	align-items: center;
+	padding: 6px 20px 4px;
+	margin-top: 10px;
+}
+
+.footer span {
+	color: rgb(220, 220, 220);
+	font-family: sans-serif;
+	font-size: 0.7em;
+	font-weight: lighter;
+}
+
+/*-------------------------------------------------MODAL-----------------------------------------------------*/
+
+.modalBackground {
+	display: flex;
+	background-color: rgba(0, 0, 0, 0.5);
+	width: 100vw;
+	height: 100vh;
+	z-index: 9998;
+	position: fixed;
+	top: 0;
+	left: 0;
+	justify-content: center;
+	align-items: center;
+}
+
+.modalWindow {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: rgb(220, 220, 220);
+	width: 600px;
+	height: 400px;
+	position: fixed;
+	z-index: 9999;
+	border: solid 2px #1b0f2b;
+}
+
+.newPostModalForm {
+	position:relative;
+	top: -20px;
+}
+
+.newPostModalForm h1 {
+	font-family: sans-serif;
+	color: #1b0f2b;
+	text-align: center;
+	font-size: 3em;
+}
+
+.newPostForm {
+	display: flex;
+	flex-direction: column;
+}
+
+.newPostForm span {
+	font-family: sans-serif;
+	color: #1b0f2b;
+	font-size: 1.5em;
+	margin-bottom: 10px;
+}
+
+.newPostForm input[type=text] {
+	font-size: 1.5em;
+	padding: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
