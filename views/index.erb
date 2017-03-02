@@ -28,90 +28,22 @@
 						<img src="/images/articleIcon.png"> 
 					</div>
 					<div class="featuredText">
-						<a href="#">FEATURED</a>
+						<a href="<%= @info["content"] %>"><%= @info["title"] %></a>
 					</div>
 				</div>
 
-				<div class="article roundCorner">
-					<div class="articleImg">
-						<img src="/images/articleIcon.png">
-					</div>
-					<div class="articleText">
-						<h3><a href="#">ARTICLE 01</a></h3>
-					</div>
-				</div>
+				<% for i in  %>
 
-				<div class="article roundCorner">
-					<div class="articleImg">
-						<img src="/images/articleIcon.png">
+					<div class="article roundCorner">
+						<div class="articleImg">
+							<img src="/images/articleIcon.png">
+						</div>
+						<div class="articleText">
+							<h3><a href="<%= @info["content"] %>"><%= @info["title"] %></a></h3>
+						</div>
 					</div>
-					<div class="articleText">
-						<h3><a href="#">ARTICLE 02</a></h3>
-					</div>
-				</div>
 
-				<div class="article roundCorner">
-					<div class="articleImg">
-						<img src="/images/articleIcon.png">
-					</div>
-					<div class="articleText">
-						<h3><a href="#">ARTICLE 03</a></h3>
-					</div>
-				</div>
-
-				<div class="article roundCorner">
-					<div class="articleImg">
-						<img src="/images/articleIcon.png">
-					</div>
-					<div class="articleText">
-						<h3><a href="#">ARTICLE 04</a></h3>
-					</div>
-				</div>
-
-				<div class="article roundCorner">
-					<div class="articleImg">
-						<img src="/images/articleIcon.png">
-					</div>
-					<div class="articleText">
-						<h3><a href="#">ARTICLE 05</a></h3>
-					</div>
-				</div>
-
-				<div class="article roundCorner">
-					<div class="articleImg">
-						<img src="/images/articleIcon.png">
-					</div>
-					<div class="articleText">
-						<h3><a href="#">ARTICLE 06</a></h3>
-					</div>
-				</div>
-
-				<div class="article roundCorner">
-					<div class="articleImg">
-						<img src="/images/articleIcon.png">
-					</div>
-					<div class="articleText">
-						<h3><a href="#">ARTICLE 07</a></h3>
-					</div>
-				</div>
-
-				<div class="article roundCorner">
-					<div class="articleImg">
-						<img src="/images/articleIcon.png">
-					</div>
-					<div class="articleText">
-						<h3><a href="#">ARTICLE 08</a></h3>
-					</div>
-				</div>
-
-				<div class="article roundCorner">
-					<div class="articleImg">
-						<img src="/images/articleIcon.png">
-					</div>
-					<div class="articleText">
-						<h3><a href="#">ARTICLE 09</a></h3>
-					</div>
-				</div>
+				<% end %>
 
 			</div>
 
@@ -121,8 +53,8 @@
 
 					<div class="searchBox">
 						<form id="newsearch" method="get" action="http://www.google.com">
-						        <input type="search" class="selected" id="searchBar" placeholder="Search...">
-						        <input type="button" class="selected" id="searchButton">
+					        <input type="search" class="selected" id="searchBar" placeholder="Search...">
+					        <input type="button" class="selected" id="searchButton">
 						</form>
 					</div>
 
