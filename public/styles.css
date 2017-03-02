@@ -408,6 +408,10 @@ input[type=submit] {
 	margin: 0;
 }
 
+.postPageContent {
+	box-shadow: 0 0 5px black;
+}
+
 
 
 
