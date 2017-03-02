@@ -310,7 +310,7 @@ input[type=submit] {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin: 45px 120px
+	padding: 45px 120px
 }
 
 /*---------------------------------------------MODAL HEADER--------------------------------------------------*/
