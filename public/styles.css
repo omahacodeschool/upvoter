@@ -271,12 +271,10 @@ input[type=submit] {
 /*-------------------------------------------------FOOTER----------------------------------------------------*/
 
 .footer {
-	display: flex;
 	background-color: #1b0f2b;
-	justify-content: center;
-	align-items: center;
-	padding: 6px 20px 4px;
+	padding: 6px 0 4px;
 	margin-top: 10px;
+	text-align: center;
 }
 
 .footer span {
