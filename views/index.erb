@@ -7,17 +7,191 @@
 
 </body>
 <html lang="en-us">
+
 	<head>
 		<meta charset="utf-8">
-		<title>Upvote</title>
-		<link rel="stylesheet" href="styles.css">
-		<script type="text/javascript" src="scripts.js"></script>
+		<title>Upvoter</title>
+		<link rel="stylesheet" href="/styles.css">
+		<script type="text/javascript" src="/scripts.js"></script>
 	</head>
 
 	<body>
+	
+		<%= erb :header %>
 
-		<div class="header">
+		<div class="bodyContent">
+
+			<div class="articles">
+
+				<div class="featured roundCorner">
+					<div class="featuredImg">
+						<img src="/images/articleIcon.png"> 
+					</div>
+					<div class="featuredText">
+						<a href="#">FEATURED</a>
+					</div>
+				</div>
+
+				<div class="article roundCorner">
+					<div class="articleImg">
+						<img src="/images/articleIcon.png">
+					</div>
+					<div class="articleText">
+						<h3><a href="#">ARTICLE 01</a></h3>
+					</div>
+				</div>
+
+				<div class="article roundCorner">
+					<div class="articleImg">
+						<img src="/images/articleIcon.png">
+					</div>
+					<div class="articleText">
+						<h3><a href="#">ARTICLE 02</a></h3>
+					</div>
+				</div>
+
+				<div class="article roundCorner">
+					<div class="articleImg">
+						<img src="/images/articleIcon.png">
+					</div>
+					<div class="articleText">
+						<h3><a href="#">ARTICLE 03</a></h3>
+					</div>
+				</div>
+
+				<div class="article roundCorner">
+					<div class="articleImg">
+						<img src="/images/articleIcon.png">
+					</div>
+					<div class="articleText">
+						<h3><a href="#">ARTICLE 04</a></h3>
+					</div>
+				</div>
+
+				<div class="article roundCorner">
+					<div class="articleImg">
+						<img src="/images/articleIcon.png">
+					</div>
+					<div class="articleText">
+						<h3><a href="#">ARTICLE 05</a></h3>
+					</div>
+				</div>
+
+				<div class="article roundCorner">
+					<div class="articleImg">
+						<img src="/images/articleIcon.png">
+					</div>
+					<div class="articleText">
+						<h3><a href="#">ARTICLE 06</a></h3>
+					</div>
+				</div>
+
+				<div class="article roundCorner">
+					<div class="articleImg">
+						<img src="/images/articleIcon.png">
+					</div>
+					<div class="articleText">
+						<h3><a href="#">ARTICLE 07</a></h3>
+					</div>
+				</div>
+
+				<div class="article roundCorner">
+					<div class="articleImg">
+						<img src="/images/articleIcon.png">
+					</div>
+					<div class="articleText">
+						<h3><a href="#">ARTICLE 08</a></h3>
+					</div>
+				</div>
+
+				<div class="article roundCorner">
+					<div class="articleImg">
+						<img src="/images/articleIcon.png">
+					</div>
+					<div class="articleText">
+						<h3><a href="#">ARTICLE 09</a></h3>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="sideBars">
+				
+				<div class="userSideBar sidebarBox roundCorner">
+
+					<div class="searchBox">
+						<form id="newsearch" method="get" action="http://www.google.com">
+						        <input type="search" class="selected" id="searchBar" placeholder="Search...">
+						        <input type="button" class="selected" id="searchButton">
+						</form>
+					</div>
+
+					<div class="underSearch">
+
+						<div class="sortByBlock">
+							<span>Sort by - </span>
+							<select id="sortBy" class="selected">
+							  <option value="popular">Popular</option>
+							  <option value="topRated">Top Rated</option>
+							  <option value="newest">Newest</option>
+							</select>
+						</div>
+
+						<form id="newPostForm" action="http://localhost:4567/newPost">
+							<input type="submit" value="New Post" class="roundCorner selected" id="newPostButton">
+						</form>
+
+					</div>
+				</div>
+
+				<div class="userSideBar sidebarBox roundCorner"></div>
+
+				<div class="lowerSideBar sidebarBox roundCorner">
+					LOWER SIDE BAR
+				</div>
+			</div>
 		</div>
+
+		<div class="modalBackground" style="display: none;">
+			<div class="modalWindow">
+
+				<div class="modalHeader">
+					<div class="modalTitle">
+						<h1>New Post</h1>
+					</div>
+				</div>
+
+				<div class="newPostContent">
+
+					<form class="newPostForm">
+						<div class="titleLine">
+							<span>Title:</span>
+							<input type="text" name="postTitle" class="selected" placeholder="Article title...">
+						</div>
+						
+						<br>
+						<div class="articleLine">
+							<span>Link:</span>
+							<input type="text" name="postLink" class="selected" placeholder="Article link...">
+						</div>
+
+						<br>
+						<div id="submitButton">
+							<input type="submit" name="submitPost" class="roundCorner selected" value="Submit">
+						</div>
+						
+					</form>
+					
+				</div>
+			</div>
+		</div>
+
+		<%= erb :footer %>
 
 	</body>
 </html>
+
+
+
+
+
