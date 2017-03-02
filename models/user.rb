@@ -37,7 +37,7 @@ DATABASE = Database.new
   # Retrieves the userID associated with a particular username.
   def posts
   	results = []
-  	posts = DATABASE.all("posts", "timestamp")
+  	posts = DATABASE.all("posts", "postID")
   	posts.each do |k, v|
   		if v["userID"] == @info["userID"]
   			results.push(k)

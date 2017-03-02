@@ -3,7 +3,7 @@ class Post
 
   def initialize(id)
     @id = id
-    @info = DATABASE.find("posts", "timestamp", @id.to_s)
+    @info = DATABASE.find("posts", "postID", @id.to_s)
   end
 
   # Create a post.
@@ -18,7 +18,7 @@ class Post
   # 
   # Returns a Hash of all posts.
   def Post.all
-    DATABASE.all("posts", "timestamp");
+    DATABASE.all("posts", "postID");
   end
 
   # Calls appropriate sort method according to desired display.
@@ -62,7 +62,7 @@ class Post
     hash = DATABASE.all("likes","likeID")
     score = 0
     hash.each do |k, v|
-      if v["postID"] == @info["timestamp"]
+      if v["postID"] == @info["postID"]
         score += 1
       end
     end

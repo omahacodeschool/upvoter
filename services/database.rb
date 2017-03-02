@@ -16,7 +16,7 @@ class Database
 		end
 	end
 
-	# Writes new entry to database with self-generated timestamp/ID.
+	# Writes new entry to database with self-generated ID.
 	#
 	# table - Table name String
 	# row   - CSV string to be modified, then added
@@ -30,7 +30,7 @@ class Database
 	# 
 	# table         - Table name String
 	# key           - String of the column header to search upon.
-	# key_result_by - Primary value to identify each row by.
+	# key_value     - Value of column to return matching entry
 	# 
 	# Returns a Hash of the row's information, or Nil.
 	def find(table, key, key_value)
