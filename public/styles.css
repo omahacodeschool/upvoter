@@ -400,17 +400,19 @@ input[type=submit] {
 	flex-grow: 1;
 }
 
+.postPageContent {
+	background-color: rgb(200, 200, 200);
+	box-shadow: 0 0 5px black;
+}
+
 .postPageTitle h1 {
 	color: #1b0f2b;
 	font-family: sans-serif;
 	text-align: center;
 	font-size: 3em;
-	margin: 0;
 }
 
-.postPageContent {
-	box-shadow: 0 0 5px black;
-}
+
 
 
 
