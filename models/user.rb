@@ -29,18 +29,17 @@ DATABASE = Database.new
     @info.values.join(",")
   end
 
-  # Gather data for a specific user
-  def getID
-  	return @info["userID"]
-  end
+  # # Gather data for a specific user
+  # def getID
+  # 	return @info["userID"]
+  # end
 
   # Retrieves the userID associated with a particular username.
   def posts
-  	userID = getID
   	results = []
   	posts = DATABASE.all("posts", "timestamp")
   	posts.each do |k, v|
-  		if v["userID"] == userID
+  		if v["userID"] == @info["userID"]
   			results.push(k)
   		end
   	end

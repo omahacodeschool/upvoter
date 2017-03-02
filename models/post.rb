@@ -45,11 +45,8 @@ class Post
   # Returns array of postIDs sorted by score, highest first
   def Post.top()
     result = {}
-    hash = Post.all
-    hash.each do |k, v|
-      post = Post.new(k)
-      score = post.score
-      result[k] = score
+    Post.all.each do |k, v|
+      result[k] = Post.new(k).score
     end
     result = result.sort_by {|k, v| v}.to_h
     return result.keys.reverse
