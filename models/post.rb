@@ -1,4 +1,6 @@
 class Post
+  attr_reader :info
+
   DATABASE = Database.new
   SCORE = Score.new
   MINUTE = 60
@@ -11,10 +13,6 @@ class Post
     @id = id
     @info = DATABASE.find("posts", "postID", @id.to_s)
     @score = Score.new(id)
-  end
-
-  def info()
-    return @info
   end
 
   # Create a post.
@@ -106,14 +104,4 @@ class Post
       return score*0.05
     end
   end
-
-  private
-  # OBSOLETE BECAUSE OF 'RESULT.KEYS' ??
-  # def Post.buildArr(sorted)
-  #   result = []
-  #   sorted.each do |k, v|
-  #     result.push(v)
-  #   end
-  #   return result
-  # end
 end

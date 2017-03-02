@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
-
-</body>
 <html lang="en-us">
-
 	<head>
 		<meta charset="utf-8">
 		<title>Upvoter</title>
@@ -27,14 +18,17 @@
 					<div class="featuredImg">
 						<img src="/images/articleIcon.png"> 
 					</div>
-					<% post = Post.new(@posts[0]) %>
+
 					<div class="featuredText">
-						<a href="<%= post.info["content"] %>"><%= post.info["title"] %></a>
+						<a href="<%= @featured_post["content"] %>"><%= @featured_post["title"] %></a>
 					</div>
 				</div>
 
+				<%# TODO Move this complexity into the controller or model. %>
 				<% for i in 1..@posts.length - 1 %>
 					<% post = Post.new(@posts[i]) %>
+
+				<%# DREAM: @posts_except_features_paginated.each_with_index do |post, i| %>
 
 					<div class="article roundCorner">
 						<div class="articleImg">
@@ -71,7 +65,7 @@
 							</select>
 						</div>
 
-						<form id="newPostForm" action="http://localhost:4567/newPost">
+						<form id="newPostForm" action="/newPost">
 							<input type="submit" value="New Post" class="roundCorner selected" id="newPostButton">
 						</form>
 
@@ -90,9 +84,7 @@
 			<div class="modalWindow">
 
 				<div class="modalHeader">
-					<div class="modalTitle">
-						<h1>New Post</h1>
-					</div>
+					<h1>New Post</h1>
 				</div>
 
 				<div class="newPostContent">
