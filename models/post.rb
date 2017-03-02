@@ -1,5 +1,6 @@
 class Post
   DATABASE = Database.new
+  SCORE = Score.new
   MINUTE = 60
   HOUR = 60*MINUTE
   DAY = 24*HOUR
@@ -9,6 +10,7 @@ class Post
   def initialize(id)
     @id = id
     @info = DATABASE.find("posts", "postID", @id.to_s)
+    @score = Score.new(id)
   end
 
   def info()
