@@ -5,7 +5,7 @@ require 'sinatra'
 
 
 get("/"){
-	@posts = Post.newest
+	@posts = Post.popular
 	erb :index
 }
 
