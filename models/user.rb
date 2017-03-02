@@ -1,5 +1,5 @@
 class User
-DATABASE = Database.new
+  DATABASE = Database.new
 
   def initialize(username)
     @username = username
@@ -29,13 +29,7 @@ DATABASE = Database.new
     @info.values.join(",")
   end
 
-  # OBSOLETE BECAUSE OF '@INFO' ??
-  # # Gather data for a specific user
-  # def getID
-  # 	return @info["userID"]
-  # end
-
-  # Retrieves the userID associated with a particular username.
+  # This user's posts.
   def posts
   	results = []
   	posts = DATABASE.all("posts", "postID")

@@ -1,4 +1,6 @@
 class Post
+  attr_reader :info
+
   DATABASE = Database.new
   MINUTE = 60
   HOUR = 60*MINUTE
@@ -100,14 +102,4 @@ class Post
       return score*0.05
     end
   end
-
-  private
-  # OBSOLETE BECAUSE OF 'RESULT.KEYS' ??
-  # def Post.buildArr(sorted)
-  #   result = []
-  #   sorted.each do |k, v|
-  #     result.push(v)
-  #   end
-  #   return result
-  # end
 end
