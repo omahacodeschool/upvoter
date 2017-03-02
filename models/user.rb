@@ -29,7 +29,7 @@ class User
     @info.values.join(",")
   end
 
-  # Retrieves the userID associated with a particular username.
+  # This user's posts.
   def posts
   	results = []
   	posts = DATABASE.all("posts", "postID")
