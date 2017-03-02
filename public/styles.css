@@ -316,12 +316,11 @@ input[type=submit] {
 /*---------------------------------------------MODAL HEADER--------------------------------------------------*/
 
 .modalHeader {
-	display: block;
 	background-color: #1b0f2b;
 	padding: 9px 0px 12px;
 }
 
-.modalTitle h1 {
+.modalHeader h1 {
 	font-family: sans-serif;
 	color: rgb(220, 220, 220);
 	text-align: center;
