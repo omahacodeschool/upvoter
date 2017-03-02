@@ -1,5 +1,5 @@
 class User
-DATABASE = Database.new
+  DATABASE = Database.new
 
   def initialize(username)
     @username = username
