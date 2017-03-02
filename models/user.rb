@@ -29,12 +29,6 @@ class User
     @info.values.join(",")
   end
 
-  # OBSOLETE BECAUSE OF '@INFO' ??
-  # # Gather data for a specific user
-  # def getID
-  # 	return @info["userID"]
-  # end
-
   # Retrieves the userID associated with a particular username.
   def posts
   	results = []
