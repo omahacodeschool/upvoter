@@ -15,6 +15,9 @@ DATABASE = Database.new
   end
 
   # Gathers user info and changes password value.
+  #
+  # newPass - String from user input
+  #
   # Rebuilds user database.
   def newPassword(newPass)
     @info["password"] = newPass

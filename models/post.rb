@@ -22,6 +22,8 @@ class Post
   end
 
   # Calls appropriate sort method according to desired display.
+  #
+  # method - String of desired sort method
   def Post.sort(method)
     if method == "newest"
       return newest()
@@ -33,12 +35,14 @@ class Post
   end
 
   # Defines method to sort posts by age.
+  # Returns array of postIDs sorted by newest first.
   def Post.newest()
     array = Post.all.keys.sort
     return array.reverse
   end
 
   # Defines method to sort posts by total score.
+  # Returns array of postIDs sorted by score, highest first
   def Post.top()
     result = {}
     hash = Post.all
@@ -53,10 +57,11 @@ class Post
 
   # Defines method to sort posts by score adjusted by age.
   def Post.popular()
+    # TODO
   end
   
+  # Returns amount of likes for particular post
   def score()
-    # hash = DATABSASE.all("posts", "timestamp")
     hash = DATABASE.all("likes","likeID")
     score = 0
     hash.each do |k, v|
