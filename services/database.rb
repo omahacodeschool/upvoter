@@ -16,8 +16,7 @@ class Database
 		end
 	end
 
-	# Generate timestamp to use as ID then 
-	# prepend ID to row and append the result to table
+	# Writes new entry to database with self-generated timestamp/ID.
 	#
 	# table - Table name String
 	# row   - CSV string to be modified, then added
@@ -36,13 +35,11 @@ class Database
 	# Returns a Hash of the row's information, or Nil.
 	def find(table, key, key_result_by)
 		file_name = "../data/#{table}.csv"
-
 		CSV.foreach(file_name, {headers: true, return_headers: false}) do |row|
 			if row[key] == key_result_by
 				return row.to_hash
 			end
 		end
-
 		return nil
 	end
 
@@ -54,7 +51,6 @@ class Database
 	# Returns a Hash containing each row's information.
 	def all(table, key_result_by)
 		file_name = "../data/#{table}.csv"
-
 		the_hash = {}
 		CSV.foreach(file_name, {headers: true, return_headers: false}) do |row|
 			key = row[key_result_by];
