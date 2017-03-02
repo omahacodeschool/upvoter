@@ -33,8 +33,11 @@
 					</div>
 				</div>
 
+				<%# TODO Move this complexity into the controller or model. %>
 				<% for i in 1..@posts.length - 1 %>
 					<% post = Post.new(@posts[i]) %>
+
+				<%# DREAM: @posts_except_features_paginated.each_with_index do |post, i| %>
 
 					<div class="article roundCorner">
 						<div class="articleImg">
