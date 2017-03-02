@@ -7,8 +7,11 @@ html {
 }
 
 body {
+	display: flex;
 	background-color: rgb(220, 220, 220);
 	margin: 0;
+	min-height: 100vh;
+  	flex-direction: column;
 }
 
 /*---------------------------------------------ROUNDED CORNERS-----------------------------------------------*/
@@ -64,6 +67,7 @@ body {
 	justify-content: space-between;
 	flex-direction: row;
 	padding: 0 20px;
+	flex-grow: 1;
 }
 
 /*-----------------------------------------------ARTICLES----------------------------------------------------*/
@@ -133,7 +137,7 @@ body {
 }
 
 .sidebarBox{
-	padding: 19px 20px;
+	padding: 17px;
 	margin-bottom: 20px;
 }
 
@@ -297,32 +301,38 @@ input[type=submit] {
 	align-items: center;
 }
 
-/*IS IT BETTER TO ESTABLISH WIDTH/HEIGHT IN MODAL WINDOW, OR TO CREATE MARGIN AROUND CONTENT? */
 .modalWindow {
-	display: flex;
-	justify-content: center;
-	align-items: center;
 	background-color: rgb(220, 220, 220);
-	/*width: 550px;
-	height: 350PX;*/
 	position: fixed;
 	z-index: 9999;
 	border: solid 2px #1b0f2b;
 }
 
-.modalContent {
-	position:relative;
-	top: -5px;
+.newPostContent {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	margin: 45px 120px
+}
+
+/*---------------------------------------------MODAL HEADER--------------------------------------------------*/
+
+.modalHeader {
+	display: block;
+	background-color: #1b0f2b;
+	padding: 9px 0px 12px;
 }
 
 .modalTitle h1 {
 	font-family: sans-serif;
-	color: #1b0f2b;
+	color: rgb(220, 220, 220);
 	text-align: center;
 	font-size: 3em;
-	margin: 20px 0px;
+	font-weight: lighter;
+	margin: 0;
 }
+
+/*----------------------------------------------MODAL FORM---------------------------------------------------*/
 
 .newPostForm {
 	display: flex;
@@ -343,21 +353,6 @@ input[type=submit] {
 	margin-left: 20px;
 }
 
-/*------------------------------------------PLACEHOLDER TEXT-------------------------------------------------*/
-
-.newPostForm input[type=text]::-webkit-input-placeholder { /* Chrome */
-	font-weight: lighter;
-}
-.newPostForm input[type=text]:-ms-input-placeholder { /* IE 10+ */
-	font-weight: lighter;
-}
-.newPostForm input[type=text]::-moz-placeholder { /* Firefox 19+ */
-	font-weight: lighter;
-}
-.newPostForm input[type=text]:-moz-placeholder { /* Firefox 4 - 18 */
-	font-weight: lighter;
-}
-
 .titleLine {
 	display: flex;
 	justify-content: space-between;
@@ -374,6 +369,43 @@ input[type=submit] {
 #submitButton {
 	display: flex;
 	justify-content: center;
+}
+
+/*------------------------------------------PLACEHOLDER TEXT-------------------------------------------------*/
+
+/* Chrome */
+.newPostForm input[type=text]::-webkit-input-placeholder { 
+	font-weight: lighter;
+}
+/* IE 10+ */
+.newPostForm input[type=text]:-ms-input-placeholder { 
+	font-weight: lighter;
+}
+/* Firefox 19+ */
+.newPostForm input[type=text]::-moz-placeholder { 
+	font-weight: lighter;
+}
+/* Firefox 4 - 18 */
+.newPostForm input[type=text]:-moz-placeholder { 
+	font-weight: lighter;
+}
+
+/*----------------------------------------------POST PAGE----------------------------------------------------*/
+
+.newPostContent {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	flex-grow: 1;
+}
+
+.postPageTitle h1 {
+	color: #1b0f2b;
+	font-family: sans-serif;
+	text-align: center;
+	font-size: 3em;
+	margin: 0;
 }
 
 

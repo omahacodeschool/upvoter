@@ -12,6 +12,36 @@
 
 		<%= erb :header %>
 
+		<div class="newPostContent">
+
+			<div class="postPageTitle">
+				<h1>New Post</h1>
+			</div>
+
+			<div class="newPostContent">
+
+				<form class="newPostForm">
+					<div class="titleLine">
+						<span>Title:</span>
+						<input type="text" name="postTitle" class="selected" placeholder="Article title...">
+					</div>
+					
+					<br>
+					<div class="articleLine">
+						<span>Link:</span>
+						<input type="text" name="postLink" class="selected" placeholder="Article link...">
+					</div>
+
+					<br>
+					<div id="submitButton">
+						<input type="submit" name="submitPost" class="roundCorner selected" value="Submit">
+					</div>
+					
+				</form>
+
+			</div>
+		</div>
+
 		<%= erb :footer %>
 
 	</body>
