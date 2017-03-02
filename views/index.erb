@@ -27,9 +27,9 @@
 					<div class="featuredImg">
 						<img src="/images/articleIcon.png"> 
 					</div>
-					<% post = Post.new(@posts[0]) %>
+
 					<div class="featuredText">
-						<a href="<%= post.info["content"] %>"><%= post.info["title"] %></a>
+						<a href="<%= @featured_post["content"] %>"><%= @featured_post["title"] %></a>
 					</div>
 				</div>
 

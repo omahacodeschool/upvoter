@@ -6,6 +6,7 @@ require 'sinatra'
 
 get("/"){
 	@posts = Post.popular
+  @featured_post = Post.new(@posts[0]).info
 	erb :index
 }
 
