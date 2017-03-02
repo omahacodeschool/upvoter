@@ -1,42 +1,55 @@
-require_relative "../services/database.rb"
-
 class User
+  DATABASE = Database.new
+
+  def initialize(username)
+    @username = username
+
+    @info = DATABASE.find("users", "username", @username)
+  end
 
   # Create a user.
   # 
   # user_info - Hash of user info
-  def create(user_info)
-    db = Database.new
+  def User.create(user_info)
     entry_string = "\"#{user_info["username"]}\","
     entry_string += "\"#{user_info["email"]}\",\"#{user_info["password"]}\""
-    db.newEntry("users", entry_string)
+    DATABASE.newEntry("users", entry_string)
   end
 
-  def newPassword(currUser, newPass)
-  	db = Database.new
-  	hash = db.all("users", "username")
-  	hash[currUser]["password"] = newPass
-  	newLine = hash[currUser].values.join(",")
-  	db.edit("users", "username", currUser, newLine)
+  # TODO Documentation
+  def newPassword(newPass)
+    @info["password"] = newPass
+
+    DATABASE.edit("users", "username", @username, format_for_database)
   end
 
-  def getID(username)
-  	db = Database.new
-  	hash = db.all("users", "username")
-  	return hash[username]["userID"]
+  # Format user's info for the database.
+  def format_for_database
+    @info.values.join(",")
   end
 
-  def posts(username)
-  	userID = getID(username)
-  	db = Database.new
+  # TODO Documentation
+  def getID
+  	return @info["userID"]
+  end
+
+  # TODO Documentation
+  def posts
+  	userID = getID
+
   	results = []
-  	posts = db.all("posts", "timestamp")
+  	posts = DATABASE.all("posts", "timestamp")
   	posts.each do |k, v|
   		if v["userID"] == userID
   			results.push(k)
   		end
   	end
   	return results
+  end
+
+  # TODO Documentation
+  def User.all
+    DATABASE.all("users", "username")
   end
 
 end
