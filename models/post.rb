@@ -14,7 +14,6 @@ class Post
     info += "\"#{post_info["score"]}\",\"#{post_info["likedIDs"]}\""
     info += "\"#{post_info["dislikeIDs"]}\",\"#{post_info["title"]}\""
     info += "\"#{post_info["content"]}\""
-
     DATABASE.append("posts", info)
   end
 
@@ -25,6 +24,7 @@ class Post
     DATABASE.all("posts", "timestamp");
   end
 
+  # Calls appropriate sort method according to desired display.
   def Post.sort(method)
     if method == "newest"
       return newest()
@@ -35,18 +35,21 @@ class Post
     end
   end
 
+  # Defines method to sort posts by age.
   def Post.newest()
     hash = DATABASE.all("posts", "timestamp")
     hash = hash.sort
     return buildArr(hash).reverse
   end
 
-
+  # Defines method to sort posts by total score.
   def Post.top()
   end
 
+  # Defines method to sort posts by score adjusted by age.
   def Post.popular()
   end
+  
   private
 
   def Post.buildArr(sorted)

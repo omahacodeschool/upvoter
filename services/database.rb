@@ -16,11 +16,11 @@ class Database
 		end
 	end
 
+	# Writes new entry to database with self-generated timestamp/ID.
 	def newEntry(table, row)
 		# GET TIMESTAMP
 		# row = PREPEND TIMESTAMP TO ROW
 		append(table, row)
-
 	end
 
 	# Get a single row based on a key and value.
@@ -32,13 +32,11 @@ class Database
 	# Returns a Hash of the row's information, or Nil.
 	def find(table, key, key_result_by)
 		file_name = "../data/#{table}.csv"
-
 		CSV.foreach(file_name, {headers: true, return_headers: false}) do |row|
 			if row[key] == key_result_by
 				return row.to_hash
 			end
 		end
-
 		return nil
 	end
 
@@ -50,7 +48,6 @@ class Database
 	# Returns a Hash containing each row's information.
 	def all(table, key_result_by)
 		file_name = "../data/#{table}.csv"
-
 		the_hash = {}
 		CSV.foreach(file_name, {headers: true, return_headers: false}) do |row|
 			key = row[key_result_by];
