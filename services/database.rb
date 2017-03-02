@@ -97,7 +97,7 @@ class Database
 
 	# Empty all the values from a table leaving the headers
 	#
-	# table 		- Table name string
+	# table - Table name string
 	def emptyTable(table)
 		file_name = "./data/#{table}.csv"
 		headers = CSV.read(file_name,headers: true).headers.join(",")
