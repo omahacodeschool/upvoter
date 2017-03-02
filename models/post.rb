@@ -1,4 +1,6 @@
 class Post
+  attr_reader :info
+
   DATABASE = Database.new
   MINUTE = 60
   HOUR = 60*MINUTE
@@ -9,10 +11,6 @@ class Post
   def initialize(id)
     @id = id
     @info = DATABASE.find("posts", "postID", @id.to_s)
-  end
-
-  def info()
-    return @info
   end
 
   # Create a post.
