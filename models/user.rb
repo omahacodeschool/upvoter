@@ -1,9 +1,8 @@
 class User
-  DATABASE = Database.new
+DATABASE = Database.new
 
   def initialize(username)
     @username = username
-
     @info = DATABASE.find("users", "username", @username)
   end
 
@@ -11,15 +10,17 @@ class User
   # 
   # user_info - Hash of user info
   def User.create(user_info)
-    entry_string = "\"#{user_info["username"]}\","
-    entry_string += "\"#{user_info["email"]}\",\"#{user_info["password"]}\""
+    entry_string = "\"#{user_info["username"]}\",\"#{user_info["email"]}\",\"#{user_info["password"]}\""
     DATABASE.newEntry("users", entry_string)
   end
 
-  # TODO Documentation
+  # Gathers user info and changes password value.
+  #
+  # newPass - String from user input
+  #
+  # Rebuilds user database.
   def newPassword(newPass)
     @info["password"] = newPass
-
     DATABASE.edit("users", "username", @username, format_for_database)
   end
 
@@ -28,26 +29,25 @@ class User
     @info.values.join(",")
   end
 
-  # TODO Documentation
-  def getID
-  	return @info["userID"]
-  end
+  # OBSOLETE BECAUSE OF '@INFO' ??
+  # # Gather data for a specific user
+  # def getID
+  # 	return @info["userID"]
+  # end
 
-  # TODO Documentation
+  # Retrieves the userID associated with a particular username.
   def posts
-  	userID = getID
-
   	results = []
-  	posts = DATABASE.all("posts", "timestamp")
+  	posts = DATABASE.all("posts", "postID")
   	posts.each do |k, v|
-  		if v["userID"] == userID
+  		if v["userID"] == @info["userID"]
   			results.push(k)
   		end
   	end
   	return results
   end
 
-  # TODO Documentation
+  # Gathers entire user database.
   def User.all
     DATABASE.all("users", "username")
   end

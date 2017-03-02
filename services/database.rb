@@ -16,29 +16,30 @@ class Database
 		end
 	end
 
+	# Writes new entry to database with self-generated ID.
+	#
+	# table - Table name String
+	# row   - CSV string to be modified, then added
 	def newEntry(table, row)
-		# GET TIMESTAMP
-		# row = PREPEND TIMESTAMP TO ROW
+		id = Time.now.to_f
+		row = id + "," + row
 		append(table, row)
-
 	end
 
 	# Get a single row based on a key and value.
 	# 
 	# table         - Table name String
 	# key           - String of the column header to search upon.
-	# key_result_by - Primary value to identify each row by.
+	# key_value     - Value of column to return matching entry
 	# 
 	# Returns a Hash of the row's information, or Nil.
-	def find(table, key, key_result_by)
+	def find(table, key, key_value)
 		file_name = "../data/#{table}.csv"
-
 		CSV.foreach(file_name, {headers: true, return_headers: false}) do |row|
-			if row[key] == key_result_by
+			if row[key] == key_value
 				return row.to_hash
 			end
 		end
-
 		return nil
 	end
 
@@ -50,7 +51,6 @@ class Database
 	# Returns a Hash containing each row's information.
 	def all(table, key_result_by)
 		file_name = "../data/#{table}.csv"
-
 		the_hash = {}
 		CSV.foreach(file_name, {headers: true, return_headers: false}) do |row|
 			key = row[key_result_by];
