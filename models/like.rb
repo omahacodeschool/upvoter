@@ -1,5 +1,6 @@
 class Like
 
+	# Calculates score for a particular post.
 	def count(postID)
 		db = Database.new
 		likes = db.all("likes", "likeID")

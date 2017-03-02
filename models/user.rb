@@ -1,9 +1,8 @@
 class User
-  DATABASE = Database.new
+DATABASE = Database.new
 
   def initialize(username)
     @username = username
-
     @info = DATABASE.find("users", "username", @username)
   end
 
@@ -16,10 +15,10 @@ class User
     DATABASE.newEntry("users", entry_string)
   end
 
-  # TODO Documentation
+  # Gathers user info and changes password value.
+  # Rebuilds user database.
   def newPassword(newPass)
     @info["password"] = newPass
-
     DATABASE.edit("users", "username", @username, format_for_database)
   end
 
@@ -28,15 +27,14 @@ class User
     @info.values.join(",")
   end
 
-  # TODO Documentation
+  # Gather data for a specific user
   def getID
   	return @info["userID"]
   end
 
-  # TODO Documentation
+  # Retrieves the userID associated with a particular username.
   def posts
   	userID = getID
-
   	results = []
   	posts = DATABASE.all("posts", "timestamp")
   	posts.each do |k, v|
@@ -47,7 +45,7 @@ class User
   	return results
   end
 
-  # TODO Documentation
+  # Gathers entire user database.
   def User.all
     DATABASE.all("users", "username")
   end

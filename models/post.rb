@@ -20,12 +20,14 @@ class Post
     DATABASE.all("posts", "timestamp");
   end
 
+  # Gathers data for a specific post entry
   def getData(postID)
     db = Database.new
     hash = db.all("posts", "postID")
     return hash[postID]
   end
 
+  # Calls specific sorting method.
   def sort(method)
     if method == "newest"
       return newest()
@@ -36,6 +38,7 @@ class Post
     end
   end
 
+  # Constructs an array of posts for display on page
   def buildArr(sorted)
     result = []
     sorted.each do |k, v|
@@ -44,6 +47,7 @@ class Post
     return result
   end
 
+  # Defines sort method for posts by timestamp.
   def newest()
     db = Database.new
     hash = db.all("posts", "timestamp")
@@ -51,11 +55,13 @@ class Post
     return buildArr(hash).reverse
   end
 
+  # Defines sort method for posts by total score.
   def top()
     db = Database.new
     
   end
 
+  # Defines sort method for posts by score adjusted for age.
   def popular()
 
   end
