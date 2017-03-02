@@ -19,7 +19,6 @@ body {
 .header {
 	display: flex;
 	background-color: #1b0f2b;
-	color: white;
 	justify-content: space-between;
 	align-items: center;
 	padding: 6px 20px 4px;
@@ -27,10 +26,6 @@ body {
 }
 
 .logo img {
-	color: rgb(220, 220, 220);
-	font-family: sans-serif;
-	font-weight: lighter;
-	margin: 0;
 	width: 120px;
 }
 
@@ -71,30 +66,33 @@ body {
 	flex-direction: column;
 	flex-grow: 1;
 	margin-right: 20px;
-	box-sizing: initial;
 }
 
 .featuredImg img {
 	display: inline-block;
 	width: 70px;
-	padding-left: 40px;
 }
 
 .featured {
 	background-color: rgb(200, 200, 200);
 	display: flex;
 	align-items: center;
+
+	// Todo - Clean up old CSS that's no longer needed.
 	min-width: 100%;
 	max-width: 100%;
-	padding: 30px 0px 30px 0px;
-	margin-bottom: 20px;
+	padding: 30px 40px;
+	margin-bottom: 10px;
+}
+
+.featuredText{
+	margin-left: 40px;
 }
 
 .featuredText a {
 	font-size: 2em;
 	font-family: sans-serif;
 	font-weight: bold;
-	padding-left: 40px;
 	color: #cc0000;
 	text-decoration: none;
 }
