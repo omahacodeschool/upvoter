@@ -350,6 +350,9 @@ input[type=submit] {
 	margin-left: 20px;
 }
 
+// TODO DRY this up, and move articleLine's margin-bottom to an additional
+//      class... Or find a way to use a CSS pseudo-selected to automatically
+//      target the last form field in the modal.
 .titleLine {
 	display: flex;
 	justify-content: space-between;
@@ -364,8 +367,7 @@ input[type=submit] {
 }
 
 #submitButton {
-	display: flex;
-	justify-content: center;
+	text-align: center;
 }
 
 /*------------------------------------------PLACEHOLDER TEXT-------------------------------------------------*/
