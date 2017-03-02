@@ -147,15 +147,32 @@
 
 		<div class="modalBackground">
 			<div class="modalWindow">
-				<div class="newPostModalForm">
-					<h1>New Post:</h1>
+				<div class="modalContent">
+
+					<div class="modalTitle">
+						<h1>New Post</h1>
+					</div>
+
+					
 					<form class="newPostForm">
-						<span>Title: </span>
-						<input type="text" name="postTitle" class="selected" placeholder="Article title...">
+						<div class="titleLine">
+							<span>Title:</span>
+							<input type="text" name="postTitle" class="selected" placeholder="Article title...">
+						</div>
+						
 						<br>
-						<span>Article Link:</span>
-						<input type="text" name="postLink" class="selected" placeholder="Article link...">
+						<div class="articleLine">
+							<span>Link:</span>
+							<input type="text" name="postLink" class="selected" placeholder="Article link...">
+						</div>
+
+						<br>
+						<div id="submitButton">
+							<input type="submit" name="submitPost" class="roundCorner selected" value="Submit">
+						</div>
+						
 					</form>
+					
 				</div>
 			</div>
 		</div>
