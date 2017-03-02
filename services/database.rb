@@ -16,11 +16,15 @@ class Database
 		end
 	end
 
+	# Generate timestamp to use as ID then 
+	# prepend ID to row and append the result to table
+	#
+	# table - Table name String
+	# row   - CSV string to be modified, then added
 	def newEntry(table, row)
-		# GET TIMESTAMP
-		# row = PREPEND TIMESTAMP TO ROW
+		id = Time.now.to_f
+		row = id + "," + row
 		append(table, row)
-
 	end
 
 	# Get a single row based on a key and value.
