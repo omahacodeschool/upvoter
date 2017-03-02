@@ -3,18 +3,15 @@ class Post
 
   def initialize(id)
     @id = id
-    @info = DATABASE.find("posts", "timestamp", @id)
+    @info = DATABASE.find("posts", "timestamp", @id.to_s)
   end
 
   # Create a post.
   # 
   # post_info - Hash of post info.
   def Post.create(post_info)
-    info = "\"#{post_info["userID"]}\","
-    info += "\"#{post_info["score"]}\",\"#{post_info["likedIDs"]}\""
-    info += "\"#{post_info["dislikeIDs"]}\",\"#{post_info["title"]}\""
-    info += "\"#{post_info["content"]}\""
-    DATABASE.append("posts", info)
+    info = "\"#{post_info["userID"]}\",\"#{post_info["title"]}\",\"#{post_info["content"]}\""
+    DATABASE.newEntry("posts", info)
   end
 
   # Get all posts.
@@ -37,19 +34,39 @@ class Post
 
   # Defines method to sort posts by age.
   def Post.newest()
-    hash = DATABASE.all("posts", "timestamp")
-    hash = hash.sort
-    return buildArr(hash).reverse
+    array = Post.all.keys.sort
+    return array.reverse
   end
 
   # Defines method to sort posts by total score.
   def Post.top()
+    result = {}
+    hash = Post.all
+    hash.each do |k, v|
+      post = Post.new(k)
+      score = post.score
+      result[k] = score
+    end
+    result = result.sort_by {|k, v| v}.to_h
+    return result.keys.reverse
   end
 
   # Defines method to sort posts by score adjusted by age.
   def Post.popular()
   end
   
+  def score()
+    # hash = DATABSASE.all("posts", "timestamp")
+    hash = DATABASE.all("likes","likeID")
+    score = 0
+    hash.each do |k, v|
+      if v["postID"] == @info["timestamp"]
+        score += 1
+      end
+    end
+    return score
+  end
+
   private
 
   def Post.buildArr(sorted)
@@ -59,5 +76,4 @@ class Post
     end
     return result
   end
-
 end

@@ -10,8 +10,7 @@ DATABASE = Database.new
   # 
   # user_info - Hash of user info
   def User.create(user_info)
-    entry_string = "\"#{user_info["username"]}\","
-    entry_string += "\"#{user_info["email"]}\",\"#{user_info["password"]}\""
+    entry_string = "\"#{user_info["username"]}\",\"#{user_info["email"]}\",\"#{user_info["password"]}\""
     DATABASE.newEntry("users", entry_string)
   end
 
