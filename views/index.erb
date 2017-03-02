@@ -27,12 +27,13 @@
 					<div class="featuredImg">
 						<img src="/images/articleIcon.png"> 
 					</div>
+					<% post = Post.new(@posts[0]) %>
 					<div class="featuredText">
-						<a href="#">TITLE</a>
+						<a href="<%= post.info["content"] %>"><%= post.info["title"] %></a>
 					</div>
 				</div>
 
-				<% for i in 0..@posts.length - 1 %>
+				<% for i in 1..@posts.length - 1 %>
 					<% post = Post.new(@posts[i]) %>
 
 					<div class="article roundCorner">
