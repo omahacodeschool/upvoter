@@ -11,6 +11,10 @@ class Post
     @info = DATABASE.find("posts", "postID", @id.to_s)
   end
 
+  def info()
+    return @info
+  end
+
   # Create a post.
   # 
   # post_info - Hash of post info.
