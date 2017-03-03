@@ -3,6 +3,7 @@
 		<meta charset="utf-8">
 		<title>Upvoter</title>
 		<link rel="stylesheet" href="/styles.css">
+		<link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,400" rel="stylesheet">
 		<script type="text/javascript" src="/scripts.js"></script>
 	</head>
 
@@ -14,27 +15,11 @@
 
 			<div class="articles">
 
-				<div class="featured roundCorner">
-					<div class="featuredImg">
-						<img src="/images/articleIcon.png"> 
-					</div>
-
-					<div class="featuredText">
-						<a href="<%= @featured.info["content"] %>"><%= @featured.info["title"] %></a>
-					</div>
-				</div>
-
-				<% for post in @page_of_posts %>
-				    <%#TODO move this into post.erb %>
-					<div class="article roundCorner"> 
-						<div class="articleImg">
-							<img src="/images/articleIcon.png">
-						</div>
-						<div class="articleText">
-							<h3><a href="<%= post.info["content"] %>"><%= post.info["title"] %></a></h3>
-						</div>
-					</div>
-				<% end %>
+				<% @page_of_posts.each_with_index { |post, i| %>
+				    
+				   <%= erb :article, :locals => {:post => post, :i => i} %>
+				   
+				<% } %>
 
 			</div>
 
@@ -75,7 +60,8 @@
 			</div>
 		</div>
 
-		<div class="modalBackground" style="display: none;">
+		<div class="modalFullScreen modalBackground" style="display: none;"></div>
+		<div class="modalFullScreen modal" style="display: none;">
 			<div class="modalWindow">
 
 				<div class="modalHeader">

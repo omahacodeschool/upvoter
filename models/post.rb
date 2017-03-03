@@ -109,7 +109,6 @@ class Post
   def Post.pageIDs(sort_method,page_number)
     postIDs = Post.sort(sort_method)
     start_post = (page_number-1)*25
-    if start_post == 0 then start_post = 1 end #skip the featured post
     end_post = start_post + 24
     return postIDs[start_post..end_post]
   end

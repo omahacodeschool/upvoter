@@ -14,13 +14,13 @@ body {
   	flex-direction: column;
 }
 
-/*---------------------------------------------ROUNDED CORNERS-----------------------------------------------*/
+/*-----------------------------ROUNDED CORNERS-------------------------------*/
 
 .roundCorner{
 	border-radius: 5px;
 }
 
-/*-------------------------------------------------HEADER----------------------------------------------------*/
+/*---------------------------------HEADER------------------------------------*/
 
 .header {
 	display: flex;
@@ -42,15 +42,17 @@ body {
 
 .login a {
 	color: rgb(220, 220, 220);
-	font-family: sans-serif;
-	font-weight: lighter;
+	font-family: 'Catamaran', sans-serif;
+	font-weight: 100;
+	font-size: 1.2em;
 	text-decoration: none;
 }
 
 .login a:hover {
 	color: #cc0000;
-	font-family: sans-serif;
-	font-weight: lighter;
+	font-family: 'Catamaran', sans-serif;
+	font-weight: 100;
+	font-size: 1.2em;
 	text-decoration: none;
 }
 
@@ -60,7 +62,7 @@ body {
 	color: rgb(220, 220, 220);
 }
 
-/*-------------------------------------------------BODY------------------------------------------------------*/
+/*---------------------------------BODY--------------------------------------*/
 
 .bodyContent {
 	display: flex;
@@ -70,7 +72,7 @@ body {
 	flex-grow: 1;
 }
 
-/*-----------------------------------------------ARTICLES----------------------------------------------------*/
+/*-------------------------------ARTICLES------------------------------------*/
 
 .articles {
 	display: flex;
@@ -97,8 +99,8 @@ body {
 }
 
 .featuredText a {
-	font-size: 2em;
-	font-family: sans-serif;
+	font-size: 1.5em;
+	font-family: "Catamaran", sans-serif;
 	font-weight: bold;
 	color: #cc0000;
 	text-decoration: none;
@@ -109,7 +111,7 @@ body {
 	display: flex;
 	align-items: center;
 	font-size: 1.3em;
-	font-family: sans-serif;
+	font-family: 'Catamaran', sans-serif;
 	text-align: center;
 	margin-bottom: 10px;
 	padding: 20px 30px;
@@ -129,7 +131,7 @@ body {
 	width: 40px;
 }
 
-/*-----------------------------------------------SIDE BARS---------------------------------------------------*/
+/*-------------------------------SIDE BARS-----------------------------------*/
 
 .sideBars {
 	display: flex;
@@ -158,7 +160,7 @@ body {
 	font-size: 0.7em;
 }
 
-/*----------------------------------------------SEARCH BAR---------------------------------------------------*/
+/*------------------------------SEARCH BAR-----------------------------------*/
 
 .searchBox {
 	margin-bottom: 13px;
@@ -200,7 +202,7 @@ body {
 	margin-bottom: 10px;
 }
 
-/*----------------------------------------UNDERNEATH SEARCH BAR----------------------------------------------*/
+/*------------------------UNDERNEATH SEARCH BAR------------------------------*/
 
 .underSearch {
 	display: flex;
@@ -209,12 +211,12 @@ body {
 }
 
 .underSearch span {
-	font-family: sans-serif;
+	font-family: 'Catamaran', sans-serif;
 	font-size: 1.2em;
 	color: #424242;
 }
 
-/*--------------------------------------------SORT DROP-DOWN-------------------------------------------------*/
+/*----------------------------SORT DROP-DOWN---------------------------------*/
 
 #sortBy {
    -webkit-border-radius: 5px;
@@ -256,19 +258,19 @@ input[type=submit].selected:focus {
 	box-shadow: 0 0 5px 3px white;
 }
 
-/*---------------------------------------------SUBMIT BUTTONS-----------------------------------------------*/
+/*-----------------------------SUBMIT BUTTONS-------------------------------*/
 
 input[type=submit] {
-	font-family: sans-serif;
+	font-family: 'Catamaran', sans-serif;
 	font-size: 1.3em;
-	font-weight: lighter;
+	font-weight: 400;
 	color: white;
 	background-color: #cc0000;
 	padding: 10px 15px;
 	border: solid 2px #cc0000;
 }
 
-/*-------------------------------------------------FOOTER----------------------------------------------------*/
+/*---------------------------------FOOTER------------------------------------*/
 
 .footer {
 	background-color: #1b0f2b;
@@ -279,41 +281,48 @@ input[type=submit] {
 
 .footer span {
 	color: rgb(220, 220, 220);
-	font-family: sans-serif;
+	font-family: 'Catamaran', sans-serif;
 	font-size: 0.7em;
 	font-weight: lighter;
 }
 
-/*-------------------------------------------------MODAL-----------------------------------------------------*/
+/*---------------------------------MODAL-------------------------------------*/
 
-.modalBackground {
-	display: flex;
-	background-color: rgba(0, 0, 0, 0.5);
-	width: 100vw;
-	height: 100vh;
-	z-index: 9998;
+.modalFullScreen {
 	position: fixed;
 	top: 0;
 	left: 0;
+	width: 100vw;
+	height: 100vh;
+}
+
+.modalBackground {
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 9998;
+}
+
+.modal {
+	display: flex;
 	justify-content: center;
 	align-items: center;
+	z-index: 9999;
+	pointer-events: none;
 }
 
 .modalWindow {
 	background-color: rgb(220, 220, 220);
-	position: fixed;
-	z-index: 9999;
 	border: solid 2px #1b0f2b;
+	pointer-events: auto;
 }
 
 .newPostContent {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding: 45px 120px
+	padding: 45px 120px;
 }
 
-/*---------------------------------------------MODAL HEADER--------------------------------------------------*/
+/*-----------------------------MODAL HEADER----------------------------------*/
 
 .modalHeader {
 	background-color: #1b0f2b;
@@ -321,7 +330,7 @@ input[type=submit] {
 }
 
 .modalHeader h1 {
-	font-family: sans-serif;
+	font-family: 'Catamaran', sans-serif;
 	color: rgb(220, 220, 220);
 	text-align: center;
 	font-size: 3em;
@@ -329,7 +338,7 @@ input[type=submit] {
 	margin: 0;
 }
 
-/*----------------------------------------------MODAL FORM---------------------------------------------------*/
+/*------------------------------MODAL FORM-----------------------------------*/
 
 .newPostForm {
 	display: flex;
@@ -337,7 +346,7 @@ input[type=submit] {
 }
 
 .newPostForm span {
-	font-family: sans-serif;
+	font-family: 'Catamaran', sans-serif;
 	color: #1b0f2b;
 	font-size: 1.5em;
 	margin-bottom: 10px;
@@ -370,7 +379,7 @@ input[type=submit] {
 	text-align: center;
 }
 
-/*------------------------------------------PLACEHOLDER TEXT-------------------------------------------------*/
+/*--------------------------PLACEHOLDER TEXT---------------------------------*/
 
 /* Chrome */
 .newPostForm input[type=text]::-webkit-input-placeholder { 
@@ -389,7 +398,7 @@ input[type=submit] {
 	font-weight: lighter;
 }
 
-/*----------------------------------------------POST PAGE----------------------------------------------------*/
+/*---------------------------------POST PAGE---------------------------------*/
 
 .newPostContent {
 	display: flex;
@@ -406,7 +415,7 @@ input[type=submit] {
 
 .postPageTitle h1 {
 	color: #1b0f2b;
-	font-family: sans-serif;
+	font-family: 'Catamaran', sans-serif;
 	text-align: center;
 	font-size: 3em;
 }

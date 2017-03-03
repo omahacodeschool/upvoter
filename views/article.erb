@@ -1,0 +1,8 @@
+<div class="article roundCorner <%= if (i == 0) then ("featured") end %> "> 
+	<div class=" <%= if (i == 0) then ("featuredImg") else ("articleImg") end %> ">
+		<img src="/images/articleIcon.png">
+	</div>
+	<div class=" <%= if (i == 0) then ("featuredText") else ("articleText") end %> ">
+		<h3><a href="<%= post.info["content"] %>"><%= post.info["title"] %></a></h3>
+	</div>
+</div>
