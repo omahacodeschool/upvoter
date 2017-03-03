@@ -70,5 +70,48 @@ class Post
     result = result.sort_by {|k, v| v}.to_h
     return result.keys.reverse
   end
-  
+
+  # TODO Should the below be returning an array of "infos" so the erb
+  # could do post["content"] rather than post.info["content"]?
+
+  # Returns an array of the 25 Posts for the specified page, or nil
+  #
+  # sort_method - String of sort method for page
+  # page_number - Integer page number
+  def Post.page(sort_method,page_number)
+    pageIDs = Post.pageIDs(sort_method,page_number)
+    if pageIDs.nil? 
+      return nil
+    else
+      return Post.IDsToPosts(pageIDs)
+    end
+  end
+
+  # Get the top ranked post for a given sort method
+  #
+  # sort_method - String of sort method
+  # Returns the top ranked Post
+  def Post.featured(sort_method)
+    pageID = Post.sort(sort_method)[0]
+    return Post.new(pageID)
+  end
+
+  private
+
+  def Post.IDsToPosts(postIDs)
+    posts = []
+    for id in postIDs
+      posts.push(Post.new(id))
+    end
+    return posts
+  end
+
+  def Post.pageIDs(sort_method,page_number)
+    postIDs = Post.sort(sort_method)
+    start_post = (page_number-1)*25
+    if start_post == 0 then start_post = 1 end #skip the featured post
+    end_post = start_post + 24
+    return postIDs[start_post..end_post]
+  end
+
 end

@@ -20,17 +20,13 @@
 					</div>
 
 					<div class="featuredText">
-						<a href="<%= @featured_post["content"] %>"><%= @featured_post["title"] %></a>
+						<a href="<%= @featured.info["content"] %>"><%= @featured.info["title"] %></a>
 					</div>
 				</div>
 
-				<%# TODO Move this complexity into the controller or model. %>
-				<% for i in 1..@posts.length - 1 %>
-					<% post = Post.new(@posts[i]) %>
-
-				<%# DREAM: @posts_except_features_paginated.each_with_index do |post, i| %>
-
-					<div class="article roundCorner">
+				<% for post in @page_of_posts %>
+				    <%#TODO move this into post.erb %>
+					<div class="article roundCorner"> 
 						<div class="articleImg">
 							<img src="/images/articleIcon.png">
 						</div>
@@ -38,7 +34,6 @@
 							<h3><a href="<%= post.info["content"] %>"><%= post.info["title"] %></a></h3>
 						</div>
 					</div>
-
 				<% end %>
 
 			</div>
