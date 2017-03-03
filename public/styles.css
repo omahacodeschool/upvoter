@@ -82,7 +82,7 @@ body {
 }
 
 .featuredImg {
-	margin-right: 40px;
+	margin-right: 20px;
 }
 
 .featuredImg img {
@@ -123,12 +123,22 @@ body {
 }
 
 .articleImg {
-	margin-right: 40px; 
+	margin-right: 20px; 
 }
 
 .articleImg img {
 	display: inline-block;
 	width: 40px;
+}
+
+.score {
+	display: flex;
+	flex-direction: column;
+	margin-right: 30px;
+}
+
+.likeIcon {
+	width: 20px;
 }
 
 /*-------------------------------SIDE BARS-----------------------------------*/
@@ -340,9 +350,10 @@ input[type=submit] {
 
 /*------------------------------MODAL FORM-----------------------------------*/
 
-.newPostForm {
+#newPostForm {
 	display: flex;
 	flex-direction: column;
+	margin: 0px;
 }
 
 .newPostForm span {

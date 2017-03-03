@@ -15,6 +15,7 @@ class Score
 		@popular_value = popular_score
 	end
 
+	# TODO Rename to num_likes.
 	def score()
 		hash = DATABASE.all("likes","likeID")
 		score = 0

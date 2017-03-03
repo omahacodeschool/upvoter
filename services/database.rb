@@ -9,8 +9,6 @@ class Database
 	def append(table, row)
 		file_name = "./data/#{table}.csv"
 
-		# TODO Auto-generate ID as first col.
-
 		open(file_name, 'a') do |f|
 			f.puts row
 		end
