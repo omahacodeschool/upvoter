@@ -1,4 +1,7 @@
 require_relative '../services/database.rb'
+
+DATABASE = Database.new("spec/data")
+
 require_relative '../models/post.rb'
 require_relative '../models/user.rb'
 require_relative '../services/score.rb'
