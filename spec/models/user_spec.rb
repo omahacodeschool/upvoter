@@ -1,5 +1,3 @@
-require_relative '../../main.rb'
-
 RSpec.describe(User, ".all") do
   it "creates a hash of all user data" do
 
