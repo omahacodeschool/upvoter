@@ -5,29 +5,41 @@ require_relative './services/score.rb'
 require 'sinatra'
 
 cur_page = 1
+search = "newest"
 
-get("/"){
-    @page_of_posts = Post.page("newest",cur_page)
+get("/") {
+	cur_page = params["pg"]
+	if cur_page.nil? 
+		cur_page = 1 
+	else
+		cur_page = cur_page.to_i
+	end
+
+	search = "newest"
+	if !params["search"].nil? then search = params["search"] end
+		
+    @page_of_posts = Post.page(search,cur_page)
   	erb :index
 }
 
 get("/next_page") {
 	cur_page += 1
-	@page_of_posts = Post.page("newest",cur_page)
-	if @page_of_posts.nil?
+	if Post.page(search,cur_page).nil?
     	cur_page -= 1
-    	@page_of_posts = Post.page("newest",cur_page)
-  end
-	erb :index
+  	end
+	redirect "/?pg="+cur_page.to_s
 }
 
 get("/prev_page") {
 	cur_page -= 1
 	if cur_page < 1 then cur_page = 1 end
-	@page_of_posts = Post.page("newest",cur_page)
-	erb :index	
+	redirect "/?pg="+cur_page.to_s
 }
 
-get("/newPost"){
+get("/newPost") {
 	erb :newPost
-}	
+}
+
+post("/newPost") {
+
+}
