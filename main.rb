@@ -17,7 +17,7 @@ get("/next_page") {
 	if @page_of_posts.nil?
     	cur_page -= 1
     	@page_of_posts = Post.page("newest",cur_page)
-  end
+  	end
 	erb :index
 }
 
