@@ -70,5 +70,12 @@ class Post
     result = result.sort_by {|k, v| v}.to_h
     return result.keys.reverse
   end
-  
+
+  def Post.page(sort_method,page_number)
+    posts = Post.sort(sort_method)
+    start_post = (page_number-1)*25
+    if start_post == 0 then start_post = 1 end #skip the featured post
+    end_post = start_post + 24
+    return posts[start_post..end_post]
+  end
 end
