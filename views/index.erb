@@ -14,26 +14,10 @@
 
 			<div class="articles">
 
-				<div class="featured roundCorner">
-					<div class="featuredImg">
-						<img src="/images/articleIcon.png"> 
-					</div>
-
-					<div class="featuredText">
-						<a href="<%= @featured.info["content"] %>"><%= @featured.info["title"] %></a>
-					</div>
-				</div>
-
 				<% for post in @page_of_posts %>
-				    <%#TODO move this into post.erb %>
-					<div class="article roundCorner"> 
-						<div class="articleImg">
-							<img src="/images/articleIcon.png">
-						</div>
-						<div class="articleText">
-							<h3><a href="<%= post.info["content"] %>"><%= post.info["title"] %></a></h3>
-						</div>
-					</div>
+
+				   <%= erb :article %>
+				   
 				<% end %>
 
 			</div>
