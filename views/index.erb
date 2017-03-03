@@ -15,6 +15,12 @@
 
 			<div class="articles">
 
+				<div class="nextPrevButtons">
+					<button class="previousButton"><img src="/images/prevPageArrow.jpg"></button>
+					<button class="nextButton"><img src="/images/nextPageArrow.jpg"></button>
+				</div>
+				
+
 				<% @page_of_posts.each_with_index { |post, i| %>
 				    
 				   <%= erb :article, :locals => {:post => post, :i => i} %>

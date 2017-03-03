@@ -28,7 +28,7 @@ body {
 	justify-content: space-between;
 	align-items: center;
 	padding: 6px 20px 4px;
-	margin-bottom: 30px;
+	margin-bottom: 5px;
 }
 
 .logo img {
@@ -70,6 +70,16 @@ body {
 	flex-direction: row;
 	padding: 0 20px;
 	flex-grow: 1;
+}
+
+
+/*---------------------------NEXT AND PREVIOUS-------------------------------*/
+
+.nextPrevButtons {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-direction: row;
 }
 
 /*-------------------------------ARTICLES------------------------------------*/
@@ -270,6 +280,12 @@ input[type=submit] {
 	border: solid 2px #cc0000;
 }
 
+button {
+	border: none;
+	padding: 0;
+	border-radius: 4px;
+}
+
 /*---------------------------------FOOTER------------------------------------*/
 
 .footer {
@@ -343,6 +359,7 @@ input[type=submit] {
 .newPostForm {
 	display: flex;
 	flex-direction: column;
+	margin:0;
 }
 
 .newPostForm span {
@@ -359,9 +376,6 @@ input[type=submit] {
 	margin-left: 20px;
 }
 
-// TODO DRY this up, and move articleLine's margin-bottom to an additional
-//      class... Or find a way to use a CSS pseudo-selected to automatically
-//      target the last form field in the modal.
 .titleLine {
 	display: flex;
 	justify-content: space-between;
