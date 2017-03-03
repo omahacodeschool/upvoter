@@ -6,12 +6,9 @@ require 'sinatra'
 
 
 get("/"){
-	@posts = Post.popular
-  @featured_post = Post.new(@posts[0]).info
-
-  # @posts_except_features_paginated = posts.page(params["page"])
-  
-	erb :index
+    @featured = Post.featured("newest")
+    @page_of_posts = Post.page("newest",1)
+  	erb :index
 }
 
 get("/newPost"){
