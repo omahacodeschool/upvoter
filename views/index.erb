@@ -24,8 +24,9 @@
 					</div>
 				</div>
 
-				<% for post in @page_of_posts %>
-				    <%#TODO move this into post.erb %>
+				<%# for post in @page_of_posts %>
+				<% @page_of_posts.each_with_index |post, i| %>
+				    <%#TODO move this into article.erb %>
 					<div class="article roundCorner"> 
 						<div class="articleImg">
 							<img src="/images/articleIcon.png">
@@ -34,6 +35,7 @@
 							<h3><a href="<%= post.info["content"] %>"><%= post.info["title"] %></a></h3>
 						</div>
 					</div>
+
 				<% end %>
 
 			</div>
