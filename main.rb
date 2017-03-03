@@ -9,6 +9,7 @@ get("/"){
     @featured = Post.featured("newest")
     @page_of_posts = Post.page("newest",1)
   	erb :index
+  	erb :article, :locals => {:post => post, :i => i}
 }
 
 get("/newPost"){
