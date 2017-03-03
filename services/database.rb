@@ -2,14 +2,20 @@ require "csv"
 
 class Database
 
+	def initialize(database_path="./data")
+		@database_path = database_path
+	end
+
+	def table_path(table)
+		"#{@database_path}/#{table}.csv"
+	end
+
 	# Add a row to the database.
 	# 
 	# table - Table name String
 	# row   - CSV string row to add.
 	def append(table, row)
-		file_name = "./data/#{table}.csv"
-
-		open(file_name, 'a') do |f|
+		open(table_path(table), 'a') do |f|
 			f.puts row
 		end
 	end
@@ -32,7 +38,7 @@ class Database
 	# 
 	# Returns a Hash of the row's information, or Nil.
 	def find(table, key, key_value)
-		file_name = "./data/#{table}.csv"
+		file_name = table_path(table)
 		CSV.foreach(file_name, {headers: true, return_headers: false}) do |row|
 			if row[key] == key_value
 				return row.to_hash
@@ -48,7 +54,7 @@ class Database
 	# 
 	# Returns a Hash containing each row's information.
 	def all(table, key_result_by)
-		file_name = "./data/#{table}.csv"
+		file_name = table_path(table)
 		the_hash = {}
 		CSV.foreach(file_name, {headers: true, return_headers: false}) do |row|
 			key = row[key_result_by];
@@ -97,7 +103,7 @@ class Database
 	#
 	# table - Table name string
 	def emptyTable(table)
-		file_name = "./data/#{table}.csv"
+		file_name = table_path(table)
 		headers = CSV.read(file_name,headers: true).headers.join(",")
 		open(file_name, 'w') do |f|
 			f.puts headers
