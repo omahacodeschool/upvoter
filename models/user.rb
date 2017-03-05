@@ -1,6 +1,4 @@
 class User
-  DATABASE = Database.new
-
   def initialize(username)
     @username = username
     @info = DATABASE.find("users", "username", @username)

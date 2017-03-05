@@ -1,0 +1,5 @@
+require_relative '../../services/database.rb'
+require_relative '../../models/post.rb'
+require_relative '../../models/user.rb'
+require_relative '../../services/score.rb'
+require 'sinatra'
