@@ -2,7 +2,6 @@ class Post
   attr_reader :info
   attr_reader :score
 
-  DATABASE = Database.new
   MINUTE = 60
   HOUR = 60*MINUTE
   DAY = 24*HOUR

@@ -2,7 +2,6 @@ class Score
 	attr_reader :value
 	attr_reader :popular_value
 
-	DATABASE = Database.new
 	MINUTE = 60
 	HOUR = 60*MINUTE
 	DAY = 24*HOUR
