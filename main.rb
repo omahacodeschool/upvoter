@@ -8,9 +8,9 @@ require 'sinatra'
 
 get("/") {
 	@cur_page = params["pg"].nil? ? 1 : params["pg"].to_i
-	search   = params["search"].nil? ? "newest" : params["search"]
+	@search   = params["search"].nil? ? "newest" : params["search"]
 		
-  @page_of_posts = Post.page(search, cur_page)
+    @page_of_posts = Post.page(@search, @cur_page)
 	erb :index
 }
 

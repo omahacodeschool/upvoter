@@ -1,5 +1,5 @@
-<div class="article roundCorner <%= "featured" if featured? %> "> 
-	<div class="articleImg <%= "featuredImg" if featured? %>">
+<div class="article roundCorner <%= "featured" if featured %> "> 
+	<div class="articleImg <%= "featuredImg" if featured %>">
 		<img src="/images/articleIcon.png">
 	</div>
 
@@ -7,7 +7,7 @@
 		<img src="https://img.4plebs.org/boards/s4s/image/1385/00/1385006781269.png" class="likeIcon">
 		<span class="scoreCount"><%= post.score.value %></span>
 	</div>
-	<div class="articleText <%= "featuredText" if featured? %> ">
+	<div class="articleText <%= "featuredText" if featured %> ">
 		<h3><a href="<%= post.info["content"] %>"><%= post.info["title"] %></a></h3>
 	</div>
 	
