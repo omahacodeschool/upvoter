@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="utf-8">
-		<title>New Post</title>
+		<title>Log In</title>
 		<link rel="stylesheet" href="/styles.css">
 		<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
 		<script type="text/javascript" src="/scripts.js"></script>
@@ -17,26 +17,30 @@
 			<div class="postPageContent roundCorner">
 
 				<div class="postPageTitle">
-					<h1>New Post</h1>
+					<h1>Log In</h1>
+					<!-- <p><%= "Username or Password is incorrect, please try again." if @error %></p> -->
+					<% if @err == true %>
+						<p class="loginError">Username or Password is incorrect, please try again.</p>
+					<% end %>
 				</div>
 
 				<div class="newPostContent">
 				
-					<form class="newPostForm" method="post" action="/newPost">
+					<form class="newPostForm" method="post" action="/login">
 						<div class="titleLine">
-							<span>Title:</span>
-							<input type="text" name="postTitle" class="selected" placeholder="Article title...">
+							<span>Username:</span>
+							<input type="text" name="username" class="selected" placeholder="Username...">
 						</div>
 						
 						<br>
 						<div class="articleLine">
-							<span>Link:</span>
-							<input type="text" name="postLink" class="selected" placeholder="Link to the article...">
+							<span>Password:</span>
+							<input type="text" name="password" class="selected" placeholder="Password...">
 						</div>
 
 						<br>
 						<div id="submitButton">
-							<input type="submit" name="submitPost" class="roundCorner selected" value="Submit">
+							<input type="submit" name="submitLogin" class="roundCorner selected" value="Submit">
 						</div>
 						
 					</form>
