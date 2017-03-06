@@ -14,6 +14,12 @@ class Post
     @score = Score.new(id)
   end
 
+  def Post.likeClicked(postID, user)
+    row = DATBASE.find("users", "username", user)
+    uid = row["userID"]
+    addLike(@id,uid)
+  end
+
   # Create a post.
   # 
   # post_info - Hash of post info.
@@ -96,6 +102,11 @@ class Post
   end
 
   private
+
+  def addLike(pid,uid)
+    row = pid.to_s + "," + uid.to_s
+    DATBASE.newEntry("likes", row)
+  end
 
   def Post.IDsToPosts(postIDs)
     posts = []

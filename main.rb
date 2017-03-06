@@ -45,9 +45,9 @@ post("/logout") {
 	redirect("/")
 }
 
-# get("/login_error") {
-
-# }
+post("/likeclicked") {
+	Post.likeClicked(params["pid"],params["user"])
+}
 
 post("/newPost") {
 
