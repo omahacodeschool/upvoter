@@ -3,7 +3,7 @@ require "pry"
 RSpec.describe(User, ".all") do
   it "gets all users" do
   	
-    expect(User.all).to include("username" => "quixote")
+    expect(User.all).to include("quixote")
 
   end
 end
