@@ -26,7 +26,7 @@ class Database
 	# row   - CSV string to be modified, then added
 	def newEntry(table, row)
 		id = Time.now.to_f
-		row = id + "," + row
+		row = id.to_s + "," + row
 		append(table, row)
 	end
 

@@ -1,4 +1,7 @@
 class User
+
+  attr_reader :info
+
   def initialize(username)
     @username = username
     @info = DATABASE.find("users", "username", @username)
