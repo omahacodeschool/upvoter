@@ -8,7 +8,7 @@ RSpec.describe(User, ".all") do
   end
 end
 
-RSpec.describe("User", "format_for_database") do
+RSpec.describe(User, '#format_for_database') do
   it "joins hash into comma separated string" do
 
   	#Setup
