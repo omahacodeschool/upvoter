@@ -2,8 +2,8 @@ require "pry"
 
 RSpec.describe(User, ".all") do
   it "creates a hash of all user data" do
-  	
-    expect(User.all).to include("username" => "quixote")
+
+    expect(User.all).to include("quixote")
 
   end
 end
