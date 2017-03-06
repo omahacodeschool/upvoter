@@ -4,6 +4,12 @@ class User
     @info = DATABASE.find("users", "username", @username)
   end
 
+  def User.loginValid?(username,password)
+    row = DATABASE.find("users","username",username)
+    if row.nil? then return false end
+    return row["password"] == password
+  end
+
   # Create a user.
   # 
   # user_info - Hash of user info
