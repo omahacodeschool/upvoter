@@ -11,16 +11,16 @@ end
 RSpec.describe(User, '#format_for_database') do
   it "joins hash into comma separated string" do
 
-  	#Setup
+  	# Setup
   	sampleUser = User.new("quixote")
 
   	actual = sampleUser.format_for_database
 
-  	#Exercise/Verify
+  	# Exercise/Verify
     expect(actual).to include("quixote")
 
-    #Teardown
-    #None required
+    # Teardown
+    # None required
   end
 end
 
@@ -28,21 +28,21 @@ end
 RSpec.describe("New user", "create") do
   it "creates a new user with the given information and adds it to the database" do
 
-  	#Setup
+  	# Setup
   	userInfoHash = {
   		"username" => "nennington",
   		"email" => "barlsworth@gmail.com",
   		"password" => "iBark"
   	}
 
-  	#Exercise
+  	# Exercise
   	createNewUser = User.create(userInfoHash)
   	nenningtonCat = User.new("nennington")
 
-  	#Verify
+  	# Verify
     expect(nenningtonCat.info).to include("username" => "nennington", "email" => "barlsworth@gmail.com", "password" => "iBark")
 
-    #Teardown
+    # Teardown
     table = CSV.table("./data/users.csv")
 
     table.delete_if do |row|
@@ -55,12 +55,3 @@ RSpec.describe("New user", "create") do
 
   end
 end
-
-
-
-
-
-
-
-
-
