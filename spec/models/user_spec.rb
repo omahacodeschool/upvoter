@@ -15,12 +15,10 @@ RSpec.describe(User, '#format_for_database') do
   	sampleUser = User.new("quixote")
 
   	actual = sampleUser.format_for_database
+    expected_str = "1488301918.870645,quixote,sirspaniard@knight.org,fkinwindmills"
 
   	# Exercise/Verify
-    expect(actual).to include("quixote")
-
-    # Teardown
-    # None required
+    expect(actual).to eq(expected_str)
   end
 end
 
