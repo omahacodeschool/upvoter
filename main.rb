@@ -40,14 +40,15 @@ post("/login") {
 	end
 }
 
-post("/logout") {
+get("/logout") {
 	session.clear
 	redirect("/")
 }
 
-# get("/login_error") {
-
-# }
+post("/likeclicked") {
+	Post.likeClicked(params["pid"],params["user"])
+	redirect("/\#")
+}
 
 post("/newPost") {
 

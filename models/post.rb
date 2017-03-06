@@ -14,6 +14,28 @@ class Post
     @score = Score.new(id)
   end
 
+  def likedBy?(user)
+    uid = DATABASE.find("users", "username", user)["userID"]
+    hash = DATABASE.all("likes","likeID")
+    liked = false
+    hash.each do |k, v|
+      if v["userID"] == uid && v["postID"] == @id
+        liked = true
+      end
+    end
+    return liked
+  end
+
+  def Post.likeClicked(postID, user)
+    uid = DATABASE.find("users", "username", user)["userID"]
+    thispost = Post.new(postID)
+    if thispost.likedBy?(user)
+      thispost.removeLike(uid)
+    elsif !uid.nil?
+      thispost.addLike(uid)
+    end
+  end
+
   # Create a post.
   # 
   # post_info - Hash of post info.
@@ -93,6 +115,22 @@ class Post
   def Post.featured(sort_method)
     pageID = Post.sort(sort_method)[0]
     return Post.new(pageID)
+  end
+
+  def addLike(uid)
+    row = @id.to_s + "," + uid.to_s
+    DATABASE.newEntry("likes", row)
+  end
+
+  def removeLike(uid)
+    hash = DATABASE.all("likes","likeID")
+    lid = nil
+    hash.each do |k, v|
+      if v["userID"] == uid && v["postID"] == @id
+        lid = k
+      end
+    end
+    DATABASE.delete("likes","likeID", lid)
   end
 
   private
