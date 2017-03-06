@@ -14,10 +14,26 @@ class Post
     @score = Score.new(id)
   end
 
+  def likedBy?(user)
+    uid = DATABASE.find("users", "username", user)["userID"]
+    hash = DATABASE.all("likes","likeID")
+    liked = false
+    hash.each do |k, v|
+      if v["userID"] == uid
+        liked = true
+      end
+    end
+    return liked
+  end
+
   def Post.likeClicked(postID, user)
-    row = DATBASE.find("users", "username", user)
-    uid = row["userID"]
-    addLike(@id,uid)
+    uid = DATABASE.find("users", "username", user)["userID"]
+    post = Post.new(postID)
+    if post.likedBy?(user)
+      post.removeLike(uid)
+    elsif !uid.nil?
+      post.addLike(uid)
+    end
   end
 
   # Create a post.
@@ -103,9 +119,20 @@ class Post
 
   private
 
-  def addLike(pid,uid)
-    row = pid.to_s + "," + uid.to_s
-    DATBASE.newEntry("likes", row)
+  def addLike(uid)
+    row = @id.to_s + "," + uid.to_s
+    DATABASE.newEntry("likes", row)
+  end
+
+  def removeLike(uid)
+    hash = DATABASE.all("likes","likeID")
+    lid = nil
+    hash.each do |k, v|
+      if v["userID"] == uid && v["postID"] == @id
+        lid = k
+      end
+    end
+    DATABASE.delete("likes","likeID", lid)
   end
 
   def Post.IDsToPosts(postIDs)
