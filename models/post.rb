@@ -19,7 +19,7 @@ class Post
     hash = DATABASE.all("likes","likeID")
     liked = false
     hash.each do |k, v|
-      if v["userID"] == uid
+      if v["userID"] == uid && v["postID"] == @id
         liked = true
       end
     end
@@ -28,11 +28,11 @@ class Post
 
   def Post.likeClicked(postID, user)
     uid = DATABASE.find("users", "username", user)["userID"]
-    post = Post.new(postID)
-    if post.likedBy?(user)
-      post.removeLike(uid)
+    thispost = Post.new(postID)
+    if thispost.likedBy?(user)
+      thispost.removeLike(uid)
     elsif !uid.nil?
-      post.addLike(uid)
+      thispost.addLike(uid)
     end
   end
 
@@ -117,8 +117,6 @@ class Post
     return Post.new(pageID)
   end
 
-  private
-
   def addLike(uid)
     row = @id.to_s + "," + uid.to_s
     DATABASE.newEntry("likes", row)
@@ -134,6 +132,8 @@ class Post
     end
     DATABASE.delete("likes","likeID", lid)
   end
+
+  private
 
   def Post.IDsToPosts(postIDs)
     posts = []
