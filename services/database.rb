@@ -88,10 +88,12 @@ class Database
 		append(table, new_row)	
 	end
 
+	private
+
 	# Write all values from a hash of table rows into a table
 	#
 	# table - Table name string
-	# hash  - Hash wth all the rows
+	# hash  - Hash with all the rows
 	def writeAll(table, hash) 
 		emptyTable(table)
 		hash.each do |k,v|
