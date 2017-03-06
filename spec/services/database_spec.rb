@@ -49,7 +49,7 @@ RSpec.describe(Database, ".all") do
   	allUsers = Database.new
 
   	# Exercise
-  	allHash = allUsers.all("users", "userid")
+  	allHash = allUsers.all("users", "userID")
 
   	# Verify
     expect(allHash.any? { |name1, name2, password1, password2| name1 = "Administrator", name2 = "bigmike", password1 = "admini", password2 = "littlemike"}).to be true
@@ -70,7 +70,7 @@ RSpec.describe(Database, ".edit") do
 
   	# Verify
   	csv = CSV.read("./data/users.csv")
-    expect(csv.any? { |userid, uname, email, password| userid = "1488301600.525664", uname = "PapaBless", email = "srsFupa@h3h3.fupa", password = "JRHNBR"}).to be true
+    expect(csv.any? { |userID, uname, email, password| userID = "1488301600.525664", uname = "PapaBless", email = "srsFupa@h3h3.fupa", password = "JRHNBR"}).to be true
 
     # Teardown
     table = CSV.table("./data/users.csv")
