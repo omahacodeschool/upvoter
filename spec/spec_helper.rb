@@ -1,6 +1,6 @@
 require_relative '../services/database.rb'
 
-DATABASE = Database.new("spec/data")
+DATABASE = Database.new("./data")
 
 require_relative '../models/post.rb'
 require_relative '../models/user.rb'
