@@ -11,8 +11,15 @@ end
 RSpec.describe(User, '#format_for_database') do
   it "joins hash into comma separated string" do
 
+    # TODO - Broken but an example of how the test should look in isolation.
   	# Setup
-  	sampleUser = User.new("quixote")
+  	# sampleUser = User.new("quixote")
+    sampleUser = User.new
+    sampleUser.set_info = {
+      "username" => fjewiofjew,
+      "email"    => fjewiofwe
+    }
+
 
   	actual = sampleUser.format_for_database
     expected_str = "1488301918.870645,quixote,sirspaniard@knight.org,fkinwindmills"
@@ -23,10 +30,13 @@ RSpec.describe(User, '#format_for_database') do
 end
 
 
-RSpec.describe("New user", "create") do
-  it "creates a new user with the given information and adds it to the database" do
+RSpec.describe(User, ".create") do
+  it "creates new user and adds it to the database" do
+    # TODO - Broken but an example of how the test should look in isolation.
 
   	# Setup
+    table = CSV.table("./data/users.csv")
+
   	userInfoHash = {
   		"username" => "nennington",
   		"email" => "barlsworth@gmail.com",
@@ -34,11 +44,18 @@ RSpec.describe("New user", "create") do
   	}
 
   	# Exercise
-  	createNewUser = User.create(userInfoHash)
-  	nenningtonCat = User.new("nennington")
+  	User.create(userInfoHash)
+  	# nenningtonCat = User.new("nennington")
 
-  	# Verify
-    expect(nenningtonCat.info).to include("username" => "nennington", "email" => "barlsworth@gmail.com", "password" => "iBark")
+    # Verify
+    matching_row = false
+    table.find_by do |row|
+      if row[:username] == 'nennington'
+        matching_row = true
+      end
+    end
+
+    expect(matching_row).to be_true
 
     # Teardown
     table = CSV.table("./data/users.csv")
