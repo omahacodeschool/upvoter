@@ -59,16 +59,31 @@ end
 
 # Testing the .edit Database method.
 RSpec.describe(Database, ".edit") do
-  it "returns information on all info in a table" do
+  it "edits a line in the csv file" do
   	
   	# Setup
-  	allUsers = Database.new
+  	changeUser = Database.new
+  	newRow = "1488301600.525664,PapaBless,srsFupa@h3h3.fupa,JRHNBR"
 
   	# Exercise
-  	allHash = allUsers.all("users", "userid")
+  	changeUser.edit("users", "username", "Sensei", newRow)
 
   	# Verify
-    expect(allHash.any? { |name1, name2, password1, password2| name1 = "Administrator", name2 = "bigmike", password1 = "admini", password2 = "littlemike"}).to be true
+  	csv = CSV.read("./data/users.csv")
+    expect(csv.any? { |userid, uname, email, password| userid = "1488301600.525664", uname = "PapaBless", email = "srsFupa@h3h3.fupa", password = "JRHNBR"}).to be true
+
+    # Teardown
+    table = CSV.table("./data/users.csv")
+
+    table.delete_if do |row|
+      row[:username] == 'PapaBless'
+    end
+
+    File.open("./data/users.csv", 'w') do |f|
+      f.write(table.to_csv)
+    end
+
+    changeUser.append("users", "1488301600.525664,Sensei,fastlearner@ocs.edu,bellybutton")
 
   end
 end
