@@ -31,8 +31,6 @@ RSpec.describe(User, ".create") do
   it "creates new user and adds it to the database" do
  
   	# Setup
-    table = CSV.table("./data/users.csv")
-
   	userInfoHash = {
   		"username" => "nennington",
   		"email" => "barlsworth@gmail.com",
@@ -41,28 +39,27 @@ RSpec.describe(User, ".create") do
 
   	# Exercise
   	User.create(userInfoHash)
-  	# nenningtonCat = User.new("nennington")
-
+  	table = CSV.table("./data/users.csv")
+  	
     # Verify
     matching_row = false
-    table.find_by do |row|
+    table.each do |row|
       if row[:username] == 'nennington'
         matching_row = true
       end
     end
-
-    expect(matching_row).to be_true
+    expect(matching_row).to be true
 
     # Teardown
-    table = CSV.table("./data/users.csv")
+    # table = CSV.table("./data/users.csv")
 
-    table.delete_if do |row|
-      row[:username] == 'nennington'
-    end
+    # table.delete_if do |row|
+    #   row[:username] == 'nennington'
+    # end
 
-    File.open("./data/users.csv", 'w') do |f|
-      f.write(table.to_csv)
-    end
+    # File.open("./data/users.csv", 'w') do |f|
+    #   f.write(table.to_csv)
+    # end
 
   end
 end
