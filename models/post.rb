@@ -1,11 +1,20 @@
 class Post
-  attr_reader :info
-  attr_reader :score
+  attr_reader :postID, :userID, :title, :content, :score
+  attr_writer :postID, :userID, :title, :content, :score
 
-  def initialize(id)
-    @id = id
-    @info = DATABASE.find("posts", "postID", @id.to_s)
-    @score = Score.new(id)
+  # def initialize(id)
+  #   @id = id
+  #   @info = DATABASE.find("posts", "postID", @id.to_s)
+  #   @score = Score.new(id)
+  # end
+
+  def Post.newFromDB(postID)
+    @postID = postID
+    info = DATABASE.find("posts", "postID", postID.to_s)
+    @userID = info["userID"]
+    @title = info["title"]
+    @content = info["content"]
+    @score = Score.new(postID)
   end
 
   def likedBy?(user)
@@ -22,7 +31,7 @@ class Post
 
   def Post.likeClicked(postID, user)
     uid = DATABASE.find("users", "username", user)["userID"]
-    thispost = Post.new(postID)
+    thispost = Post.newFromDB(postID)
     if thispost.likedBy?(user)
       thispost.removeLike(uid)
     elsif !uid.nil?
@@ -70,7 +79,7 @@ class Post
   def Post.top()
     result = {}
     Post.all.each do |k, v|
-      result[k] = Post.new(k).score.value
+      result[k] = Post.newFromDB(k).score.value
     end
     result = result.sort_by {|k, v| v}.to_h
     return result.keys.reverse
@@ -80,7 +89,7 @@ class Post
   def Post.popular()
     result = {}
     Post.all.each do |k, v|
-      result[k] = Post.new(k).score.popular_value
+      result[k] = Post.newFromDB(k).score.popular_value
     end
     result = result.sort_by {|k, v| v}.to_h
     return result.keys.reverse
@@ -120,7 +129,7 @@ class Post
   def Post.IDsToPosts(postIDs)
     posts = []
     for id in postIDs
-      posts.push(Post.new(id))
+      posts.push(Post.newFromDB(id))
     end
     return posts
   end
