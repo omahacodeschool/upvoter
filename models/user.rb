@@ -6,7 +6,7 @@ class User
   def newFromDB(username)
      @username = username
      info = DATABASE.find("users", "username", @username)
-     @id = info["userID"]
+     @userID = info["userID"]
      @email = info["email"]
      @password = info["password"]
   end
@@ -25,19 +25,19 @@ class User
     DATABASE.newEntry("users", entry_string)
   end
 
-  # Gathers user info and changes password value.
+  # Changes a User password
   #
   # newPass - String from user input
   #
   # Rebuilds user database.
   def newPassword(newPass)
-    @info["password"] = newPass
+    @password = newPass
     DATABASE.edit("users", "username", @username, format_for_database)
   end
 
   # Format user's info for the database.
   def format_for_database
-    @info.values.join(",")
+    [@userID,@username,@email,@password].join(",")
   end
 
   # This user's posts.
@@ -45,7 +45,7 @@ class User
   	results = []
   	posts = DATABASE.all("posts", "postID")
   	posts.each do |k, v|
-  		if v["userID"] == @info["userID"]
+  		if v["userID"] == @userID
   			results.push(k)
   		end
   	end
