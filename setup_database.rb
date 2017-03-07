@@ -1,3 +1,10 @@
+# To install Postgres and the Ruby Postgres adapter:
+
+# brew install postgresql
+# gem install pg -- --with-pg-config=/usr/local/bin/pg_config
+
+# -----------------------------------------------------------------------------
+
 # require "pg"
 
 # # When you need to set up the database, just UNCOMMENT the below.
