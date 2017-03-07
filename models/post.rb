@@ -9,12 +9,14 @@ class Post
   # end
 
   def Post.newFromDB(postID)
-    @postID = postID
+    post = Post.new
+    post.postID = postID
     info = DATABASE.find("posts", "postID", postID.to_s)
-    @userID = info["userID"]
-    @title = info["title"]
-    @content = info["content"]
-    @score = Score.new(postID)
+    post.userID = info["userID"]
+    post.title = info["title"]
+    post.content = info["content"]
+    post.score = Score.new(postID)
+    return post
   end
 
   def likedBy?(user)
