@@ -1,13 +1,14 @@
 require "csv"
 
 class Database
+	attr_reader :conn
 
-	def initialize(database_path="./data")
-		@database_path = database_path
+	def initialize(database_path='upvoter_development')
+		@conn = PG.connect(dbname: database_path)
 	end
 
 	def table_path(table)
-		"#{@database_path}/#{table}.csv"
+		table
 	end
 
 	# Add a row to the database.
@@ -54,6 +55,9 @@ class Database
 	# 
 	# Returns a Hash containing each row's information.
 	def all(table, key_result_by)
+		# TODO Example
+		# DATABASE.conn.exec("SELECT * FROM users").each {|row| puts row["username"]}
+
 		file_name = table_path(table)
 		the_hash = {}
 		CSV.foreach(file_name, {headers: true, return_headers: false}) do |row|

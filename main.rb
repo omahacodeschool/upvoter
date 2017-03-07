@@ -1,3 +1,7 @@
+require 'pry'
+
+require 'pg'
+
 require_relative './services/database.rb'
 DATABASE = Database.new
 
@@ -5,7 +9,6 @@ require_relative './models/post.rb'
 require_relative './models/user.rb'
 require_relative './services/score.rb'
 require 'sinatra'
-require 'pry'
 
 enable :sessions
 
