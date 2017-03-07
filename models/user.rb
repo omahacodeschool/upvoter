@@ -1,12 +1,14 @@
 class User
 
-  attr_reader :info
-  # attr_reader :username, :email, :password
-  # attr_writer :username, :email, :password
+  attr_reader :id :username, :email, :password
+  attr_writer :id :username, :email, :password
 
-  def initialize(username)
-    @username = username
-    @info = DATABASE.find("users", "username", @username)
+  def newFromDB(username)
+     @username = username
+     info = DATABASE.find("users", "username", @username)
+     @id = info["userID"]
+     @email = info["email"]
+     @password = info["password"]
   end
 
   def User.loginValid?(username,password)
