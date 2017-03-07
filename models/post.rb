@@ -2,12 +2,6 @@ class Post
   attr_reader :info
   attr_reader :score
 
-  MINUTE = 60
-  HOUR = 60*MINUTE
-  DAY = 24*HOUR
-  WEEK = 7*DAY
-  MONTH = 4*WEEK
-
   def initialize(id)
     @id = id
     @info = DATABASE.find("posts", "postID", @id.to_s)
@@ -92,9 +86,6 @@ class Post
     return result.keys.reverse
   end
 
-  # TODO Should the below be returning an array of "infos" so the erb
-  # could do post["content"] rather than post.info["content"]?
-
   # Returns an array of the 25 Posts for the specified page, or nil
   #
   # sort_method - String of sort method for page
@@ -106,15 +97,6 @@ class Post
     else
       return Post.IDsToPosts(pageIDs)
     end
-  end
-
-  # Get the top ranked post for a given sort method
-  #
-  # sort_method - String of sort method
-  # Returns the top ranked Post
-  def Post.featured(sort_method)
-    pageID = Post.sort(sort_method)[0]
-    return Post.new(pageID)
   end
 
   def addLike(uid)
