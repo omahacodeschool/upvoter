@@ -9,20 +9,17 @@ RSpec.describe(User, ".all") do
 end
 
 RSpec.describe(User, '#format_for_database') do
-  it "joins hash into comma separated string" do
+  it "joins user info into comma separated string" do
 
-    # TODO - Broken but an example of how the test should look in isolation.
   	# Setup
-  	# sampleUser = User.new("quixote")
     sampleUser = User.new
-    sampleUser.set_info = {
-      "username" => fjewiofjew,
-      "email"    => fjewiofwe
-    }
-
+    sampleUser.userID = 1
+    sampleUser.username = "Albert"
+    sampleUser.email = "abc@123.com"
+    sampleUser.password = "abc123"
 
   	actual = sampleUser.format_for_database
-    expected_str = "1488301918.870645,quixote,sirspaniard@knight.org,fkinwindmills"
+    expected_str = "1,Albert,abc@123.com,abc123"
 
   	# Exercise/Verify
     expect(actual).to eq(expected_str)
@@ -32,8 +29,7 @@ end
 
 RSpec.describe(User, ".create") do
   it "creates new user and adds it to the database" do
-    # TODO - Broken but an example of how the test should look in isolation.
-
+ 
   	# Setup
     table = CSV.table("./data/users.csv")
 
