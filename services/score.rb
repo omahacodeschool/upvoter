@@ -8,17 +8,17 @@ class Score
 	WEEK = 7*DAY
 	MONTH = 4*WEEK
 
-	def initialize(postID)
-		@postID = postID
+	def initialize(postid)
+		@postid = postid
 		@value = num_likes
 		@popular_value = popular_score
 	end
 
 	def num_likes()
-		hash = DATABASE.all("likes","likeID")
+		hash = DATABASE.all("likes","likeid")
 		num_likes = 0
 		hash.each do |k, v|
-			if v["postID"] == @postID
+			if v["postid"] == @postid
 				num_likes += 1
 			end
 		end
@@ -26,7 +26,7 @@ class Score
 	end
 
 	def popular_score()
-	    postTime = @postID.to_f
+	    postTime = @postid.to_f
 	    currently = Time.now.to_f
 	    age = currently - postTime
 	    return decay(age)

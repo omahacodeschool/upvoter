@@ -40,8 +40,7 @@ class Database
 	# 
 	# Returns a Hash of the row's information, or Nil.
 	def find(table, key, key_value)
-		result = @conn.exec("SELECT * FROM " + table + " WHERE " + key + "=" + key_value + ";")[0]
-		binding.pry
+		result = @conn.exec("SELECT * FROM " + table + " WHERE " + key + "='" + key_value + "';")[0]
 		return result
 	end
 
@@ -67,7 +66,7 @@ class Database
 	# key_value - Value of key_name to delete
 	# 
 	# Examples: - delete(users, username, "bruce")
-	#           - delete(users, userID, 1234567890.123456)
+	#           - delete(users, userid, 1234567890.123456)
 	def delete(table, key_name, key_value)
 		@conn.exec("DELETE FROM " + table + " WHERE " + key_name + "=" + key_value + ";")
 	end
@@ -93,8 +92,8 @@ class Database
 			vals.push(v)
 		end
 		heads = heads.join(", ")
-		vals = vals.join(", ")
-		return "(" + heads + ") VALUES (" + vals +")"
+		vals = vals.join("', '")
+		return "(" + heads + ") VALUES ('" + vals +"')"
 	end
 
 end

@@ -12,29 +12,32 @@ class UpvoteFaker
 	end
 
 	def fakeUser()
-		userID = tsFrom(0,365,"d")
+		userid = tsFrom(0,365,"d")
 		username = Faker::Internet.user_name
 		email = Faker::Internet.email
 		password = Faker::Internet.password(4, 10)
-		row = "#{userID},#{username},#{email},#{password}"
-		DATABASE.append("users",row)
+		#row = "#{userid},#{username},#{email},#{password}"
+		entry = {"userid" => userid, "username" => username, "email" => email, "password" => password}
+		DATABASE.newEntry("users",entry)
 	end
 
 	def fakeUserWithCredentials(username,password)
-		userID = tsFrom(0,365,"d")
+		userid = tsFrom(0,365,"d")
 		username = username
 		email = Faker::Internet.email
 		password = password
-		row = "#{userID},#{username},#{email},#{password}"
-		DATABASE.append("users",row)
+		#row = "#{userid},#{username},#{email},#{password}"
+		entry = {"userid" => userid, "username" => username, "email" => email, "password" => password}
+		DATABASE.newEntry("users",entry)
 	end
 
-	def fakePost(postID = tsFrom(0,365,"d"))
-		userID = randomUIDFromUsers()
+	def fakePost(postid = tsFrom(0,365,"d"))
+		userid = randomUIDFromUsers()
 		title = Faker::Company.catch_phrase
 		content = Faker::Internet.url
-		row = "#{postID},#{userID},#{title},#{content}"
-		DATABASE.append("posts",row)
+		#row = "#{postid},#{userid},#{title},#{content}"
+		entry = {"postid" => postid, "userid" => userid, "title" => title, "content" => content}
+		DATABASE.newEntry("posts",entry)
 	end
 
 	def fakePosts(count)
@@ -43,34 +46,22 @@ class UpvoteFaker
 		end
 	end
 
-	def fakeLike(postID,num_likes)
-		num_users = DATABASE.all("users","userID").keys.length
+	def fakeLike(postid,num_likes)
+		num_users = DATABASE.all("users","userid").keys.length
 		num_likes = num_likes > num_users ? num_users : num_likes
 		num_likes.times do
-			likeID = tsFrom(0,365,"d")
-			userID = randomUIDFromUsers()
-			row = "#{likeID},#{postID},#{userID}"
-			DATABASE.append("likes",row)
+			likeid = tsFrom(0,365,"d")
+			userid = randomUIDFromUsers()
+			# row = "#{likeid},#{postid},#{userid}"
+			entry = {"postid" => postid, "userid" => userid}
+			DATABASE.newEntry("likes",entry)
 		end
 	end
 
 	def fakeLikes(max_likes)
-		pids = DATABASE.all("posts","postID").keys
+		pids = DATABASE.all("posts","postid").keys
 		for pid in pids
 			fakeLike(pid,rand(0..max_likes))
-		end
-	end
-
-	def makeTables()
-		makeTable("likes", "likeID,postID,userID")
-		makeTable("posts", "postID,userID,title,content")
-		makeTable("users", "userID,username,email,password")
-	end
-
-	def makeTable(table, headers) 
-		file_name = DATABASE.table_path(table)
-		open(file_name, 'w') do |f|
-			f.puts headers
 		end
 	end
 
@@ -81,7 +72,7 @@ class UpvoteFaker
 		return ([time1,time2].min+rn)
 	end
 
-	private
+	# private
 
 	def timeMulti(unit)
 		case unit.downcase
@@ -99,7 +90,8 @@ class UpvoteFaker
 	end
 
 	def randomUIDFromUsers()
-		uids = DATABASE.all("users","userID").keys
+		uids = DATABASE.conn.exec("SELECT userid FROM users;")
+		uids = uids.values
 		i = rand(0..uids.length-1)
 		return uids[i]
 	end

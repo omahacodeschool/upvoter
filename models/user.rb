@@ -42,9 +42,9 @@ class User
   # This user's posts.
   def posts
   	results = []
-  	posts = DATABASE.all("posts", "postID")
+  	posts = DATABASE.all("posts", "postid")
   	posts.each do |k, v|
-  		if v["userID"] == @info["userID"]
+  		if v["userid"] == @info["userid"]
   			results.push(k)
   		end
   	end
