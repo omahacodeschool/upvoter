@@ -30,7 +30,8 @@ class User
   # Rebuilds user database.
   def newPassword(newPass)
     @info["password"] = newPass
-    DATABASE.edit("users", "username", @username, format_for_database)
+    DATABASE.edit("users", "password", newpass, @info["username"])
+
   end
 
   # Format user's info for the database.
@@ -41,9 +42,9 @@ class User
   # This user's posts.
   def posts
   	results = []
-  	posts = DATABASE.all("posts", "postID")
+  	posts = DATABASE.all("posts", "postid")
   	posts.each do |k, v|
-  		if v["userID"] == @info["userID"]
+  		if v["userid"] == @info["userid"]
   			results.push(k)
   		end
   	end
