@@ -79,34 +79,10 @@ class Database
 	# key_value - Value of key_name to edit
 	# new_row   - csv string containing data for new row
 	def edit(table, key_name, key_value, idkey, idval)
-		# delete(table,key_name,key_value)
-		# append(table, new_row)
 		@conn.exec("UPDATE " + table + " SET " + key_name + "=" + key_value + " WHERE " + idkey + "=" + idval + ";")
 	end
 
 	private
-
-	# Write all values from a hash of table rows into a table
-	#
-	# table - Table name string
-	# hash  - Hash with all the rows
-	def writeAll(table, hash) 
-		emptyTable(table)
-		hash.each do |k,v|
-			append(table,v.values.join(","))
-		end
-	end
-
-	# Empty all the values from a table leaving the headers
-	#
-	# table - Table name string
-	def emptyTable(table)
-		file_name = table_path(table)
-		headers = CSV.read(file_name,headers: true).headers.join(",")
-		open(file_name, 'w') do |f|
-			f.puts headers
-		end
-	end
 
 	# Format stuff for insert to sql
 	def insertQuery(row)
