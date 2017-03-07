@@ -4,7 +4,7 @@
 	</div>
 
 	<div class="score">
-		<form method="post" action="/likeclicked?pid=<%= post.info["postID"] %>&user=<%=user%>">
+		<form method="post" action="/likeclicked?pid=<%= post.postID %>&user=<%=user%>">
 			<button type="submit">
 				<img src="https://img.4plebs.org/boards/s4s/image/1385/00/1385006781269.png" class="likeIcon">
 			</button>
@@ -12,7 +12,7 @@
 		<span class="scoreCount"><%= post.score.value %></span>
 	</div>
 	<div class="articleText <%= "featuredText" if featured %> ">
-		<h3><a href="<%= post.info["content"] %>"><%= post.info["title"] %></a></h3>
+		<h3><a href="<%= post.content %>"><%= post.title %></a></h3>
 	</div>
 	
 </div>

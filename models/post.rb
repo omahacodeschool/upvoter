@@ -43,8 +43,8 @@ class Post
   # 
   # post_info - Hash of post info.
   def Post.create(post_info)
-    info = "\"#{post_info["userID"]}\",\"#{post_info["title"]}\",\"#{post_info["content"]}\""
-    DATABASE.newEntry("posts", info)
+    row = "\"#{post_info["userID"]}\",\"#{post_info["title"]}\",\"#{post_info["content"]}\""
+    DATABASE.newEntry("posts", row)
   end
 
   # Get all posts.
