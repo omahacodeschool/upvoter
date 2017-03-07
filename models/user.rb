@@ -1,12 +1,28 @@
 class User
 
-  attr_reader :info
-  # attr_reader :username, :email, :password
-  # attr_writer :username, :email, :password
+  attr_reader :userID, :username, :email, :password
+  attr_writer :userID, :username, :email, :password
 
-  def initialize(username)
-    @username = username
-    @info = DATABASE.find("users", "username", @username)
+  def User.newFromDB(username)
+     @username = username
+     row = DATABASE.find("users", "username", @username)
+     @userID = info["userID"]
+     @email = info["email"]
+     @password = info["password"]
+  end
+
+  def User.newWithInfo(info)
+     @username = info["username"]
+     @userID = info["userID"]
+     @email = info["email"]
+     @password = info["password"]
+  end
+
+  def changeInfo(info)
+    @userID = info["userID"].nil? ? @userID : info["userID"]
+    @username = info["username"].nil? ? @username : info["username"]
+    @email = info["email"].nil? ? @email : info["email"]
+    @password = info["password"].nil? ? @password : info["password"]
   end
 
   def User.loginValid?(username,password)
@@ -23,19 +39,19 @@ class User
     DATABASE.newEntry("users", entry_string)
   end
 
-  # Gathers user info and changes password value.
+  # Changes a User password
   #
   # newPass - String from user input
   #
   # Rebuilds user database.
   def newPassword(newPass)
-    @info["password"] = newPass
+    @password = newPass
     DATABASE.edit("users", "username", @username, format_for_database)
   end
 
   # Format user's info for the database.
   def format_for_database
-    @info.values.join(",")
+    [@userID,@username,@email,@password].join(",")
   end
 
   # This user's posts.
@@ -43,7 +59,7 @@ class User
   	results = []
   	posts = DATABASE.all("posts", "postID")
   	posts.each do |k, v|
-  		if v["userID"] == @info["userID"]
+  		if v["userID"] == @userID
   			results.push(k)
   		end
   	end

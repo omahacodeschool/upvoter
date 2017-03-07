@@ -1,17 +1,22 @@
 class Post
-  attr_reader :info
-  attr_reader :score
+  attr_reader :postID, :userID, :title, :content, :score
+  attr_writer :postID, :userID, :title, :content, :score
 
-  MINUTE = 60
-  HOUR = 60*MINUTE
-  DAY = 24*HOUR
-  WEEK = 7*DAY
-  MONTH = 4*WEEK
+  # def initialize(id)
+  #   @id = id
+  #   @info = DATABASE.find("posts", "postID", @id.to_s)
+  #   @score = Score.new(id)
+  # end
 
-  def initialize(id)
-    @id = id
-    @info = DATABASE.find("posts", "postID", @id.to_s)
-    @score = Score.new(id)
+  def Post.newFromDB(postID)
+    post = Post.new
+    post.postID = postID
+    info = DATABASE.find("posts", "postID", postID.to_s)
+    post.userID = info["userID"]
+    post.title = info["title"]
+    post.content = info["content"]
+    post.score = Score.new(postID)
+    return post
   end
 
   def likedBy?(user)
@@ -28,7 +33,7 @@ class Post
 
   def Post.likeClicked(postID, user)
     uid = DATABASE.find("users", "username", user)["userID"]
-    thispost = Post.new(postID)
+    thispost = Post.newFromDB(postID)
     if thispost.likedBy?(user)
       thispost.removeLike(uid)
     elsif !uid.nil?
@@ -40,8 +45,8 @@ class Post
   # 
   # post_info - Hash of post info.
   def Post.create(post_info)
-    info = "\"#{post_info["userID"]}\",\"#{post_info["title"]}\",\"#{post_info["content"]}\""
-    DATABASE.newEntry("posts", info)
+    row = "\"#{post_info["userID"]}\",\"#{post_info["title"]}\",\"#{post_info["content"]}\""
+    DATABASE.newEntry("posts", row)
   end
 
   # Get all posts.
@@ -76,7 +81,7 @@ class Post
   def Post.top()
     result = {}
     Post.all.each do |k, v|
-      result[k] = Post.new(k).score.value
+      result[k] = Post.newFromDB(k).score.value
     end
     result = result.sort_by {|k, v| v}.to_h
     return result.keys.reverse
@@ -86,14 +91,11 @@ class Post
   def Post.popular()
     result = {}
     Post.all.each do |k, v|
-      result[k] = Post.new(k).score.popular_value
+      result[k] = Post.newFromDB(k).score.popular_value
     end
     result = result.sort_by {|k, v| v}.to_h
     return result.keys.reverse
   end
-
-  # TODO Should the below be returning an array of "infos" so the erb
-  # could do post["content"] rather than post.info["content"]?
 
   # Returns an array of the 25 Posts for the specified page, or nil
   #
@@ -106,15 +108,6 @@ class Post
     else
       return Post.IDsToPosts(pageIDs)
     end
-  end
-
-  # Get the top ranked post for a given sort method
-  #
-  # sort_method - String of sort method
-  # Returns the top ranked Post
-  def Post.featured(sort_method)
-    pageID = Post.sort(sort_method)[0]
-    return Post.new(pageID)
   end
 
   def addLike(uid)
@@ -138,7 +131,7 @@ class Post
   def Post.IDsToPosts(postIDs)
     posts = []
     for id in postIDs
-      posts.push(Post.new(id))
+      posts.push(Post.newFromDB(id))
     end
     return posts
   end
