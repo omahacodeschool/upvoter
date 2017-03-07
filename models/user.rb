@@ -3,12 +3,26 @@ class User
   attr_reader :userID, :username, :email, :password
   attr_writer :userID, :username, :email, :password
 
-  def newFromDB(username)
+  def User.newFromDB(username)
      @username = username
-     info = DATABASE.find("users", "username", @username)
+     row = DATABASE.find("users", "username", @username)
      @userID = info["userID"]
      @email = info["email"]
      @password = info["password"]
+  end
+
+  def User.newWithInfo(info)
+     @username = info["username"]
+     @userID = info["userID"]
+     @email = info["email"]
+     @password = info["password"]
+  end
+
+  def changeInfo(info)
+    @userID = info["userID"].nil? ? @userID : info["userID"]
+    @username = info["username"].nil? ? @username : info["username"]
+    @email = info["email"].nil? ? @email : info["email"]
+    @password = info["password"].nil? ? @password : info["password"]
   end
 
   def User.loginValid?(username,password)
