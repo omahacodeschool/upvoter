@@ -1,4 +1,6 @@
 require "csv"
+require 'pry'
+require 'pg'
 
 class Database
 	attr_reader :conn
@@ -16,19 +18,18 @@ class Database
 	# table - Table name String
 	# row   - CSV string row to add.
 	def append(table, row)
-		open(table_path(table), 'a') do |f|
-			f.puts row
-		end
+		# open(table_path(table), 'a') do |f|
+		# 	f.puts row
+		# end
+		# @conn.exec
 	end
-
+	
 	# Writes new entry to database with self-generated ID.
 	#
-	# table - Table name String
-	# row   - CSV string to be modified, then added
-	def newEntry(table, row)
-		id = Time.now.to_f
-		row = id.to_s + "," + row
-		append(table, row)
+	# table - 
+	# entry - 
+	def newEntry(table, entry)
+		@conn.exec("INSERT INTO " + table + insertQuery(entry) + ";")
 	end
 
 	# Get a single row based on a key and value.
@@ -39,13 +40,9 @@ class Database
 	# 
 	# Returns a Hash of the row's information, or Nil.
 	def find(table, key, key_value)
-		file_name = table_path(table)
-		CSV.foreach(file_name, {headers: true, return_headers: false}) do |row|
-			if row[key] == key_value
-				return row.to_hash
-			end
-		end
-		return nil
+		result = @conn.exec("SELECT * FROM " + table + " WHERE " + key + "=" + key_value + ";")[0]
+		binding.pry
+		return result
 	end
 
 	# Get all rows from a table.
@@ -55,16 +52,12 @@ class Database
 	# 
 	# Returns a Hash containing each row's information.
 	def all(table, key_result_by)
-		# TODO Example
-		# DATABASE.conn.exec("SELECT * FROM users").each {|row| puts row["username"]}
-
-		file_name = table_path(table)
-		the_hash = {}
-		CSV.foreach(file_name, {headers: true, return_headers: false}) do |row|
-			key = row[key_result_by];
-			the_hash[key] = row.to_hash
+		result = {}
+		the_hash = @conn.exec("SELECT * FROM " + table + ";")
+		the_hash.each do |row|
+			result[row[key_result_by]] = row
 		end
-		return the_hash
+		return result
 	end
 
 	# Delete a row from a table
@@ -76,9 +69,7 @@ class Database
 	# Examples: - delete(users, username, "bruce")
 	#           - delete(users, userID, 1234567890.123456)
 	def delete(table, key_name, key_value)
-		the_hash = all(table, key_name)
-		the_hash.delete(key_value)
-		writeAll(table, the_hash)
+		@conn.exec("DELETE FROM " + table + " WHERE " + key_name + "=" + key_value + ";")
 	end
 
 	# Edit a row from a table
@@ -87,9 +78,10 @@ class Database
 	# key_name  - Name of key to edit
 	# key_value - Value of key_name to edit
 	# new_row   - csv string containing data for new row
-	def edit(table, key_name, key_value, new_row)
-		delete(table,key_name,key_value)
-		append(table, new_row)	
+	def edit(table, key_name, key_value, idkey, idval)
+		# delete(table,key_name,key_value)
+		# append(table, new_row)
+		@conn.exec("UPDATE " + table + " SET " + key_name + "=" + key_value + " WHERE " + idkey + "=" + idval + ";")
 	end
 
 	private
@@ -114,6 +106,19 @@ class Database
 		open(file_name, 'w') do |f|
 			f.puts headers
 		end
+	end
+
+	# Format stuff for insert to sql
+	def insertQuery(row)
+		heads = []
+		vals = []
+		row.each do |k,v|
+			heads.push(k)
+			vals.push(v)
+		end
+		heads = heads.join(", ")
+		vals = vals.join(", ")
+		return "(" + heads + ") VALUES (" + vals +")"
 	end
 
 end

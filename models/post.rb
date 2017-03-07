@@ -14,6 +14,9 @@ class Post
     @score = Score.new(id)
   end
 
+  # Checks if user has already liked a post
+  # user - username as string
+  # returns true if likes has an entry with both the wanted postID and userID
   def likedBy?(user)
     uid = DATABASE.find("users", "username", user)["userID"]
     hash = DATABASE.all("likes","likeID")
@@ -26,6 +29,7 @@ class Post
     return liked
   end
 
+  # Increments/decrements score of post when user clicks arrow.
   def Post.likeClicked(postID, user)
     uid = DATABASE.find("users", "username", user)["userID"]
     thispost = Post.new(postID)
@@ -76,7 +80,7 @@ class Post
   def Post.top()
     result = {}
     Post.all.each do |k, v|
-      result[k] = Post.new(k).score.value
+      result[k] = Post.new(k).num_likes.value
     end
     result = result.sort_by {|k, v| v}.to_h
     return result.keys.reverse
@@ -86,7 +90,7 @@ class Post
   def Post.popular()
     result = {}
     Post.all.each do |k, v|
-      result[k] = Post.new(k).score.popular_value
+      result[k] = Post.new(k).num_likes.popular_value
     end
     result = result.sort_by {|k, v| v}.to_h
     return result.keys.reverse
