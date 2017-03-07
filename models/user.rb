@@ -1,7 +1,7 @@
 class User
 
-  attr_reader :id :username, :email, :password
-  attr_writer :id :username, :email, :password
+  attr_reader :id, :username, :email, :password
+  attr_writer :id, :username, :email, :password
 
   def newFromDB(username)
      @username = username
