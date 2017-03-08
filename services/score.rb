@@ -12,6 +12,7 @@ class Score
 		@postid = postid
 		@value = num_likes
 		@popular_value = popular_score
+		binding.pry
 	end
 
 	def num_likes()
@@ -22,6 +23,7 @@ class Score
 				num_likes += 1
 			end
 		end
+		binding.pry
 		return num_likes
 	end
 
@@ -31,6 +33,8 @@ class Score
 	    age = currently - postTime
 	    return decay(age)
 	end
+
+	private
 
 	def decay(age)
 		case
