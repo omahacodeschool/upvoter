@@ -57,4 +57,16 @@ post("/likeclicked") do
 	redirect("/\#")
 end
 
+get("/newUser") do
+	erb :newUser
+end
+
+post("/newUser") do
+
+end
+
+post("/newPassword") do
+
+end
+
 
