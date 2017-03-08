@@ -1,18 +1,22 @@
 <div class="article roundCorner <%= "featured" if featured %> "> 
-	<div class="articleImg <%= "featuredImg" if featured %>">
-		<img src="/images/articleIcon.png">
+
+	<div class="articleWrapper">
+		<div class="articleImg <%= "featuredImg" if featured %>">
+			<img src="/images/articleIcon.png">
+		</div>
+
+		<div class="articleText <%= "featuredText" if featured %> ">
+			<h3><a href="<%= post.info["content"] %>"><%= post.info["title"] %></a></h3>
+		</div>
 	</div>
 
 	<div class="score">
-		<form method="post" action="/likeclicked?pid=<%= post.info["postID"] %>&user=<%=user%>">
-			<button type="submit">
-				<img src="https://img.4plebs.org/boards/s4s/image/1385/00/1385006781269.png" class="likeIcon">
+		<form id="outerUpvoteForm" class="upvoteform" method="post" action="/likeclicked?pid=<%= post.info["postID"] %>&user=<%=user%>">
+			<button type="submit" class="upvoteButton">
+				upvote
 			</button>
 		</form>
 		<span class="scoreCount"><%= post.score.value %></span>
-	</div>
-	<div class="articleText <%= "featuredText" if featured %> ">
-		<h3><a href="<%= post.info["content"] %>"><%= post.info["title"] %></a></h3>
 	</div>
 	
 </div>
