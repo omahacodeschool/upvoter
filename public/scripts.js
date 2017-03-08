@@ -4,10 +4,8 @@ window.addEventListener('load', function(){
 	var modal = document.getElementsByClassName("modal")[0];
 	var newPostButton = document.getElementById("newPostButton");
 
-	for (i = 0; i < 25; i++){
-		var upvoteButton = document.getElementsByClassName("upvoteButton")[i];
-		//HOW TO CALL THIS FUNCTION ON CLICK???
-		upvoteButton.addEventListener('click', function(e){ upvotePost(i) });
+	for (upvoteButton in document.getElementsByClassName("upvoteButton")){
+		upvoteButton.addEventListener('click', upvotePost);
 	}
 	
 	newPostButton.addEventListener('click', showModal);
@@ -25,8 +23,10 @@ window.addEventListener('load', function(){
 		modal.style.display = "none";
 	}
 
-	function upvotePost(event, i) {
+	function upvotePost(event) {
 		event.preventDefault();
+		// TODO Using your button, which is event.target, use DOM traversal to get
+		// to its parent form.
 		var formClass = document.getElementsByClassName("upvoteform")[i];
 		var testClasses = formClass.className;
 		
