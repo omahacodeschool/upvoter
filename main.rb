@@ -11,11 +11,11 @@ require_relative './services/score.rb'
 
 enable :sessions
 
-SEARCHDEFAULT = "popular"
+SORTDEFAULT = "popular"
 
 get("/") do
 	@cur_page = params["pg"].nil? ? 1 : params["pg"].to_i
-	@sort   = params["sort"].nil? ? SEARCHDEFAULT : params["sort"]
+	@sort   = params["sort"].nil? ? SORTDEFAULT : params["sort"]
 	@user     = session[:user]
 	
     @page_of_posts = Post.page(@sort, @cur_page)
@@ -28,16 +28,16 @@ end
 
 post("/newPost") do
 	cur_page = params["pg"].nil? ? 1 : params["pg"].to_i
-	sort   = params["sort"].nil? ? SEARCHDEFAULT : params["sort"]
+	sort   = params["sort"].nil? ? SORTDEFAULT : params["sort"]
 
 	post_info = {"userid" => params["userid"], "title" => params["title"], "content" => params["content"]}
 	Post.create(post_info)
-	redirect("/?pg="+cur_page+"&sort="+sort)
+	redirect("/?pg="+cur_page.to_s+"&sort="+sort)
 end
 
 get("/login") do
 	cur_page = params["pg"].nil? ? 1 : params["pg"].to_i
-	sort   = params["sort"].nil? ? SEARCHDEFAULT : params["sort"]
+	sort   = params["sort"].nil? ? SORTDEFAULT : params["sort"]
 
 	@err = session[:login] == "error"
 	session.clear
@@ -46,12 +46,12 @@ end
 
 post("/login") do
 	cur_page = params["pg"].nil? ? 1 : params["pg"].to_i
-	sort   = params["sort"].nil? ? SEARCHDEFAULT : params["sort"]
+	sort   = params["sort"].nil? ? SORTDEFAULT : params["sort"]
 
 	if User.loginValid?(params["username"],params["password"])
 		session[:login] = "true"
 		session[:user] = params["username"]
-		redirect("/?pg="+cur_page+"&sort="+sort)
+		redirect("/?pg="+cur_page.to_s+"&sort="+sort)
 	else
 		session[:login] = "error"
 		redirect("/login?pg="+cur_page+"&sort="+sort)
@@ -65,36 +65,40 @@ end
 
 post("/likeclicked") do
 	cur_page = params["pg"].nil? ? 1 : params["pg"].to_i
-	sort   = params["sort"].nil? ? SEARCHDEFAULT : params["sort"]
+	sort   = params["sort"].nil? ? SORTDEFAULT : params["sort"]
 
-	Post.likeClicked(params["pid"],params["user"])
-	redirect("/?pg="+cur_page+"&sort="+sort)
+	if session[:user]
+		Post.likeClicked(params["pid"],params["user"])
+		redirect("/?pg="+cur_page.to_s+"&sort="+sort)
+	else
+		redirect("/login")
+	end
 end
 
 get("/newUser") do
 	@cur_page = params["pg"].nil? ? 1 : params["pg"].to_i
-	@sort   = params["sort"].nil? ? SEARCHDEFAULT : params["sort"]
+	@sort   = params["sort"].nil? ? SORTDEFAULT : params["sort"]
 
 	erb :newUser
 end
 
 post("/newUser") do
 	cur_page = params["pg"].nil? ? 1 : params["pg"].to_i
-	sort   = params["sort"].nil? ? SEARCHDEFAULT : params["sort"]
+	sort   = params["sort"].nil? ? SORTDEFAULT : params["sort"]
 
 	user_info = {"username" => params["username"], "email" => params["email"], "password" => params["password"]}
 	User.create(user_info)
-	redirect("/?pg="+cur_page+"&sort="+sort)
+	redirect("/?pg="+cur_page.to_s+"&sort="+sort)
 end
 
 post("/newPassword") do
 	cur_page = params["pg"].nil? ? 1 : params["pg"].to_i
-	sort   = params["sort"].nil? ? SEARCHDEFAULT : params["sort"]
+	sort   = params["sort"].nil? ? SORTDEFAULT : params["sort"]
 	
 	username = session[:user]
 	user = User.new(username)
 	user.newPassword(params["password"])
-	redirect("/?pg="+cur_page+"&sort="+sort)
+	redirect("/?pg="+cur_page.to_s+"&sort="+sort)
 end
 
 
