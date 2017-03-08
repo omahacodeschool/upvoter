@@ -1,6 +1,10 @@
+require 'rubygems'
+require 'bundler'
+Bundler.require(:default)
+
 require_relative '../services/database.rb'
 
-DATABASE = Database.new("./data")
+DATABASE = Database.new("upvoter_test")
 
 require_relative '../models/post.rb'
 require_relative '../models/user.rb'

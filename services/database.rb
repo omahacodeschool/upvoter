@@ -1,115 +1,88 @@
 require "csv"
+require 'pry'
+require 'pg'
 
 class Database
+	attr_reader :conn
 
-	def initialize(database_path="./data")
-		@database_path = database_path
-	end
-
-	def table_path(table)
-		"#{@database_path}/#{table}.csv"
-	end
-
-	# Add a row to the database.
-	# 
-	# table - Table name String
-	# row   - CSV string row to add.
-	def append(table, row)
-		open(table_path(table), 'a') do |f|
-			f.puts row
-		end
+	def initialize(database_path='upvoter_development')
+		@conn = PG.connect(dbname: database_path)
 	end
 
 	# Writes new entry to database with self-generated ID.
 	#
-	# table - Table name String
-	# row   - CSV string to be modified, then added
-	def newEntry(table, row)
-		id = Time.now.to_f
-		row = id.to_s + "," + row
-		append(table, row)
+	# table - Table name as string
+	# entry - Hash of values to enter
+	def newEntry(table, entry)
+		@conn.exec("INSERT INTO " + table + insertQuery(entry) + ";")
 	end
 
 	# Get a single row based on a key and value.
 	# 
-	# table         - Table name String
-	# key           - String of the column header to search upon.
+	# table         - Table name as string
+	# key           - String of the column header to search
 	# key_value     - Value of column to return matching entry
 	# 
 	# Returns a Hash of the row's information, or Nil.
 	def find(table, key, key_value)
-		file_name = table_path(table)
-		CSV.foreach(file_name, {headers: true, return_headers: false}) do |row|
-			if row[key] == key_value
-				return row.to_hash
-			end
-		end
-		return nil
+		result = @conn.exec("SELECT * FROM " + table + " WHERE " + key + "='" + key_value + "';")[0]
+		return result
 	end
 
 	# Get all rows from a table.
 	# 
-	# table         - Table name String
-	# key_result_by - Primary key to identify each row by.
+	# table         - Table name as string
+	# key_result_by - Primary key to identify each row
 	# 
-	# Returns a Hash containing each row's information.
+	# Returns a Hash containing each row's information
 	def all(table, key_result_by)
-		file_name = table_path(table)
-		the_hash = {}
-		CSV.foreach(file_name, {headers: true, return_headers: false}) do |row|
-			key = row[key_result_by];
-			the_hash[key] = row.to_hash
+		result = {}
+		the_hash = @conn.exec("SELECT * FROM " + table + ";")
+		the_hash.each do |row|
+			result[row[key_result_by]] = row
 		end
-		return the_hash
+		return result
 	end
 
 	# Delete a row from a table
 	#
-	# table     - Table name String
-	# key_name  - Name of key to delete
+	# table     - Table name as string
+	# key_name  - Key of entry to delete
 	# key_value - Value of key_name to delete
 	# 
 	# Examples: - delete(users, username, "bruce")
-	#           - delete(users, userID, 1234567890.123456)
+	#           - delete(users, userid, 1234567890.123456)
 	def delete(table, key_name, key_value)
-		the_hash = all(table, key_name)
-		the_hash.delete(key_value)
-		writeAll(table, the_hash)
+		@conn.exec("DELETE FROM " + table + " WHERE " + key_name + "=" + key_value + ";")
 	end
 
 	# Edit a row from a table
 	# 
-	# table     - Table name string
-	# key_name  - Name of key to edit
-	# key_value - Value of key_name to edit
-	# new_row   - csv string containing data for new row
-	def edit(table, key_name, key_value, new_row)
-		delete(table,key_name,key_value)
-		append(table, new_row)	
+	# table     - Table name as string
+	# key_name  - Key of entry to edit
+	# key_value - New value of key_name
+	# idkey     - Key used to idetify entry to edit
+	# idval     - Value of idkey to identify entry to edit
+	#
+	# Example:  - edit(users, password, "chickennugs", username, "eggboi")
+	def edit(table, key_name, key_value, idkey, idval)
+		@conn.exec("UPDATE " + table + " SET " + key_name + "=" + key_value + " WHERE " + idkey + "=" + idval + ";")
+
 	end
 
 	private
 
-	# Write all values from a hash of table rows into a table
-	#
-	# table - Table name string
-	# hash  - Hash with all the rows
-	def writeAll(table, hash) 
-		emptyTable(table)
-		hash.each do |k,v|
-			append(table,v.values.join(","))
+	# Format entry from hash to SQL command string
+	def insertQuery(row)
+		heads = []
+		vals = []
+		row.each do |k,v|
+			heads.push(k)
+			vals.push(v)
 		end
-	end
-
-	# Empty all the values from a table leaving the headers
-	#
-	# table - Table name string
-	def emptyTable(table)
-		file_name = table_path(table)
-		headers = CSV.read(file_name,headers: true).headers.join(",")
-		open(file_name, 'w') do |f|
-			f.puts headers
-		end
+		heads = heads.join(", ")
+		vals = vals.join("', '")
+		return "(" + heads + ") VALUES ('" + vals +"')"
 	end
 
 end

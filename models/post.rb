@@ -10,25 +10,29 @@ class Post
 
   def initialize(id)
     @id = id
-    @info = DATABASE.find("posts", "postID", @id.to_s)
+    @info = DATABASE.find("posts", "postid", id.to_s)
     @score = Score.new(id)
   end
 
+  # Checks if user has already liked a post
+  # user - username as string
+  # returns true if likes has an entry with both the wanted postid and userid
   def likedBy?(user)
-    uid = DATABASE.find("users", "username", user)["userID"]
-    hash = DATABASE.all("likes","likeID")
+    uid = DATABASE.find("users", "username", user)["userid"]
+    hash = DATABASE.all("likes","likeid")
     liked = false
     hash.each do |k, v|
-      if v["userID"] == uid && v["postID"] == @id
+      if v["userid"] == uid && v["postid"] == @id
         liked = true
       end
     end
     return liked
   end
 
-  def Post.likeClicked(postID, user)
-    uid = DATABASE.find("users", "username", user)["userID"]
-    thispost = Post.new(postID)
+  # Increments/decrements score of post when user clicks arrow.
+  def Post.likeClicked(postid, user)
+    uid = DATABASE.find("users", "username", user)["userid"]
+    thispost = Post.new(postid)
     if thispost.likedBy?(user)
       thispost.removeLike(uid)
     elsif !uid.nil?
@@ -40,15 +44,15 @@ class Post
   # 
   # post_info - Hash of post info.
   def Post.create(post_info)
-    info = "\"#{post_info["userID"]}\",\"#{post_info["title"]}\",\"#{post_info["content"]}\""
-    DATABASE.newEntry("posts", info)
+    #info = "\"#{post_info["userid"]}\",\"#{post_info["title"]}\",\"#{post_info["content"]}\""
+    DATABASE.newEntry("posts", post_info)
   end
 
   # Get all posts.
   # 
   # Returns a Hash of all posts.
   def Post.all
-    DATABASE.all("posts", "postID");
+    DATABASE.all("posts", "postid");
   end
 
   # Calls appropriate sort method according to desired display.
@@ -65,18 +69,18 @@ class Post
   end
 
   # Defines method to sort posts by age.
-  # Returns array of postIDs sorted by newest first.
+  # Returns array of postids sorted by newest first.
   def Post.newest()
     array = Post.all.keys.sort
     return array.reverse
   end
 
   # Defines method to sort posts by total score.
-  # Returns array of postIDs sorted by score, highest first
+  # Returns array of postids sorted by score, highest first
   def Post.top()
     result = {}
     Post.all.each do |k, v|
-      result[k] = Post.new(k).score.value
+      result[k] = Post.new(k).score.num_likes
     end
     result = result.sort_by {|k, v| v}.to_h
     return result.keys.reverse
@@ -118,36 +122,34 @@ class Post
   end
 
   def addLike(uid)
-    row = @id.to_s + "," + uid.to_s
-    DATABASE.newEntry("likes", row)
+    entry = {"postid" => @id, "userid" => uid}
+    DATABASE.newEntry("likes", entry)
   end
 
   def removeLike(uid)
-    hash = DATABASE.all("likes","likeID")
+    hash = DATABASE.all("likes","likeid")
     lid = nil
     hash.each do |k, v|
-      if v["userID"] == uid && v["postID"] == @id
+      if v["userid"] == uid && v["postid"] == @id
         lid = k
       end
     end
-    DATABASE.delete("likes","likeID", lid)
+    DATABASE.delete("likes","likeid", lid)
   end
 
-  private
-
-  def Post.IDsToPosts(postIDs)
+  def Post.IDsToPosts(postids)
     posts = []
-    for id in postIDs
+    for id in postids
       posts.push(Post.new(id))
     end
     return posts
   end
 
   def Post.pageIDs(sort_method,page_number)
-    postIDs = Post.sort(sort_method)
+    postids = Post.sort(sort_method)
     start_post = (page_number-1)*25
     end_post = start_post + 24
-    return postIDs[start_post..end_post]
+    return postids[start_post..end_post]
   end
 
 end
