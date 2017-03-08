@@ -68,9 +68,6 @@ class Post
     end
   end
 
-  # TODO Should the below be returning an array of "infos" so the erb
-  # could do post["content"] rather than post.info["content"]?
-
   # Returns an array of the 25 Posts for the specified page, or nil
   #
   # sort_method - String of sort method for page

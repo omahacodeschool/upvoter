@@ -5,6 +5,7 @@ RSpec.describe(Score, ".num_likes") do
 	it "calculates the score for a post" do
 
 		# Setup
+		tableCleaner
 		score = Database.new("upvoter_test")
 		uf = UpvoteFaker.new
 		uf.fakeUserWithCredentials("testington","fakecat")
@@ -19,8 +20,9 @@ RSpec.describe(Score, ".num_likes") do
 		expect(testPost.score.value).to eq(20)
 
 		# Teardown
-		DATABASE.delete("posts", "postid", "'1'")
-		DATABASE.delete("users", "username", "'testington'")
+		# DATABASE.delete("posts", "postid", "'1'")
+		# DATABASE.delete("users", "username", "'testington'")
+		tableCleaner
 
 	end
 end
@@ -30,8 +32,10 @@ RSpec.describe(Score, ".popular_score") do
 	it "calculates score decayed by time" do
 
 		# Setup
+		tableCleaner
 		score = Database.new("upvoter_test")
 		uf = UpvoteFaker.new
+		uf.fakeUserWithCredentials("testington","fakecat")
 		testNow = uf.tsFrom(0,1,"h").to_s
 		testHour = uf.tsFrom(1,7,"h").to_s
 		testDay = uf.tsFrom(9,20,"h").to_s
@@ -64,18 +68,19 @@ RSpec.describe(Score, ".popular_score") do
 		expect(scores).to eq([100, 95.0, 75.0, 50.0, 25.0, 15.0])
 
 		# Teardown
-		DATABASE.delete("posts", "postid", "'#{testNow}'")
-		DATABASE.delete("posts", "postid", "'#{testHour}'")
-		DATABASE.delete("posts", "postid", "'#{testDay}'")
-		DATABASE.delete("posts", "postid", "'#{testWeek}'")
-		DATABASE.delete("posts", "postid", "'#{testMonth}'")
-		DATABASE.delete("posts", "postid", "'#{testYear}'")
-		DATABASE.delete("likes", "postid", "'#{testNow}'")
-		DATABASE.delete("likes", "postid", "'#{testHour}'")
-		DATABASE.delete("likes", "postid", "'#{testDay}'")
-		DATABASE.delete("likes", "postid", "'#{testWeek}'")
-		DATABASE.delete("likes", "postid", "'#{testMonth}'")
-		DATABASE.delete("likes", "postid", "'#{testYear}'")
+		# DATABASE.delete("posts", "postid", "'#{testNow}'")
+		# DATABASE.delete("posts", "postid", "'#{testHour}'")
+		# DATABASE.delete("posts", "postid", "'#{testDay}'")
+		# DATABASE.delete("posts", "postid", "'#{testWeek}'")
+		# DATABASE.delete("posts", "postid", "'#{testMonth}'")
+		# DATABASE.delete("posts", "postid", "'#{testYear}'")
+		# DATABASE.delete("likes", "postid", "'#{testNow}'")
+		# DATABASE.delete("likes", "postid", "'#{testHour}'")
+		# DATABASE.delete("likes", "postid", "'#{testDay}'")
+		# DATABASE.delete("likes", "postid", "'#{testWeek}'")
+		# DATABASE.delete("likes", "postid", "'#{testMonth}'")
+		# DATABASE.delete("likes", "postid", "'#{testYear}'")
+		tableCleaner
 
 	end
 end
