@@ -22,7 +22,6 @@ class Score
 				num_likes += 1
 			end
 		end
-		binding.pry
 		return num_likes
 	end
 

@@ -8,19 +8,19 @@ RSpec.describe(Score, ".num_likes") do
 		score = Database.new("upvoter_test")
 		uf = UpvoteFaker.new
 		uf.fakeUserWithCredentials("testington","fakecat")
-		uf.fakePost(1)
+		uf.fakePost("1")
 		uf.fakeLike("1",20)
 
 		# Exercise
-		testPost = Post.new(1)
+		testPost = Post.new("1")
 		sco = testPost.score.num_likes
 
 		# Validation
 		expect(testPost.score.value).to eq(20)
 
 		# Teardown
-		DATABASE.delete("posts", "postid", "1")
-		DATABASE.delete("user", "username", "testington")
+		DATABASE.delete("posts", "postid", "'1'")
+		DATABASE.delete("users", "username", "'testington'")
 
 	end
 end
