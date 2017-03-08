@@ -66,7 +66,9 @@ post("/newUser") do
 end
 
 post("/newPassword") do
-
+	username = session[:user]
+	user = User.new(username)
+	user.newPassword(params["password"])
 end
 
 
