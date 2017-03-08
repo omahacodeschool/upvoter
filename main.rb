@@ -32,7 +32,7 @@ post("/newPost") do
 
 	post_info = {"userid" => params["userid"], "title" => params["title"], "content" => params["content"]}
 	Post.create(post_info)
-	redirect("/?pg="+cur_page+"&sort="+sort)
+	redirect("/?pg="+cur_page.to_s+"&sort="+sort)
 end
 
 get("/login") do
@@ -51,7 +51,7 @@ post("/login") do
 	if User.loginValid?(params["username"],params["password"])
 		session[:login] = "true"
 		session[:user] = params["username"]
-		redirect("/?pg="+cur_page+"&sort="+sort)
+		redirect("/?pg="+cur_page.to_s+"&sort="+sort)
 	else
 		session[:login] = "error"
 		redirect("/login?pg="+cur_page+"&sort="+sort)
@@ -69,7 +69,7 @@ post("/likeclicked") do
 
 	if session[:user]
 		Post.likeClicked(params["pid"],params["user"])
-		redirect("/?pg="+cur_page+"&sort="+sort)
+		redirect("/?pg="+cur_page.to_s+"&sort="+sort)
 	else
 		redirect("/login")
 	end
@@ -88,7 +88,7 @@ post("/newUser") do
 
 	user_info = {"username" => params["username"], "email" => params["email"], "password" => params["password"]}
 	User.create(user_info)
-	redirect("/?pg="+cur_page+"&sort="+sort)
+	redirect("/?pg="+cur_page.to_s+"&sort="+sort)
 end
 
 post("/newPassword") do
@@ -98,7 +98,7 @@ post("/newPassword") do
 	username = session[:user]
 	user = User.new(username)
 	user.newPassword(params["password"])
-	redirect("/?pg="+cur_page+"&sort="+sort)
+	redirect("/?pg="+cur_page.to_s+"&sort="+sort)
 end
 
 
