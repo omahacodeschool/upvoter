@@ -9,33 +9,18 @@ class Database
 		@conn = PG.connect(dbname: database_path)
 	end
 
-	def table_path(table)
-		table
-	end
-
-	# Add a row to the database.
-	# 
-	# table - Table name String
-	# row   - CSV string row to add.
-	def append(table, row)
-		# open(table_path(table), 'a') do |f|
-		# 	f.puts row
-		# end
-		# @conn.exec
-	end
-	
 	# Writes new entry to database with self-generated ID.
 	#
-	# table - 
-	# entry - 
+	# table - Table name as string
+	# entry - Hash of values to enter
 	def newEntry(table, entry)
 		@conn.exec("INSERT INTO " + table + insertQuery(entry) + ";")
 	end
 
 	# Get a single row based on a key and value.
 	# 
-	# table         - Table name String
-	# key           - String of the column header to search upon.
+	# table         - Table name as string
+	# key           - String of the column header to search
 	# key_value     - Value of column to return matching entry
 	# 
 	# Returns a Hash of the row's information, or Nil.
@@ -46,10 +31,10 @@ class Database
 
 	# Get all rows from a table.
 	# 
-	# table         - Table name String
-	# key_result_by - Primary key to identify each row by.
+	# table         - Table name as string
+	# key_result_by - Primary key to identify each row
 	# 
-	# Returns a Hash containing each row's information.
+	# Returns a Hash containing each row's information
 	def all(table, key_result_by)
 		result = {}
 		the_hash = @conn.exec("SELECT * FROM " + table + ";")
@@ -61,8 +46,8 @@ class Database
 
 	# Delete a row from a table
 	#
-	# table     - Table name String
-	# key_name  - Name of key to delete
+	# table     - Table name as string
+	# key_name  - Key of entry to delete
 	# key_value - Value of key_name to delete
 	# 
 	# Examples: - delete(users, username, "bruce")
@@ -73,17 +58,20 @@ class Database
 
 	# Edit a row from a table
 	# 
-	# table     - Table name string
-	# key_name  - Name of key to edit
-	# key_value - Value of key_name to edit
-	# new_row   - csv string containing data for new row
+	# table     - Table name as string
+	# key_name  - Key of entry to edit
+	# key_value - New value of key_name
+	# idkey     - Key used to idetify entry to edit
+	# idval     - Value of idkey to identify entry to edit
+	#
+	# Example:  - edit(users, password, "chickennugs", username, "eggboi")
 	def edit(table, key_name, key_value, idkey, idval)
 		@conn.exec("UPDATE " + table + " SET " + key_name + "=" + key_value + " WHERE " + idkey + "=" + idval + ";")
 	end
 
 	private
 
-	# Format stuff for insert to sql
+	# Format entry from hash to SQL command string
 	def insertQuery(row)
 		heads = []
 		vals = []
