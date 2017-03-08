@@ -12,26 +12,30 @@ require 'sinatra'
 
 enable :sessions
 
-get("/") {
+get("/") do
 	@cur_page = params["pg"].nil? ? 1 : params["pg"].to_i
 	@search   = params["search"].nil? ? "newest" : params["search"]
 	@user     = session[:user]
 		
     @page_of_posts = Post.page(@search, @cur_page)
 	erb :index
-}
+end
 
-get("/newPost") {
+get("/newPost") do
 	erb :newPost
-}
+end
 
-get("/login") {
+post("/newPost") do
+
+end
+
+get("/login") do
 	@err = session[:login] == "error"
 	session.clear
 	erb :login
-}
+end
 
-post("/login") {
+post("/login") do
 	if User.loginValid?(params["username"],params["password"])
 		session[:login] = "true"
 		session[:user] = params["username"]
@@ -41,18 +45,16 @@ post("/login") {
 		session[:login] = "error"
 		redirect("/login")
 	end
-}
+end
 
-get("/logout") {
+get("/logout") do
 	session.clear
 	redirect("/")
-}
+end
 
-post("/likeclicked") {
+post("/likeclicked") do
 	Post.likeClicked(params["pid"],params["user"])
 	redirect("/\#")
-}
+end
 
-post("/newPost") {
 
-}
