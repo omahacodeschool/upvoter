@@ -1,8 +1,23 @@
 class User
 
-  attr_reader :info
-  # attr_reader :username, :email, :password
-  # attr_writer :username, :email, :password
+  attr_reader :id, :username, :email, :password
+  attr_writer :id, :username, :email, :password
+
+
+  def User.newFromInfo(info)
+    newUser = User.new
+    newUser.username = info["username"]
+    newUser.userID = info["userID"]
+    newUser.email = info["email"]
+    newUser.password = info["password"]
+    return newUser
+  end
+
+  def User.newFromDB(username)
+    @username = username
+    info = DATABASE.find("users", "username", @username)
+    return newFromInfo(info)
+  end
 
   def initialize(username)
     @username = username
