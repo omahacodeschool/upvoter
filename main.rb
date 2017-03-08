@@ -26,7 +26,8 @@ get("/newPost") do
 end
 
 post("/newPost") do
-
+	post_info = {"userid" => params["userid"], "title" => params["title"], "content" => params["content"]}
+	Post.create(post_info)
 end
 
 get("/login") do
@@ -62,7 +63,8 @@ get("/newUser") do
 end
 
 post("/newUser") do
-
+	user_info = {"username" => params["username"], "email" => params["email"], "password" => params["password"]}
+	User.create(user_info)
 end
 
 post("/newPassword") do
