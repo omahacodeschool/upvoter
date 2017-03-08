@@ -65,14 +65,14 @@ RSpec.describe(Database, ".edit") do
   	changePass.conn.exec("INSERT INTO users(username, email, password) VALUES ('nennington', 'barlsworth@gmail.com', 'nenners');")
 
   	# Exercise
-  	changePass.edit("users", "password", "snails", "username", "nennington")
+  	changePass.edit("users", "password", "'snails'", "username", "'nennington'")
 
   	# Verify
     actual = changePass.conn.exec("SELECT password FROM users WHERE username='nennington';")[0]["password"]
     expect(actual).to eq('snails')
 
     # Teardown
-    findUser.conn.exec("DELETE FROM users WHERE username='nennington';")
+    changePass.conn.exec("DELETE FROM users WHERE username='nennington';")
 
   end
 end

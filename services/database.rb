@@ -67,6 +67,7 @@ class Database
 	# Example:  - edit(users, password, "chickennugs", username, "eggboi")
 	def edit(table, key_name, key_value, idkey, idval)
 		@conn.exec("UPDATE " + table + " SET " + key_name + "=" + key_value + " WHERE " + idkey + "=" + idval + ";")
+
 	end
 
 	private
