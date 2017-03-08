@@ -12,7 +12,6 @@ class Post
     @id = id
     @info = DATABASE.find("posts", "postid", id.to_s)
     @score = Score.new(id)
-    binding.pry
   end
 
   # Checks if user has already liked a post

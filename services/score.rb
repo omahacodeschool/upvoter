@@ -12,7 +12,6 @@ class Score
 		@postid = postid
 		@value = num_likes
 		@popular_value = popular_score
-		binding.pry
 	end
 
 	def num_likes()

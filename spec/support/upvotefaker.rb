@@ -47,8 +47,8 @@ class UpvoteFaker
 	end
 
 	def fakeLike(postid,num_likes)
-		num_users = DATABASE.all("users","userid").keys.length
-		num_likes = num_likes > num_users ? num_users : num_likes
+		# num_users = DATABASE.all("users","userid").keys.length
+		# num_likes = num_likes > num_users ? num_users : num_likes
 		num_likes.times do
 			likeid = tsFrom(0,365,"d")
 			userid = randomUIDFromUsers()
