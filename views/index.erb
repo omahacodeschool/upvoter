@@ -66,15 +66,18 @@
 			</div>
 		</div>
 
-		<div class="modalFullScreen modalBackground" style="display: none;"></div>
-		<div class="modalFullScreen modal" style="display: none;">
+		<!-- ALL MODALS BACKGROUND -->
+		<div id="modalBackground" class="modalFullScreen modalBackground" style="display: none;"></div>
+
+		<!-- NEW POST MODAL -->
+		<div class="modalFullScreen modal" id="newPostModal" style="display: none;">
 			<div class="modalWindow">
 
 				<div class="modalHeader">
 					<h1>New Post</h1>
 				</div>
 
-				<div class="newPostContent">
+				<div class="modalContent">
 
 					<form class="newPostForm">
 						<div class="titleLine">
@@ -85,6 +88,39 @@
 						<br>
 						<div class="articleLine">
 							<span>Link:</span>
+							<input type="text" name="postLink" class="selected" placeholder="Article link...">
+						</div>
+
+						<br>
+						<div id="submitButton">
+							<input type="submit" name="submitPost" class="roundCorner selected" value="Submit">
+						</div>
+						
+					</form>
+					
+				</div>
+			</div>
+		</div>
+
+		<!-- LOGIN MODAL -->
+		<div class="modalFullScreen modal" id="loginModal" style="display: none;">
+			<div class="modalWindow">
+
+				<div class="modalHeader">
+					<h1>New Post</h1>
+				</div>
+
+				<div class="modalContent">
+
+					<form class="newPostForm">
+						<div class="titleLine">
+							<span>Username:</span>
+							<input type="text" name="postTitle" class="selected" placeholder="Article title...">
+						</div>
+						
+						<br>
+						<div class="articleLine">
+							<span>Password:</span>
 							<input type="text" name="postLink" class="selected" placeholder="Article link...">
 						</div>
 

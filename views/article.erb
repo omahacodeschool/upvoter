@@ -11,7 +11,7 @@
 	</div>
 
 	<div class="score">
-		<form id="outerUpvoteForm" class="upvoteform" method="post" action="/likeclicked?pid=<%= post.info["postID"] %>&user=<%=user%>">
+		<form class="upvoteform" method="post" action="/likeclicked?pid=<%= post.info["postID"] %>&user=<%=user%>">
 			<button type="submit" class="upvoteButton">
 				upvote
 			</button>

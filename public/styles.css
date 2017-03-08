@@ -353,7 +353,7 @@ input[type=submit] {
 	pointer-events: auto;
 }
 
-.newPostContent {
+.modalContent {
 	display: flex;
 	justify-content: center;
 	align-items: center;
