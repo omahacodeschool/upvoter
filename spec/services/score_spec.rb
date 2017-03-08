@@ -25,6 +25,7 @@ RSpec.describe(Score, ".num_likes") do
 	end
 end
 
+# Testing .popular_score method
 RSpec.describe(Score, ".popular_score") do
 	it "calculates score decayed by time" do
 
@@ -56,10 +57,8 @@ RSpec.describe(Score, ".popular_score") do
 		monthPost = Post.new(testMonth)
 		yearPost = Post.new(testYear)
 
-
 		# Exercise
 		scores = [nowPost.score.popular_score, hourPost.score.popular_score, dayPost.score.popular_score, weekPost.score.popular_score, monthPost.score.popular_score, yearPost.score.popular_score]
-		
 
 		# Validation
 		expect(scores).to eq([100, 95.0, 75.0, 50.0, 25.0, 15.0])
