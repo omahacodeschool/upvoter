@@ -1,4 +1,4 @@
-window.addEventListener('load', function(){
+function UpvoteButton = function(element){
 
   var newPostButton = document.getElementById("newPostButton");
 
@@ -25,4 +25,4 @@ window.addEventListener('load', function(){
     }
     
   }
-});
+};

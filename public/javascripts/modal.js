@@ -1,18 +1,18 @@
-window.addEventListener('load', function(){
-  var modalBG = document.getElementsByClassName("modalBackground")[0];
-  var modal = document.getElementsByClassName("modal")[0];
+function Modal(){
+  this.modalBG = document.getElementsByClassName("modalBackground")[0];
+  this.modal   = document.getElementsByClassName("modal")[0];
 
-  modalBG.addEventListener('click', hideModal);
-
-  function showModal(e) {
+  this.hide = function(e) {
     e.preventDefault();
-    modalBG.style.display = "block";
-    modal.style.display = "flex";
+    this.modalBG.style.display = "none";
+    this.modal.style.display = "none";
   }
 
-  function hideModal(e) {
+  this.show = function(e) {
     e.preventDefault();
-    modalBG.style.display = "none";
-    modal.style.display = "none";
+    this.modalBG.style.display = "block";
+    this.modal.style.display = "flex";
   }
-});
+
+  this.modalBG.addEventListener('click', hideModal);
+}
