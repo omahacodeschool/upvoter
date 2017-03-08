@@ -32,6 +32,8 @@ class Score
 	    return decay(age)
 	end
 
+	private
+
 	def decay(age)
 		case
 		when age < HOUR # Full score when newer than 1 hour

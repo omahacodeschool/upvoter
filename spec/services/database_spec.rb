@@ -40,21 +40,21 @@ RSpec.describe(Database, ".find") do
   end
 end
 
-# Testing the .all Database method.
-RSpec.describe(Database, ".all") do
-  it "returns information on all entries in a table" do
+# # Testing the .all Database method.
+# RSpec.describe(Database, ".all") do
+#   it "returns information on all entries in a table" do
   	
-  	# Setup
-  	allUsers = Database.new("upvoter_test")
+#   	# Setup
+#   	allUsers = Database.new("upvoter_test")
 
-  	# Exercise
-  	allHash = allUsers.all("users", "userid")
+#   	# Exercise
+#   	allHash = allUsers.all("users", "userid")
 
-  	# Verify
-    expect(allHash.any? { |name1, name2, password1, password2| name1 = "Administrator", name2 = "bigmike", password1 = "admini", password2 = "littlemike"}).to be true
+#   	# Verify
+#     expect(allHash.any? { |name1, name2, password1, password2| name1 = "Administrator", name2 = "bigmike", password1 = "admini", password2 = "littlemike"}).to be true
 
-  end
-end
+#   end
+# end
 
 # Testing the .edit Database method.
 RSpec.describe(Database, ".edit") do
