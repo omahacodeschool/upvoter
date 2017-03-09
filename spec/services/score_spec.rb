@@ -1,8 +1,12 @@
+# TODO Test Score in isolation, no need to connect to DB at all.
+
 require 'pry'
 
 # Testing .num_likes score method
 RSpec.describe(Score, ".num_likes") do
 	it "calculates the score for a post" do
+		# Score.new(342890234, 23)
+
 
 		# Setup
 		tableCleaner

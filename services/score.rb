@@ -1,3 +1,9 @@
+# TODO Consider that Score is just these two values + some math.
+# 1. Post timestamp
+# 2. Post num_likes
+
+# TODO Add docs for methods.
+
 class Score
 	attr_reader :value
 	attr_reader :popular_value
@@ -8,21 +14,11 @@ class Score
 	WEEK = 7*DAY
 	MONTH = 4*WEEK
 
-	def initialize(postid)
+	def initialize(postid, num_likes)
+		@hash = hash
 		@postid = postid
 		@value = num_likes
 		@popular_value = popular_score
-	end
-
-	def num_likes()
-		hash = DATABASE.all("likes","likeid")
-		num_likes = 0
-		hash.each do |k, v|
-			if v["postid"] == @postid
-				num_likes += 1
-			end
-		end
-		return num_likes
 	end
 
 	def popular_score()
