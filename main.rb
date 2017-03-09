@@ -31,10 +31,12 @@ post("/newPost") do
 	cur_page = params["pg"].nil? ? 1 : params["pg"].to_i
 	sort   = params["sort"].nil? ? SORTDEFAULT : params["sort"]
 
-	post_info = {"userid" => params["userid"], "title" => params["title"], "content" => params["content"]}
+	user = User.newFromDB(session[:user])
+	post_info = {"userid" => user.userid, "title" => params["title"], "content" => params["content"]}
 	post = Post.newFromInfo(post_info)
 	post.save
-	
+	Post.likeClicked(post.postid, user.username)
+
 	redirect("/?pg="+cur_page.to_s+"&sort="+sort)
 end
 
