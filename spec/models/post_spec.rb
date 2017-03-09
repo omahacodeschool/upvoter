@@ -160,7 +160,7 @@ RSpec.describe(Post, ".page") do
 		uf.fakeLike(testMonth, 98)
 		uf.fakePost(testYear)
 		uf.fakeLike(testYear, 97)
-		uf.fakePosts(30, uf.tsFrom(400,500,"d").to_s)
+		uf.fakePosts(30, {"start" => 400, "end" => 500,"unit" => "d"})
 		nowPost = Post.newFromDB(testNow)
 		hourPost = Post.newFromDB(testHour)
 		dayPost = Post.newFromDB(testDay)
