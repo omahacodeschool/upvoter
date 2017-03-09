@@ -13,7 +13,7 @@ RSpec.describe(Score, ".num_likes") do
 		uf.fakeLike("1",20)
 
 		# Exercise
-		testPost = Post.new("1")
+		testPost = Post.newFromDB("1")
 		sco = testPost.score.num_likes
 
 		# Validation
@@ -54,12 +54,12 @@ RSpec.describe(Score, ".popular_score") do
 		uf.fakeLike(testMonth, 100)
 		uf.fakePost(testYear)
 		uf.fakeLike(testYear, 100)
-		nowPost = Post.new(testNow)
-		hourPost = Post.new(testHour)
-		dayPost = Post.new(testDay)
-		weekPost = Post.new(testWeek)
-		monthPost = Post.new(testMonth)
-		yearPost = Post.new(testYear)
+		nowPost = Post.newFromDB(testNow)
+		hourPost = Post.newFromDB(testHour)
+		dayPost = Post.newFromDB(testDay)
+		weekPost = Post.newFromDB(testWeek)
+		monthPost = Post.newFromDB(testMonth)
+		yearPost = Post.newFromDB(testYear)
 
 		# Exercise
 		scores = [nowPost.score.popular_score, hourPost.score.popular_score, dayPost.score.popular_score, weekPost.score.popular_score, monthPost.score.popular_score, yearPost.score.popular_score]

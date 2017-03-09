@@ -1,17 +1,27 @@
 class Post
-  attr_reader :info
-  attr_reader :score
+  attr_reader :postid, :userid, :title, :content, :score
+  attr_writer  :postid, :userid, :title, :content, :score
 
-  MINUTE = 60
-  HOUR = 60*MINUTE
-  DAY = 24*HOUR
-  WEEK = 7*DAY
-  MONTH = 4*WEEK
+  # def initialize(id)
+  #   @id = id
+  #   @info = DATABASE.find("posts", "postid", id.to_s)
+  #   @score = Score.new(id)
+  # end
 
-  def initialize(id)
-    @id = id
-    @info = DATABASE.find("posts", "postid", id.to_s)
-    @score = Score.new(id)
+  def Post.newFromInfo(info)
+    newPost = Post.new
+    newPost.postid  = info["postid"].nil? ? Time.now.to_f.to_s : info["postid"]
+    newPost.userid  = info["userid"]
+    newPost.title   = info["title"]
+    newPost.content = info["content"]
+    newPost.score = Score.new(@postid)
+    return newPost
+  end
+
+  def Post.newFromDB(postid)
+    @postid = postid
+    info = DATABASE.find("posts", "postid", @postid)
+    return newFromInfo(info)
   end
 
   # Checks if user has already liked a post
