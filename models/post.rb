@@ -8,6 +8,15 @@ class Post
   #   @score = Score.new(id)
   # end
 
+  def num_likes
+    # TODO
+  end
+
+  # TODO
+  # def popular_score
+  #   score.popular_score
+  # end
+
   def Post.newFromInfo(info)
     newPost = Post.new
     newPost.postid  = info["postid"].nil? ? Time.now.to_f.to_s : info["postid"]
