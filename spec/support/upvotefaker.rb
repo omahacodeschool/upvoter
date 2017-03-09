@@ -40,9 +40,10 @@ class UpvoteFaker
 		DATABASE.newEntry("posts",entry)
 	end
 
-	def fakePosts(count)
+	def fakePosts(count, options={"start" => 0, "end" => 365, "unit" => "d"})
 		count.times do
-			fakePost()
+			postid = tsFrom(options["start"], options["end"], options["unit"])
+			fakePost(postid)
 		end
 	end
 

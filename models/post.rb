@@ -1,17 +1,27 @@
 class Post
-  attr_reader :info
-  attr_reader :score
+  attr_reader :postid, :userid, :title, :content, :score
+  attr_writer  :postid, :userid, :title, :content, :score
 
-  MINUTE = 60
-  HOUR = 60*MINUTE
-  DAY = 24*HOUR
-  WEEK = 7*DAY
-  MONTH = 4*WEEK
+  # def initialize(id)
+  #   @id = id
+  #   @info = DATABASE.find("posts", "postid", id.to_s)
+  #   @score = Score.new(id)
+  # end
 
-  def initialize(id)
-    @id = id
-    @info = DATABASE.find("posts", "postid", id.to_s)
-    @score = Score.new(id)
+  def Post.newFromInfo(info)
+    newPost = Post.new
+    newPost.postid  = info["postid"].nil? ? Time.now.to_f.to_s : info["postid"]
+    newPost.userid  = info["userid"]
+    newPost.title   = info["title"]
+    newPost.content = info["content"]
+    newPost.score = Score.new(@postid)
+    return newPost
+  end
+
+  def Post.newFromDB(postid)
+    @postid = postid
+    info = DATABASE.find("posts", "postid", @postid)
+    return newFromInfo(info)
   end
 
   # Checks if user has already liked a post
@@ -22,7 +32,7 @@ class Post
     hash = DATABASE.all("likes","likeid")
     liked = false
     hash.each do |k, v|
-      if v["userid"] == uid && v["postid"] == @id
+      if v["userid"] == uid && v["postid"] == @postid
         liked = true
       end
     end
@@ -32,7 +42,7 @@ class Post
   # Increments/decrements score of post when user clicks arrow.
   def Post.likeClicked(postid, user)
     uid = DATABASE.find("users", "username", user)["userid"]
-    thispost = Post.new(postid)
+    thispost = Post.newFromDB(postid)
     if thispost.likedBy?(user)
       thispost.removeLike(uid)
     elsif !uid.nil?
@@ -43,29 +53,9 @@ class Post
   # Create a post.
   # 
   # post_info - Hash of post info.
-  def Post.create(post_info)
-    #info = "\"#{post_info["userid"]}\",\"#{post_info["title"]}\",\"#{post_info["content"]}\""
-    DATABASE.newEntry("posts", post_info)
-  end
-
-  # Get all posts.
-  # 
-  # Returns a Hash of all posts.
-  def Post.all
-    DATABASE.all("posts", "postid");
-  end
-
-  # Calls appropriate sort method according to desired display.
-  #
-  # method - String of desired sort method
-  def Post.sort(method)
-    if method == "newest"
-      return newest()
-    elsif method == "top"
-      return top()
-    else
-      return popular()
-    end
+  def save
+    entry = {"postid" => @postid, "userid" => @userid, "title" => @title, "content" => @content}
+    DATABASE.newEntry("posts", entry)
   end
 
   # Returns an array of the 25 Posts for the specified page, or nil
@@ -81,16 +71,18 @@ class Post
     end
   end
 
+  # CAN BE PRIVATE BUT BREAKS TESTS  ???
   def addLike(uid)
-    entry = {"postid" => @id, "userid" => uid}
+    entry = {"postid" => @postid, "userid" => uid}
     DATABASE.newEntry("likes", entry)
   end
 
+  # CAN BE PRIVATE BUT BREAKS TESTS ???
   def removeLike(uid)
     hash = DATABASE.all("likes","likeid")
     lid = nil
     hash.each do |k, v|
-      if v["userid"] == uid && v["postid"] == @id
+      if v["userid"] == uid && v["postid"] == @postid
         lid = k
       end
     end
@@ -111,7 +103,7 @@ class Post
   def Post.top()
     result = {}
     Post.all.each do |k, v|
-      result[k] = Post.new(k).score.num_likes
+      result[k] = Post.newFromDB(k).score.num_likes
     end
     result = result.sort_by {|k, v| v}.to_h
     return result.keys.reverse
@@ -121,7 +113,7 @@ class Post
   def Post.popular()
     result = {}
     Post.all.each do |k, v|
-      result[k] = Post.new(k).score.popular_value
+      result[k] = Post.newFromDB(k).score.popular_value
     end
     result = result.sort_by {|k, v| v}.to_h
     return result.keys.reverse
@@ -130,7 +122,7 @@ class Post
   def Post.IDsToPosts(postids)
     posts = []
     for id in postids
-      posts.push(Post.new(id))
+      posts.push(Post.newFromDB(id))
     end
     return posts
   end
@@ -140,6 +132,26 @@ class Post
     start_post = (page_number-1)*25
     end_post = start_post + 24
     return postids[start_post..end_post]
+  end
+
+  # Get all posts.
+  # 
+  # Returns a Hash of all posts.
+  def Post.all
+    DATABASE.all("posts", "postid");
+  end
+
+  # Calls appropriate sort method according to desired display.
+  #
+  # method - String of desired sort method
+  def Post.sort(method)
+    if method == "newest"
+      return newest()
+    elsif method == "top"
+      return top()
+    else
+      return popular()
+    end
   end
 
 end

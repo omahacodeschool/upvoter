@@ -17,7 +17,7 @@ class User
   def User.newFromDB(username)
     @username = username
     info = DATABASE.find("users", "username", @username)
-    return newFromInfo(info)
+    return User.newFromInfo(info)
   end
 
   # Check if a username/password combo is present in the database
