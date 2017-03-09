@@ -9,7 +9,7 @@ class Post
     # end
 
     def num_likes
-        return DATABASE.conn.exec("SELECT * FROM likes WHERE postid=#{@postid}").to_a.length
+        return DATABASE.conn.exec("SELECT * FROM likes WHERE postid='#{@postid}'").to_a.length
     end
 
     # TODO
@@ -23,7 +23,7 @@ class Post
         newPost.userid  = info["userid"]
         newPost.title   = info["title"]
         newPost.content = info["content"]
-        newPost.score = Score.new(@postid)
+        newPost.score = Score.new(@postid, newPost.num_likes)
         return newPost
     end
 
@@ -112,7 +112,7 @@ class Post
     def Post.top()
         result = {}
         Post.all.each do |k, v|
-            result[k] = Post.newFromDB(k).score.num_likes
+            result[k] = Post.newFromDB(k).num_likes
         end
         result = result.sort_by {|k, v| v}.to_h
         return result.keys.reverse
