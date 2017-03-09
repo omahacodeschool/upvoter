@@ -58,26 +58,6 @@ class Post
     DATABASE.newEntry("posts", entry)
   end
 
-  # Get all posts.
-  # 
-  # Returns a Hash of all posts.
-  def Post.all
-    DATABASE.all("posts", "postid");
-  end
-
-  # Calls appropriate sort method according to desired display.
-  #
-  # method - String of desired sort method
-  def Post.sort(method)
-    if method == "newest"
-      return newest()
-    elsif method == "top"
-      return top()
-    else
-      return popular()
-    end
-  end
-
   # Returns an array of the 25 Posts for the specified page, or nil
   #
   # sort_method - String of sort method for page
@@ -91,16 +71,18 @@ class Post
     end
   end
 
+  # CAN BE PRIVATE BUT BREAKS TESTS  ???
   def addLike(uid)
-    entry = {"postid" => @id, "userid" => uid}
+    entry = {"postid" => @postid, "userid" => uid}
     DATABASE.newEntry("likes", entry)
   end
 
+  # CAN BE PRIVATE BUT BREAKS TESTS ???
   def removeLike(uid)
     hash = DATABASE.all("likes","likeid")
     lid = nil
     hash.each do |k, v|
-      if v["userid"] == uid && v["postid"] == @id
+      if v["userid"] == uid && v["postid"] == @postid
         lid = k
       end
     end
@@ -150,6 +132,26 @@ class Post
     start_post = (page_number-1)*25
     end_post = start_post + 24
     return postids[start_post..end_post]
+  end
+
+  # Get all posts.
+  # 
+  # Returns a Hash of all posts.
+  def Post.all
+    DATABASE.all("posts", "postid");
+  end
+
+  # Calls appropriate sort method according to desired display.
+  #
+  # method - String of desired sort method
+  def Post.sort(method)
+    if method == "newest"
+      return newest()
+    elsif method == "top"
+      return top()
+    else
+      return popular()
+    end
   end
 
 end

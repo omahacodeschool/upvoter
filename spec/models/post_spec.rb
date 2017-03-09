@@ -49,13 +49,13 @@ RSpec.describe(Post, ".likeClicked") do
 
 		# Exercise
 		Post.likeClicked('12', 'nennington')
-		click1 = DATABASE.conn.exec("SELECT * FROM likes WHERE postid='12';")
+		click1 = DATABASE.conn.exec("SELECT * FROM likes WHERE postid='12';").to_a.length
 		Post.likeClicked('12', 'nennington')
-		click2 = DATABASE.conn.exec("SELECT * FROM likes WHERE postid='12';")
+		click2 = DATABASE.conn.exec("SELECT * FROM likes WHERE postid='12';").to_a.length
 
 		# Verify
-		expect(click1).to be_truthy
-		expect(click2).to be_falsey
+		expect(click1).to eq(1)
+		expect(click2).to eq(0)
 
 		# Teardown
 		tableCleaner
@@ -135,15 +135,49 @@ RSpec.describe(Post, ".save") do
 end
 
 # Tests returning all entries from posts table
-RSpec.describe(Post, ".all") do
-	it "gathers all post entries" do
+RSpec.describe(Post, ".page") do
+	it "...." do
 
 		# Setup
 		tableCleaner
+		uf = UpvoteFaker.new
+		uf.fakeUserWithCredentials("testington","fakecat")
+		testNow = uf.tsFrom(0,1,"h").to_s
+		testHour = uf.tsFrom(1,7,"h").to_s
+		testDay = uf.tsFrom(9,20,"h").to_s
+		testWeek = uf.tsFrom(2,5,"d").to_s
+		testMonth = uf.tsFrom(2,3,"w").to_s
+		testYear = uf.tsFrom(8,40,"w").to_s
+		uf.fakePost(testNow)
+		uf.fakeLike(testNow, 90)
+		uf.fakePost(testHour)
+		uf.fakeLike(testHour, 100)
+		uf.fakePost(testDay)
+		uf.fakeLike(testDay, 40)
+		uf.fakePost(testWeek)
+		uf.fakeLike(testWeek, 99)
+		uf.fakePost(testMonth)
+		uf.fakeLike(testMonth, 98)
+		uf.fakePost(testYear)
+		uf.fakeLike(testYear, 97)
+		testFill = uf.tsFrom(400,500,"d").to_s
+		uf.fakePosts(30, testFill)
+		nowPost = Post.newFromDB(testNow)
+		hourPost = Post.newFromDB(testHour)
+		dayPost = Post.newFromDB(testDay)
+		weekPost = Post.newFromDB(testWeek)
+		monthPost = Post.newFromDB(testMonth)
+		yearPost = Post.newFromDB(testYear)
 
 		# Exercise
+		actualNew = Post.page("newest", 1)[0..5]
+		actualTop = Post.page("top", 1)[0..5]
+		actualPop = Post.page("popular", 1)[0..5]
 
 		# Verify
+		expect(actualNew).to eq([testNow, testHour, testDay, testWeek, testMonth, testYear])
+		expect(actualPop).to eq([testHour, testNow, testWeek, testDay, testMonth, testYear])
+		expect(actualTop).to eq([testHour, testWeek, testMonth, testYear, testNow, testDay])
 
 		# Teardown
 		tableCleaner
@@ -151,19 +185,3 @@ RSpec.describe(Post, ".all") do
 	end
 end
 
-# Tests sorting the entries by different methods
-RSpec.describe(Post, ".sort") do
-	it "arranges post entries" do
-
-		# Setup
-		tableCleaner
-
-		# Exercise
-
-		# Verify
-
-		# Teardown
-		tableCleaner
-
-	end
-end
