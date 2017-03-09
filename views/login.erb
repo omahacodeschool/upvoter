@@ -27,6 +27,8 @@
 				<div class="newPostContent">
 				
 					<form class="newPostForm" method="post" action="/login">
+						<input type="hidden" name="pg" value="<%= @cur_page %>">
+						<input type="hidden" name="sort" value="<%= @sort %>">
 						<div class="titleLine">
 							<span>Username:</span>
 							<input type="text" name="username" class="selected" placeholder="Username...">
