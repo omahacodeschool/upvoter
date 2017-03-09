@@ -20,7 +20,7 @@
 				<% if @page_of_posts %>
 					<% @page_of_posts.each_with_index { |post, i| %>
 
-					   <%= erb :article, :locals => {:post => post, :featured => (i == 0 && @cur_page == 1), :user => @user} %>
+					   <%= erb :article, :locals => {:post => post, :featured => (i == 0 && @cur_page == 1), :user => @user, :pg => @cur_page, :sort => @sort} %>
 					   
 					<% } %>
 				<% else %>
@@ -81,16 +81,16 @@
 
 				<div class="modalContent">
 
-					<form class="newPostForm">
+					<form class="newPostForm" method="post" action="/newPost">
 						<div class="articleLine">
 							<span>Title:</span>
-							<input type="text" name="postTitle" class="selected" placeholder="Article title...">
+							<input type="text" name="title" class="selected" placeholder="Article title...">
 						</div>
 						
 						<br>
 						<div class="articleLine bottomLine">
 							<span>Link:</span>
-							<input type="text" name="postLink" class="selected" placeholder="Article link...">
+							<input type="text" name="content" class="selected" placeholder="Article link...">
 						</div>
 
 						<br>

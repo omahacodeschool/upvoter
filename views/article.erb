@@ -11,14 +11,19 @@
 	</div>
 
 	<div class="score">
-	
-		<form class="upvoteform" method="post" action="/likeclicked?pid=<%= post.info["postID"] %>&user=<%=user%>">
+		<form class= "upvoteform" method="post" action="/likeclicked?pid=<%= post.postid %>&user=<%=user%>">
+			<input type="hidden" name="pg" value="<%= pg %>">
+			<input type="hidden" name="sort" value="<%= sort %>">
 			<button type="submit" class="upvoteButton">
 				upvote
 			</button>
 		</form>
 
 		<span class="scoreCount"><%= post.score.value %></span>
+	</div>
+
+	<div class="articleText <%= "featuredText" if featured %> ">
+		<h3><a href="<%= post.content %>"><%= post.title %></a></h3>
 	</div>
 	
 </div>
