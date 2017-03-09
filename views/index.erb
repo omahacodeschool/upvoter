@@ -29,11 +29,6 @@
 
 			</div>
 
-			<ul>
-				<li><a href="/?sort=<%= @sort %>&pg=<%= @cur_page-1 %>">Prev</a></li>
-				<li><a href="/?sort=<%= @sort %>&pg=<%= @cur_page+1 %>">Next</a></li>
-			</ul>
-
 			<div class="sideBars">
 				
 				<div class="userSideBar sidebarBox roundCorner">
@@ -68,7 +63,10 @@
 				</div>
 
 				<div class="lowerSideBar sidebarBox roundCorner">
-					<span>LOWER SIDE BAR</span>
+					<ul>
+						<li><a href="/?sort=<%= @sort %>&pg=<%= @cur_page-1 %>">Prev</a></li>
+						<li><a href="/?sort=<%= @sort %>&pg=<%= @cur_page+1 %>">Next</a></li>
+					</ul>
 				</div>
 			</div>
 		</div>
