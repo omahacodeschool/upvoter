@@ -17,12 +17,6 @@ window.addEventListener('load', function(){
 	// Array of all post scores.
 	var scoresArray = document.getElementsByClassName("scoreCount");
 
-	// All of our post scores.
-	// for (var i = 0; i < (scoresArray.length); i++){
-	// 	var currScore = document.getElementsByClassName("scoreCount")[i];
-	// 	new LikeScore(currScore);
-	// }
-
 	// Triggers for click events.
 	var newPostButton = document.getElementById("newPostButton");
 	var loginLink = document.getElementById("login");
