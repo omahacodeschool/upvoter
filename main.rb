@@ -91,7 +91,7 @@ post("/newPassword") do
 	cur_page = params["pg"].nil? ? 1 : params["pg"].to_i
 	sort   = params["sort"].nil? ? SORTDEFAULT : params["sort"]
 	username = session[:user]
-	user = User.new(username)
+	user = User.newFromDB(username)
 	user.newPassword(params["password"])
 	redirect("/?pg="+cur_page.to_s+"&sort="+sort)
 end

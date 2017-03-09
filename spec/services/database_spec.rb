@@ -5,6 +5,7 @@ RSpec.describe(Database, ".newEntry") do
   it "adds new entry to database" do
   	
   	# Setup
+    tableCleaner
   	newUser = Database.new("upvoter_test")
 
     # Exercise
@@ -15,7 +16,8 @@ RSpec.describe(Database, ".newEntry") do
     expect(actual).to eq('nennington')
 
     # Teardown
-    newUser.conn.exec("DELETE FROM users WHERE username='nennington';")
+    # newUser.conn.exec("DELETE FROM users WHERE username='nennington';")
+    tableCleaner
 
   end
 end
@@ -25,6 +27,7 @@ RSpec.describe(Database, ".find") do
   it "returns information on a single entry in a table" do
   	
   	# Setup
+    tableCleaner
   	findUser = Database.new("upvoter_test")
     findUser.conn.exec("INSERT INTO users(username, email, password) VALUES ('nennington', 'barlsworth@gmail.com', 'nenners');")
 
@@ -35,32 +38,40 @@ RSpec.describe(Database, ".find") do
     expect(resultHash).to include("username" => "nennington", "email" => "barlsworth@gmail.com", "password" => "nenners")
 
     # Teardown
-    findUser.conn.exec("DELETE FROM users WHERE username='nennington';")
+    # findUser.conn.exec("DELETE FROM users WHERE username='nennington';")
+    tableCleaner
 
   end
 end
 
-# # Testing the .all Database method.
-# RSpec.describe(Database, ".all") do
-#   it "returns information on all entries in a table" do
+# Testing the .all Database method.
+RSpec.describe(Database, ".all") do
+  it "returns information on all entries in a table" do
   	
-#   	# Setup
-#   	allUsers = Database.new("upvoter_test")
+  	# Setup
+    tableCleaner
+    allUsers = Database.new("upvoter_test")
+    uf = UpvoteFaker.new
+    uf.fakeUsers(30)
 
-#   	# Exercise
-#   	allHash = allUsers.all("users", "userid")
+  	# Exercise
+    allHash = allUsers.all("users", "userid")
 
-#   	# Verify
-#     expect(allHash.any? { |name1, name2, password1, password2| name1 = "Administrator", name2 = "bigmike", password1 = "admini", password2 = "littlemike"}).to be true
+  	# Verify
+    expect(allHash.length).to eq(30)
 
-#   end
-# end
+    # Teardown
+    tableCleaner
+
+  end
+end
 
 # Testing the .edit Database method.
 RSpec.describe(Database, ".edit") do
   it "edits an entry in sql table" do
   	
   	# Setup
+    tableCleaner
   	changePass = Database.new("upvoter_test")
   	changePass.conn.exec("INSERT INTO users(username, email, password) VALUES ('nennington', 'barlsworth@gmail.com', 'nenners');")
 
@@ -72,7 +83,8 @@ RSpec.describe(Database, ".edit") do
     expect(actual).to eq('snails')
 
     # Teardown
-    changePass.conn.exec("DELETE FROM users WHERE username='nennington';")
+    # changePass.conn.exec("DELETE FROM users WHERE username='nennington';")
+    tableCleaner
 
   end
 end
