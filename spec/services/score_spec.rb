@@ -2,33 +2,6 @@
 
 require 'pry'
 
-# # Testing .num_likes score method
-# RSpec.describe(Score, ".num_likes") do
-# 	it "calculates the score for a post" do
-# 		# Score.new(342890234, 23)
-
-
-# 		# Setup
-# 		tableCleaner
-# 		score = Database.new("upvoter_test")
-# 		uf = UpvoteFaker.new
-# 		uf.fakeUserWithCredentials("testington","fakecat")
-# 		uf.fakePost("1")
-# 		uf.fakeLike("1",20)
-
-# 		# Exercise
-# 		testPost = Post.newFromDB("1")
-# 		sco = testPost.score.num_likes
-
-# 		# Validation
-# 		expect(testPost.score.value).to eq(20)
-
-# 		# Teardown
-# 		tableCleaner
-
-# 	end
-# end
-
 # Testing .popular_score method
 RSpec.describe(Score, ".popular_score") do
 	it "calculates score decayed by time" do
