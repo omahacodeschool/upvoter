@@ -32,7 +32,7 @@ class Post
     hash = DATABASE.all("likes","likeid")
     liked = false
     hash.each do |k, v|
-      if v["userid"] == uid && v["postid"] == @id
+      if v["userid"] == uid && v["postid"] == @postid
         liked = true
       end
     end
@@ -53,9 +53,9 @@ class Post
   # Create a post.
   # 
   # post_info - Hash of post info.
-  def Post.create(post_info)
-    #info = "\"#{post_info["userid"]}\",\"#{post_info["title"]}\",\"#{post_info["content"]}\""
-    DATABASE.newEntry("posts", post_info)
+  def save
+    entry = {"postid" => @postid, "userid" => @userid, "title" => @title, "content" => @content}
+    DATABASE.newEntry("posts", entry)
   end
 
   # Get all posts.
