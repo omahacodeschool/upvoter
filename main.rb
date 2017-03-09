@@ -16,8 +16,10 @@ SORTDEFAULT = "popular"
 get("/") do
 	@cur_page = params["pg"].nil? ? 1 : params["pg"].to_i
 	@sort     = params["sort"].nil? ? SORTDEFAULT : params["sort"]
+
 	@user     = session[:user]
     @page_of_posts = Post.page(@sort, @cur_page)
+
 	erb :index
 end
 
@@ -28,16 +30,23 @@ end
 post("/newPost") do
 	cur_page = params["pg"].nil? ? 1 : params["pg"].to_i
 	sort   = params["sort"].nil? ? SORTDEFAULT : params["sort"]
-	post_info = {"userid" => params["userid"], "title" => params["title"], "content" => params["content"]}
-	Post.create(post_info)
+
+	user = User.newFromDB(session[:user])
+	post_info = {"userid" => user.userid, "title" => params["title"], "content" => params["content"]}
+	post = Post.newFromInfo(post_info)
+	post.save
+	Post.likeClicked(post.postid, user.username)
+
 	redirect("/?pg="+cur_page.to_s+"&sort="+sort)
 end
 
 get("/login") do
 	cur_page = params["pg"].nil? ? 1 : params["pg"].to_i
 	sort   = params["sort"].nil? ? SORTDEFAULT : params["sort"]
+
 	@err = session[:login] == "error"
 	session.clear
+
 	erb :login
 end
 
@@ -82,17 +91,22 @@ end
 post("/newUser") do
 	cur_page = params["pg"].nil? ? 1 : params["pg"].to_i
 	sort   = params["sort"].nil? ? SORTDEFAULT : params["sort"]
+
 	user_info = {"username" => params["username"], "email" => params["email"], "password" => params["password"]}
-	User.create(user_info)
+	user = User.newFromInfo(user_info)
+	user.register
+
 	redirect("/?pg="+cur_page.to_s+"&sort="+sort)
 end
 
 post("/newPassword") do
 	cur_page = params["pg"].nil? ? 1 : params["pg"].to_i
 	sort   = params["sort"].nil? ? SORTDEFAULT : params["sort"]
+
 	username = session[:user]
 	user = User.newFromDB(username)
 	user.newPassword(params["password"])
+
 	redirect("/?pg="+cur_page.to_s+"&sort="+sort)
 end
 
