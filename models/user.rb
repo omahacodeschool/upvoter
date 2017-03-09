@@ -1,12 +1,12 @@
 class User
 
-  attr_reader :id, :username, :email, :password
-  attr_writer :id, :username, :email, :password
+  attr_reader :userid, :username, :email, :password
+  attr_writer :userid, :username, :email, :password
 
   # Creates a new user from hash of user info
   def User.newFromInfo(info)
     newUser = User.new
-    newUser.userID = info["userid"].nil? ? Time.now.to_f.to_s : info["userid"]
+    newUser.userid = info["userid"].nil? ? Time.now.to_f.to_s : info["userid"]
     newUser.username = info["username"]
     newUser.email = info["email"]
     newUser.password = info["password"]
@@ -38,19 +38,26 @@ class User
   #
   # newPass - String from user input
   def newPassword(newPass)
-    DATABASE.edit("users", "password", newpass, @username)
+    DATABASE.edit("users", "password", newPass, "username", @username)
   end
 
   # IDs of user's posts
+  # def posts
+  # 	results = []
+  # 	posts = DATABASE.all("posts", "postid")
+  #   binding.pry
+  # 	posts.each do |k, v|
+  # 		if v["userid"] == "'#{@userid}'"
+  # 			results.push(k)
+  # 		end
+  # 	end
+  #   binding.pry
+  # 	return results
+  # end
   def posts
-  	results = []
-  	posts = DATABASE.all("posts", "postid")
-  	posts.each do |k, v|
-  		if v["userid"] == "'#{@userid}'"
-  			results.push(k)
-  		end
-  	end
-  	return results
+    posts = DATABASE.conn.exec("SELECT postid FROM posts WHERE userid='#{@userid}';")
+    posts = posts.values.flatten
+    return posts
   end
 
 end
