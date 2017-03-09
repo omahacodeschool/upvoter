@@ -50,6 +50,7 @@ function UpvoteButton(UVButton){
     var upvoteRequest = new XMLHttpRequest();
     // Setting the address that we will be posting to.
     var action = e.target.parentNode.action;
+    debugger;
     // This is a post request that sends the post ID and user ID in the query
     // string.
     upvoteRequest.open('POST', action);
