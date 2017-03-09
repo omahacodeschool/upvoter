@@ -37,12 +37,14 @@ class Post
     # user - username as string
     # returns true if likes has an entry with both the wanted postid and userid
     def likedBy?(user)
-        uid = DATABASE.find("users", "username", user)["userid"]
-        hash = DATABASE.all("likes","likeid")
         liked = false
-        hash.each do |k, v|
-            if v["userid"] == uid && v["postid"] == @postid
-                liked = true
+        if !user
+            uid = DATABASE.find("users", "username", user)["userid"]
+            hash = DATABASE.all("likes","likeid")
+            hash.each do |k, v|
+                if v["userid"] == uid && v["postid"] == @postid
+                    liked = true
+                end
             end
         end
         return liked

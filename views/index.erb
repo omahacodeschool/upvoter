@@ -20,7 +20,7 @@
 				<% if @page_of_posts %>
 					<% @page_of_posts.each_with_index { |post, i| %>
 
-					   <%= erb :article, :locals => {:post => post, :featured => (i == 0 && @cur_page == 1), :user => @user, :pg => @cur_page, :sort => @sort} %>
+					   <%= erb :article, :locals => {:post => post, :featured => (i == 0 && @cur_page == 1), :user => @user, :pg => @cur_page, :sort => @sort, :liked => post.likedBy?("'#{@user}'")} %>
 					   
 					<% } %>
 				<% else %>
