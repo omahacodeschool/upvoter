@@ -1,26 +1,19 @@
-// function UpvoteButton = function(element){
+function UpvoteButton(UVButton){
 
-//   for (upvoteButton in document.getElementsByClassName("upvoteButton")){
-//     upvoteButton.addEventListener('click', upvotePost);
-//   }
+  UVButton.addEventListener('click', function(event){ upvotePost(event); });
 
-//   newPostButton.addEventListener('click', showModal);
-
-//   function upvotePost(event) {
-//     event.preventDefault();
-//     // TODO Using your button, which is event.target, use DOM traversal to get
-//     // to its parent form.
-//     var formClass = document.getElementsByClassName("upvoteform")[i];
-//     var testClasses = formClass.className;
+  function upvotePost(event) {
+    event.preventDefault();
     
-//     if (testClasses === "upvoteform"){
-//       formClass.className += " articleLiked";
-//       event.preventDefault();
-//     }
-//     else {
-//       formClass.className = "upvoteform";
-//       event.preventDefault();
-//     }
+    var thisButtonForm = event.target.parentNode;
+    var formClasses = thisButtonForm.className;
+
+    if (formClasses === "upvoteform"){
+      thisButtonForm.className += " articleLiked";
+    }
+    else {
+      thisButtonForm.className = "upvoteform";
+    }
     
-//   }
-// };
+  }
+};

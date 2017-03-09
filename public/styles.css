@@ -93,8 +93,8 @@ body {
 	background-color: rgb(200, 200, 200);
 	display: flex;
 	align-items: center;
-	padding: 30px 40px;
-	margin-bottom: 20px;
+	padding: 30px 40px !important;
+	margin-bottom: 20px !important;
 }
 
 .featuredText a {
@@ -177,7 +177,7 @@ form {
 }
 
 .sidebarBox{
-	padding: 17px;
+	padding: 23px;
 	margin-bottom: 20px;
 }
 
@@ -271,6 +271,10 @@ form {
    height: 29px;
    margin: 0px 4px;
    padding-left: 5px;
+}
+
+.sortByBlock {
+	padding-bottom: 4px;
 }
 
 #sortBy.selected:focus {
@@ -378,7 +382,7 @@ input[type=submit] {
 
 /*------------------------------MODAL FORM-----------------------------------*/
 
-#newPostForm {
+.newPostForm {
 	display: flex;
 	flex-direction: column;
 	margin: 0px;
@@ -388,7 +392,6 @@ input[type=submit] {
 	font-family: 'Catamaran', sans-serif;
 	color: #1b0f2b;
 	font-size: 1.5em;
-	margin-bottom: 10px;
 }
 
 .newPostForm input[type=text] {
@@ -398,20 +401,57 @@ input[type=submit] {
 	margin-left: 20px;
 }
 
-// TODO DRY this up, and move articleLine's margin-bottom to an additional
-//      class... Or find a way to use a CSS pseudo-selected to automatically
-//      target the last form field in the modal.
-.titleLine {
-	display: flex;
-	justify-content: space-between;
-	align-items: flex-end;
+.newPostForm input[type=password] {
+	font-size: 1.5em;
+	padding: 5px;
+	color: #cc0000;
+	margin-left: 20px;
 }
 
 .articleLine {
 	display: flex;
 	justify-content: space-between;
-	align-items: flex-end;
+	align-items: center;
+}
+
+.bottomLine {
 	margin-bottom: 20px;
+}
+
+/*----------------------------SIGN UP MODAL----------------------------------*/
+
+.signUpLine {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+}
+
+.signUpLine span {
+	font-family: 'Catamaran', sans-serif;
+	color: #1b0f2b;
+	font-size: 1.1em;
+}
+
+.signUpLine input[type=text] {
+	font-size: 1.1em;
+	padding: 5px;
+	color: #cc0000;
+	margin-left: 20px;
+}
+
+.signUpLine input[type=password] {
+	font-size: 1.1em;
+	padding: 5px;
+	color: #cc0000;
+	margin-left: 20px;
+}
+
+.signUpLine.bottomLine {
+	margin-bottom: 10px;
+}
+
+.signUpContent {
+	padding: 25px 120px !important;
 }
 
 #submitButton {

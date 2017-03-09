@@ -80,13 +80,13 @@
 				<div class="modalContent">
 
 					<form class="newPostForm">
-						<div class="titleLine">
+						<div class="articleLine">
 							<span>Title:</span>
 							<input type="text" name="postTitle" class="selected" placeholder="Article title...">
 						</div>
 						
 						<br>
-						<div class="articleLine">
+						<div class="articleLine bottomLine">
 							<span>Link:</span>
 							<input type="text" name="postLink" class="selected" placeholder="Article link...">
 						</div>
@@ -107,21 +107,72 @@
 			<div class="modalWindow">
 
 				<div class="modalHeader">
-					<h1>New Post</h1>
+					<h1>Log In</h1>
 				</div>
 
 				<div class="modalContent">
 
 					<form class="newPostForm">
-						<div class="titleLine">
+						<div class="articleLine">
 							<span>Username:</span>
-							<input type="text" name="postTitle" class="selected" placeholder="Article title...">
+							<input type="text" name="loginUsername" class="selected" placeholder="Username...">
 						</div>
 						
 						<br>
-						<div class="articleLine">
+						<div class="articleLine bottomLine">
 							<span>Password:</span>
-							<input type="text" name="postLink" class="selected" placeholder="Article link...">
+							<input type="password" name="loginPassword" class="selected" placeholder="Password...">
+						</div>
+
+						<br>
+						<div id="submitButton">
+							<input type="submit" name="submitPost" class="roundCorner selected" value="Submit">
+						</div>
+						
+					</form>
+					
+				</div>
+			</div>
+		</div>
+
+		<!-- SIGN UP MODAL -->
+		<div class="modalFullScreen modal" id="signUpModal" style="display: none;">
+			<div class="modalWindow">
+
+				<div class="modalHeader">
+					<h1>Sign Up</h1>
+				</div>
+
+				<div class="modalContent signUpContent">
+
+					<form class="newPostForm">
+						<div class="signUpLine">
+							<span>Username:</span>
+							<input type="text" name="signUpUsername" class="selected" placeholder="Username...">
+						</div>
+						
+						<br>
+						<div class="signUpLine">
+							<span>First Name:</span>
+							<input type="text" name="signUpFName" class="selected" placeholder="First Name...">
+						</div>
+
+						<br>
+						<div class="signUpLine">
+							<span>Last Name:</span>
+							<input type="text" name="signUpLName" class="selected" placeholder="Last Name...">
+						</div>
+
+						<br>
+						<div class="signUpLine">
+							<span>Password:</span>
+							<input type="password" name="signUpPassword" class="selected" placeholder="Password...">
+						</div>
+
+						<br>
+						<div class="signUpLine bottomLine">
+							<span>Re-enter Password:</span>
+							<input type="password" name="signUpPasswordVerify" class="selected" placeholder="Password...">
 						</div>
 
 						<br>
