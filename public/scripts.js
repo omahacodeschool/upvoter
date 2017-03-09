@@ -3,9 +3,11 @@ window.addEventListener('load', function(){
 	var newPostModal = new Modal("newPostModal");
 	var loginModal = new Modal("loginModal");
 	var signUpModal = new Modal("signUpModal");
+
+	var upvoteArrowArray = document.getElementsByClassName("upvoteButton");
 	
 	// All of our upvote arrows.
-	for (upvoteButton in document.getElementsByClassName("upvoteButton")){
+	for (var upvoteButton = 0; upvoteButton < (upvoteArrowArray.length); upvoteButton++){
 		var UVButton = document.getElementsByClassName("upvoteButton")[upvoteButton];
 		new UpvoteButton(UVButton);
 	}

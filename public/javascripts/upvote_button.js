@@ -9,9 +9,11 @@ function UpvoteButton(UVButton){
     var formClasses = thisButtonForm.className;
 
     if (formClasses === "upvoteform"){
+      event.preventDefault();
       thisButtonForm.className += " articleLiked";
     }
     else {
+      event.preventDefault();
       thisButtonForm.className = "upvoteform";
     }
     
