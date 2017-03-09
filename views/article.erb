@@ -11,11 +11,13 @@
 	</div>
 
 	<div class="score">
+	
 		<form class="upvoteform" method="post" action="/likeclicked?pid=<%= post.info["postID"] %>&user=<%=user%>">
 			<button type="submit" class="upvoteButton">
 				upvote
 			</button>
 		</form>
+
 		<span class="scoreCount"><%= post.score.value %></span>
 	</div>
 	

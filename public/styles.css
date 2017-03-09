@@ -169,6 +169,10 @@ form {
 	background-size: cover;
 }
 
+.upvoteButton:focus {
+	outline:0;
+}
+
 /*-------------------------------SIDE BARS-----------------------------------*/
 
 .sideBars {
