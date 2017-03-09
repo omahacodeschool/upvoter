@@ -160,8 +160,7 @@ RSpec.describe(Post, ".page") do
 		uf.fakeLike(testMonth, 98)
 		uf.fakePost(testYear)
 		uf.fakeLike(testYear, 97)
-		testFill = uf.tsFrom(400,500,"d").to_s
-		uf.fakePosts(30, testFill)
+		uf.fakePosts(30, uf.tsFrom(400,500,"d").to_s)
 		nowPost = Post.newFromDB(testNow)
 		hourPost = Post.newFromDB(testHour)
 		dayPost = Post.newFromDB(testDay)
@@ -170,14 +169,16 @@ RSpec.describe(Post, ".page") do
 		yearPost = Post.newFromDB(testYear)
 
 		# Exercise
-		actualNew = Post.page("newest", 1)[0..5]
-		actualTop = Post.page("top", 1)[0..5]
-		actualPop = Post.page("popular", 1)[0..5]
+		actualNew = Post.page("newest", 1)[0..5].map {|post| post.postid}
+		actualTop = Post.page("top", 1)[0..5].map {|post| post.postid}
+		actualPop = Post.page("popular", 1)[0..5].map {|post| post.postid}
+		actual2 = Post.page("newest", 2).to_a.length
 
 		# Verify
 		expect(actualNew).to eq([testNow, testHour, testDay, testWeek, testMonth, testYear])
 		expect(actualPop).to eq([testHour, testNow, testWeek, testDay, testMonth, testYear])
 		expect(actualTop).to eq([testHour, testWeek, testMonth, testYear, testNow, testDay])
+		expect(actual2).to eq(11)
 
 		# Teardown
 		tableCleaner
