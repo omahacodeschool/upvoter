@@ -42,7 +42,7 @@ class Post
   # Increments/decrements score of post when user clicks arrow.
   def Post.likeClicked(postid, user)
     uid = DATABASE.find("users", "username", user)["userid"]
-    thispost = Post.new(postid)
+    thispost = Post.newFromDB(postid)
     if thispost.likedBy?(user)
       thispost.removeLike(uid)
     elsif !uid.nil?
@@ -121,7 +121,7 @@ class Post
   def Post.top()
     result = {}
     Post.all.each do |k, v|
-      result[k] = Post.new(k).score.num_likes
+      result[k] = Post.newFromDB(k).score.num_likes
     end
     result = result.sort_by {|k, v| v}.to_h
     return result.keys.reverse
@@ -131,7 +131,7 @@ class Post
   def Post.popular()
     result = {}
     Post.all.each do |k, v|
-      result[k] = Post.new(k).score.popular_value
+      result[k] = Post.newFromDB(k).score.popular_value
     end
     result = result.sort_by {|k, v| v}.to_h
     return result.keys.reverse
@@ -140,7 +140,7 @@ class Post
   def Post.IDsToPosts(postids)
     posts = []
     for id in postids
-      posts.push(Post.new(id))
+      posts.push(Post.newFromDB(id))
     end
     return posts
   end
