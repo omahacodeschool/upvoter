@@ -34,20 +34,35 @@ RSpec.describe(Post, ".likeClicked") do
 	end
 end
 
-# Tests building a new post entry
-RSpec.describe(Post, ".create") do
-	it "creates a new post entry" do
+RSpec.describe(Post, "#newFromInfo") do
+	it "creates a new Post object from given info" do
+		entry = {"postid" => "1234567890", 
+			"userid" => "1111111111", 
+			"title" => "Hello World",
+            "content" => "http://www.google.com"}
 
-		# Setup
+        post = Post.newFromInfo(entry)
+
+        expected = ["1234567890","1111111111","Hello World","http://www.google.com"]
+        actual   = [post.postid, post.userid, post.title, post.content]
+        expect(actual).to eq(expected)
+	end
+end
+
+RSpec.describe(Post, "#newFromDB") do
+	it "creates a new Post object from datbase info" do
 		tableCleaner
+		query =  "INSERT INTO posts(postid, userid, title, content) "
+		query += "VALUES ('1234567890', '1111111111', 'Hello World', 'http://www.google.com');"
+		DATABASE.conn.exec(query)
 
-		# Exercise
+		post = Post.newFromDB("1234567890")
 
-		# Verify
+		expected = ["1234567890","1111111111","Hello World","http://www.google.com"]
+        actual   = [post.postid, post.userid, post.title, post.content]
+		expect(actual).to eq(expected)
 
-		# Teardown
 		tableCleaner
-
 	end
 end
 

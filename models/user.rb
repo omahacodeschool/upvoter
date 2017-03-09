@@ -1,58 +1,50 @@
 class User
 
-  attr_reader :info
-  # attr_reader :username, :email, :password
-  # attr_writer :username, :email, :password
+  attr_reader :userid, :username, :email, :password
+  attr_writer :userid, :username, :email, :password
 
-  def initialize(username)
-    @username = username
-    @info = DATABASE.find("users", "username", @username)
+  # Creates a new user from hash of user info
+  def User.newFromInfo(info)
+    newUser = User.new
+    newUser.userid = info["userid"].nil? ? Time.now.to_f.to_s : info["userid"]
+    newUser.username = info["username"]
+    newUser.email = info["email"]
+    newUser.password = info["password"]
+    return newUser
   end
 
+  # Creates a new User from database info
+  def User.newFromDB(username)
+    @username = username
+    info = DATABASE.find("users", "username", @username)
+    return User.newFromInfo(info)
+  end
+
+  # Check if a username/password combo is present in the database
   def User.loginValid?(username,password)
     row = DATABASE.find("users","username",username)
     if row.nil? then return false end
     return row["password"] == password
   end
 
-  # Create a user.
-  # 
-  # user_info - Hash of user info
-  def User.create(user_info)
-    #entry_string = "\"#{user_info["username"]}\",\"#{user_info["email"]}\",\"#{user_info["password"]}\""
-    DATABASE.newEntry("users", user_info)
+  # Write this user to the users table
+  def register()
+    entry = {"userid" => @userid, "username" => @username, "email" => @email,
+            "password" => @password}
+    DATABASE.newEntry("users", entry)
   end
 
-  # Gathers user info and changes password value.
+  # Changes password
   #
   # newPass - String from user input
-  #
-  # Rebuilds user database.
   def newPassword(newPass)
-    @info["password"] = newPass
-    DATABASE.edit("users", "password", newpass, @info["username"])
+    DATABASE.edit("users", "password", newPass, "username", @username)
   end
 
-  # Format user's info for the database.
-  def format_for_database
-    @info.values.join(",")
-  end
-
-  # This user's posts.
   def posts
-  	results = []
-  	posts = DATABASE.all("posts", "postid")
-  	posts.each do |k, v|
-  		if v["userid"] == @info["userid"]
-  			results.push(k)
-  		end
-  	end
-  	return results
-  end
-
-  # Gathers entire user database.
-  def User.all
-    DATABASE.all("users", "username")
+    posts = DATABASE.conn.exec("SELECT postid FROM posts WHERE userid='#{@userid}';")
+    posts = posts.values.flatten
+    return posts
   end
 
 end
