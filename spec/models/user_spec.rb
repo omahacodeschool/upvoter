@@ -91,14 +91,14 @@ end
 RSpec.describe(User,".posts") do
 	it "returns an array of postids for this User's posts" do
 		tableCleaner
+		user = User.new
+		user.userid = "1"
 		post1_q =  "INSERT INTO posts(postid, userid, title, content) "
 		post1_q += "VALUES ('1234567890', '1', 'Post 1', 'http://able.com');"
 		post2_q =  "INSERT INTO posts(postid, userid, title, content) "
 		post2_q += "VALUES ('1234567891', '1', 'Post 2', 'http://bravo.com');"
 		DATABASE.conn.exec(post1_q)
 		DATABASE.conn.exec(post2_q)
-		user = User.new
-		user.userid = "1"
 
 		expect(user.posts).to eq(['1234567890','1234567891'])
 

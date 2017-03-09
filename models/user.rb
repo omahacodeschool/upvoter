@@ -41,19 +41,6 @@ class User
     DATABASE.edit("users", "password", newPass, "username", @username)
   end
 
-  # IDs of user's posts
-  # def posts
-  # 	results = []
-  # 	posts = DATABASE.all("posts", "postid")
-  #   binding.pry
-  # 	posts.each do |k, v|
-  # 		if v["userid"] == "'#{@userid}'"
-  # 			results.push(k)
-  # 		end
-  # 	end
-  #   binding.pry
-  # 	return results
-  # end
   def posts
     posts = DATABASE.conn.exec("SELECT postid FROM posts WHERE userid='#{@userid}';")
     posts = posts.values.flatten

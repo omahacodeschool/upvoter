@@ -81,6 +81,22 @@ class Post
     end
   end
 
+  def addLike(uid)
+    entry = {"postid" => @id, "userid" => uid}
+    DATABASE.newEntry("likes", entry)
+  end
+
+  def removeLike(uid)
+    hash = DATABASE.all("likes","likeid")
+    lid = nil
+    hash.each do |k, v|
+      if v["userid"] == uid && v["postid"] == @id
+        lid = k
+      end
+    end
+    DATABASE.delete("likes","likeid", lid)
+  end
+
   private
 
   # Defines method to sort posts by age.
@@ -109,22 +125,6 @@ class Post
     end
     result = result.sort_by {|k, v| v}.to_h
     return result.keys.reverse
-  end
-
-  def addLike(uid)
-    entry = {"postid" => @id, "userid" => uid}
-    DATABASE.newEntry("likes", entry)
-  end
-
-  def removeLike(uid)
-    hash = DATABASE.all("likes","likeid")
-    lid = nil
-    hash.each do |k, v|
-      if v["userid"] == uid && v["postid"] == @id
-        lid = k
-      end
-    end
-    DATABASE.delete("likes","likeid", lid)
   end
 
   def Post.IDsToPosts(postids)
