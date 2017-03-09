@@ -29,7 +29,7 @@ end
 
 post("/newPost") do
 	cur_page = params["pg"].nil? ? 1 : params["pg"].to_i
-	sort   = params["sort"].nil? ? SORTDEFAULT : params["sort"]
+	sort     = params["sort"].nil? ? SORTDEFAULT : params["sort"]
 
 	user = User.newFromDB(session[:user])
 	post_info = {"userid" => user.userid, "title" => params["title"], "content" => params["content"]}
@@ -41,8 +41,8 @@ post("/newPost") do
 end
 
 get("/login") do
-	cur_page = params["pg"].nil? ? 1 : params["pg"].to_i
-	sort   = params["sort"].nil? ? SORTDEFAULT : params["sort"]
+	@cur_page = params["pg"].nil? ? 1 : params["pg"].to_i
+	@sort   = params["sort"].nil? ? SORTDEFAULT : params["sort"]
 
 	@err = session[:login] == "error"
 	session.clear
