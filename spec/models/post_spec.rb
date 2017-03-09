@@ -1,5 +1,33 @@
 require 'pry'
 
+# Testing .num_likes score method
+RSpec.describe(Post, ".num_likes") do
+	it "calculates the score for a post" do
+		# Score.new(342890234, 23)
+
+
+		# Setup
+		tableCleaner
+		score = Database.new("upvoter_test")
+		uf = UpvoteFaker.new
+		uf.fakeUserWithCredentials("testington","fakecat")
+		uf.fakePost("1")
+		uf.fakeLike("1",20)
+
+		# Exercise
+		testPost = Post.newFromDB("1")
+		score = testPost.num_likes
+		binding.pry
+
+		# Validation
+		expect(score).to eq(20)
+
+		# Teardown
+		tableCleaner
+
+	end
+end
+
 # Tests whether a user has liked a post
 RSpec.describe(Post, ".likedBy?") do
 	it "checks if a post was liked by a user" do
