@@ -2,34 +2,32 @@
 
 require 'pry'
 
-# Testing .num_likes score method
-RSpec.describe(Score, ".num_likes") do
-	it "calculates the score for a post" do
-		# Score.new(342890234, 23)
+# # Testing .num_likes score method
+# RSpec.describe(Score, ".num_likes") do
+# 	it "calculates the score for a post" do
+# 		# Score.new(342890234, 23)
 
 
-		# Setup
-		tableCleaner
-		score = Database.new("upvoter_test")
-		uf = UpvoteFaker.new
-		uf.fakeUserWithCredentials("testington","fakecat")
-		uf.fakePost("1")
-		uf.fakeLike("1",20)
+# 		# Setup
+# 		tableCleaner
+# 		score = Database.new("upvoter_test")
+# 		uf = UpvoteFaker.new
+# 		uf.fakeUserWithCredentials("testington","fakecat")
+# 		uf.fakePost("1")
+# 		uf.fakeLike("1",20)
 
-		# Exercise
-		testPost = Post.newFromDB("1")
-		sco = testPost.score.num_likes
+# 		# Exercise
+# 		testPost = Post.newFromDB("1")
+# 		sco = testPost.score.num_likes
 
-		# Validation
-		expect(testPost.score.value).to eq(20)
+# 		# Validation
+# 		expect(testPost.score.value).to eq(20)
 
-		# Teardown
-		# DATABASE.delete("posts", "postid", "'1'")
-		# DATABASE.delete("users", "username", "'testington'")
-		tableCleaner
+# 		# Teardown
+# 		tableCleaner
 
-	end
-end
+# 	end
+# end
 
 # Testing .popular_score method
 RSpec.describe(Score, ".popular_score") do
@@ -72,18 +70,6 @@ RSpec.describe(Score, ".popular_score") do
 		expect(scores).to eq([100, 95.0, 75.0, 50.0, 25.0, 15.0])
 
 		# Teardown
-		# DATABASE.delete("posts", "postid", "'#{testNow}'")
-		# DATABASE.delete("posts", "postid", "'#{testHour}'")
-		# DATABASE.delete("posts", "postid", "'#{testDay}'")
-		# DATABASE.delete("posts", "postid", "'#{testWeek}'")
-		# DATABASE.delete("posts", "postid", "'#{testMonth}'")
-		# DATABASE.delete("posts", "postid", "'#{testYear}'")
-		# DATABASE.delete("likes", "postid", "'#{testNow}'")
-		# DATABASE.delete("likes", "postid", "'#{testHour}'")
-		# DATABASE.delete("likes", "postid", "'#{testDay}'")
-		# DATABASE.delete("likes", "postid", "'#{testWeek}'")
-		# DATABASE.delete("likes", "postid", "'#{testMonth}'")
-		# DATABASE.delete("likes", "postid", "'#{testYear}'")
 		tableCleaner
 
 	end
