@@ -48,8 +48,8 @@ RSpec.describe(Post, ".likedBy?") do
     	DATABASE.newEntry("likes", entry)
 
 		# Exercise
-		nenlike = post.likedBy?("'nennington'")
-		cowlike = post.likedBy?("'cowboy'")
+		nenlike = post.likedBy?("nennington")
+		cowlike = post.likedBy?("cowboy")
 
 		# Verify
 		expect(nenlike).to be true
@@ -75,9 +75,9 @@ RSpec.describe(Post, ".likeClicked") do
 		DATABASE.conn.exec(query)
 
 		# Exercise
-		Post.likeClicked('12', "'nennington'")
+		Post.likeClicked('12', "nennington")
 		click1 = DATABASE.conn.exec("SELECT * FROM likes WHERE postid='12';").to_a.length
-		Post.likeClicked('12', "'nennington'")
+		Post.likeClicked('12', "nennington")
 		click2 = DATABASE.conn.exec("SELECT * FROM likes WHERE postid='12';").to_a.length
 
 		# Verify

@@ -13,7 +13,7 @@
 	</div>
 
 	<div class="score">
-		<form class= "upvoteform <%= "articleLiked" if liked %> " method="post" action="/likeclicked?pid=<%= post.postid %>&user=<%=user%>">
+		<form class= "upvoteform<%= " articleLiked" if liked %>" method="post" action="/likeclicked?pid=<%= post.postid %>&user=<%=user%>">
 			<input type="hidden" name="pg" value="<%= pg %>">
 			<input type="hidden" name="sort" value="<%= sort %>">
 			<button type="submit" class="upvoteButton">
