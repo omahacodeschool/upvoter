@@ -13,12 +13,17 @@ enable :sessions
 
 SORTDEFAULT = "popular"
 
+def current_user
+	if session[:user]
+		@current_user ||= User.newFromDB(session[:user])
+	end
+end
+
 get("/") do
 	@cur_page = params["pg"].nil? ? 1 : params["pg"].to_i
 	@sort     = params["sort"].nil? ? SORTDEFAULT : params["sort"]
 
-	@user     = session[:user]
-    @page_of_posts = Post.page(@sort, @cur_page)
+  @page_of_posts = Post.page(@sort, @cur_page)
 
 	erb :index
 end
@@ -31,11 +36,10 @@ post("/newPost") do
 	cur_page = params["pg"].nil? ? 1 : params["pg"].to_i
 	sort     = params["sort"].nil? ? SORTDEFAULT : params["sort"]
 
-	user = User.newFromDB(session[:user])
-	post_info = {"userid" => user.userid, "title" => params["title"], "content" => params["content"]}
+	post_info = {"userid" => current_user.userid, "title" => params["title"], "content" => params["content"]}
 	post = Post.newFromInfo(post_info)
 	post.save
-	Post.likeClicked(post.postid, user.username)
+	Post.likeClicked(post.postid, current_user)
 
 	redirect("/?pg="+cur_page.to_s+"&sort="+sort)
 end
@@ -73,7 +77,7 @@ post("/likeclicked") do
 	cur_page = params["pg"].nil? ? 1 : params["pg"].to_i
 	sort   = params["sort"].nil? ? SORTDEFAULT : params["sort"]
 
-	if session[:user]
+	if current_user
 		Post.likeClicked(params["pid"],params["user"])
 		redirect("/?pg="+cur_page.to_s+"&sort="+sort)
 	else
@@ -103,9 +107,7 @@ post("/newPassword") do
 	cur_page = params["pg"].nil? ? 1 : params["pg"].to_i
 	sort   = params["sort"].nil? ? SORTDEFAULT : params["sort"]
 
-	username = session[:user]
-	user = User.newFromDB(username)
-	user.newPassword(params["password"])
+	current_user.newPassword(params["password"])
 
 	redirect("/?pg="+cur_page.to_s+"&sort="+sort)
 end
