@@ -22,7 +22,7 @@ class User
 
 	# Check if a username/password combo is present in the database
 	def User.loginValid?(username,password)
-		row = DATABASE.find("users","username",username)
+		row = DATABASE.find("users","username","'#{username}'")
 		if row.nil? then return false end
 		return row["password"] == password
 	end
