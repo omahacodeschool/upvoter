@@ -4,6 +4,24 @@ window.addEventListener('load', function(){
 	var loginModal = new Modal("loginModal");
 	var signUpModal = new Modal("signUpModal");
 
+	// All of our modal submit buttons.
+	var newPostSubmitObject = new Modal("newPostSubmit");
+	var loginSubmitObject = new Modal("loginSubmit");
+	var signUpSubmitObject = new Modal("signUpSubmit");
+
+	var newPostModalSubmit = document.getElementById("newPostSubmit");
+	var loginModalSubmit = document.getElementById("loginSubmit");
+	var signUpModalSubmit = document.getElementById("signUpSubmit");
+
+// --------------------NOT DONE, START HERE-------------------------------
+
+	// Add click events to modal submit forms.
+	newPostModalSubmit.addEventListener('click', newPostSubmitObject.sendNewPost);
+	loginModalSubmit.addEventListener('click', loginSubmitObject.sendLogin);
+	signUpModalSubmit.addEventListener('click', signUpSubmitObject.sendSignUp);
+
+// --------------------NOT DONE, START HERE-------------------------------
+
 	// Array of all upvote arrows.
 	var upvoteArrowArray = document.getElementsByClassName("upvoteButton");
 	

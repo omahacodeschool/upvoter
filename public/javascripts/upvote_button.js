@@ -50,7 +50,6 @@ function UpvoteButton(UVButton){
     var upvoteRequest = new XMLHttpRequest();
     // Setting the address that we will be posting to.
     var action = e.target.parentNode.action;
-    debugger;
     // This is a post request that sends the post ID and user ID in the query
     // string.
     upvoteRequest.open('POST', action);
@@ -59,7 +58,6 @@ function UpvoteButton(UVButton){
     // Example: If the user clicks "upvote" on a post, when the server responds
     // that it received the request, only then will it update the like counter.
     upvoteRequest.onload = function(){
-      alert("I got your request.");
     };
     // This line sends the request.
     upvoteRequest.send();

@@ -71,7 +71,7 @@
 			</div>
 		</div>
 
-		<%= erb :modals %>
+		<%= erb :modals, :locals => {:pg => @cur_page, :sort => @sort, :username => @user} %>
 
 		<%= erb :footer %>
 

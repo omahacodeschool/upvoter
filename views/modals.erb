@@ -12,6 +12,11 @@
 		<div class="modalContent">
 
 			<form class="newPostForm" method="post" action="/newPost">
+
+				<input type="hidden" name="pg" value="<%= pg %>">
+				<input type="hidden" name="sort" value="<%= sort %>">
+				<input type="hidden" name="username" value="<%= username %>">
+
 				<div class="articleLine">
 					<span>Title:</span>
 					<input type="text" name="title" class="selected" placeholder="Article title...">
@@ -25,7 +30,7 @@
 
 				<br>
 				<div id="submitButton">
-					<input type="submit" name="submitPost" class="roundCorner selected" value="Submit">
+					<input type="submit" name="submitPost" id="newPostSubmit" class="roundCorner selected" value="Submit">
 				</div>
 				
 			</form>
@@ -45,6 +50,8 @@
 		<div class="modalContent">
 
 			<form class="newPostForm">
+				<input type="hidden" name="pg" value="<%= @cur_page %>">
+				<input type="hidden" name="sort" value="<%= @sort %>">
 				<div class="articleLine">
 					<span>Username:</span>
 					<input type="text" name="loginUsername" class="selected" placeholder="Username...">
@@ -58,7 +65,7 @@
 
 				<br>
 				<div id="submitButton">
-					<input type="submit" name="submitPost" class="roundCorner selected" value="Submit">
+					<input type="submit" name="submitPost" id="loginSubmit" class="roundCorner selected" value="Submit">
 				</div>
 				
 			</form>
@@ -78,6 +85,8 @@
 		<div class="modalContent signUpContent">
 
 			<form class="newPostForm">
+				<input type="hidden" name="pg" value="<%= @cur_page %>">
+				<input type="hidden" name="sort" value="<%= @sort %>">
 				<div class="signUpLine">
 					<span>Username:</span>
 					<input type="text" name="signUpUsername" class="selected" placeholder="Username...">
@@ -109,7 +118,7 @@
 
 				<br>
 				<div id="submitButton">
-					<input type="submit" name="submitPost" class="roundCorner selected" value="Submit">
+					<input type="submit" name="submitPost" id="signUpSubmit" class="roundCorner selected" value="Submit">
 				</div>
 				
 			</form>
