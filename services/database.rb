@@ -17,6 +17,22 @@ class Database
 		@conn.exec("INSERT INTO #{table} " + insertQuery(entry) + ";")
 	end
 
+	# Get all rows based on a key and value.
+	# 
+	# table         - Table name as string
+	# key           - String of the column header to search
+	# key_value     - Value of column to return matching entry
+	# 
+	# Returns an Array the row hashes.
+	def find_all(table, key, key_value)
+		sql = "SELECT * FROM #{table} WHERE #{key}='#{key_value}';"
+		puts "Running this SQL: \n\n"
+		puts sql
+		puts "\n\n-----------------------------------------------------"
+		
+		result = @conn.exec(sql).to_a
+	end
+
 	# Get a single row based on a key and value.
 	# 
 	# table         - Table name as string
@@ -25,8 +41,18 @@ class Database
 	# 
 	# Returns a Hash of the row's information, or Nil.
 	def find(table, key, key_value)
-		result = @conn.exec("SELECT * FROM #{table} WHERE #{key}=#{key_value};")[0]
-		return result
+		sql = "SELECT * FROM #{table} WHERE #{key}='#{key_value}';"
+		puts "Running this SQL: \n\n"
+		puts sql
+		puts "\n\n-----------------------------------------------------"
+		
+		result = @conn.exec(sql)
+
+		if result.ntuples == 0
+			binding.pry
+		else
+			return result[0]
+		end
 	end
 
 	# Get all rows from a table.

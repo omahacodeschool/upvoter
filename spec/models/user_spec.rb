@@ -97,7 +97,7 @@ RSpec.describe(User,".newPassword") do
 		query += "VALUES ('1234567890', 'Able', 'bravocharlie@delta.echo', 'foxtrot');"
 		DATABASE.conn.exec(query)
 		user = User.new
-		user.username = "'Able'"
+		user.username = "Able"
 
 		# Exercise
         user.newPassword("'gamma'")

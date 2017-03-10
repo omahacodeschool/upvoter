@@ -32,7 +32,7 @@ it "returns information on a single entry in a table" do
 	findUser.conn.exec("INSERT INTO users(username, email, password) VALUES ('nennington', 'barlsworth@gmail.com', 'nenners');")
 
 	# Exercise
-	resultHash = findUser.find("users", "email", "'barlsworth@gmail.com'")
+	resultHash = findUser.find("users", "email", "barlsworth@gmail.com")
 
 	# Verify
 	expect(resultHash).to include("username" => "nennington", "email" => "barlsworth@gmail.com", "password" => "nenners")
@@ -76,7 +76,7 @@ it "edits an entry in sql table" do
 	changePass.conn.exec("INSERT INTO users(username, email, password) VALUES ('nennington', 'barlsworth@gmail.com', 'nenners');")
 
 	# Exercise
-	changePass.edit("users", "password", "'snails'", "username", "'nennington'")
+	changePass.edit("users", "password", "snails", "username", "nennington")
 
 	# Verify
 	actual = changePass.conn.exec("SELECT password FROM users WHERE username='nennington';")[0]["password"]
