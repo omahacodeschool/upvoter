@@ -16,7 +16,7 @@ window.addEventListener('load', function(){
 // --------------------NOT DONE, START HERE-------------------------------
 
 	// Add click events to modal submit forms.
-	newPostModalSubmit.addEventListener('click', newPostSubmitObject.sendNewPost);
+	// newPostModalSubmit.addEventListener('click', newPostSubmitObject.sendNewPost);
 	loginModalSubmit.addEventListener('click', loginSubmitObject.sendLogin);
 	signUpModalSubmit.addEventListener('click', signUpSubmitObject.sendSignUp);
 

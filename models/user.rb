@@ -3,6 +3,11 @@ class User
 	attr_reader :userid, :username, :email, :password
 	attr_writer :userid, :username, :email, :password
 
+	# Returns an Array of post_ids that this user likes.
+	def likes
+		@likes ||= fetch_likes
+	end
+
 	# Creates a new user from hash of user info
 	def User.newFromInfo(info)
 		newUser = User.new
@@ -15,6 +20,7 @@ class User
 
 	# Creates a new User from database info
 	def User.newFromDB(username)
+		puts "\n\n--------------------------FIND! User.newFromDB(username)\n\n"
 		@username = username
 		info = DATABASE.find("users", "username", @username)
 		return User.newFromInfo(info)
@@ -22,6 +28,7 @@ class User
 
 	# Check if a username/password combo is present in the database
 	def User.loginValid?(username,password)
+		puts "\n\n--------------------------FIND! User.loginValid?\n\n"
 		row = DATABASE.find("users","username",username)
 		if row.nil? then return false end
 		return row["password"] == password
@@ -41,9 +48,18 @@ class User
 	end
 
 	def posts
+		puts '\n\nRunning User#posts\n\n'
 		posts = DATABASE.conn.exec("SELECT postid FROM posts WHERE userid='#{@userid}';")
 		posts = posts.values.flatten
 		return posts
+	end
+
+	private
+
+	def fetch_likes
+		puts "\n\n--------------------------FIND! User#fetch_likes?\n\n"
+		like_rows = DATABASE.find_all("likes", "userid", userid)
+		like_rows.map { |row| row["postid"] }
 	end
 
 end

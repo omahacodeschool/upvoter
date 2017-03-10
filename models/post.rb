@@ -3,6 +3,7 @@ class Post
     attr_writer  :postid, :userid, :title, :content, :score
 
     def num_likes
+        puts "MORE SQL! GETTING LIKES FOR THE POST."
         return DATABASE.conn.exec("SELECT * FROM likes WHERE postid='#{@postid}'").to_a.length
     end
 
@@ -22,30 +23,23 @@ class Post
     end
 
     def Post.newFromDB(postid)
+        puts "\n\n-------------------------Post.newFromDB\n\n"
         @postid = postid
         info = DATABASE.find("posts", "postid", @postid)
         return newFromInfo(info)
     end
 
     # Checks if user has already liked a post
-    # user - username as string
+    # user - User object.
     # returns true if likes has an entry with both the wanted postid and userid
     def likedBy?(user)
-        liked = false
-        if user != ""
-            uid = DATABASE.find("users", "username", user)["userid"]
-            hash = DATABASE.all("likes","likeid")
-            hash.each do |k, v|
-                if v["userid"] == uid && v["postid"] == @postid
-                    liked = true
-                end
-            end
-        end
-        return liked
+        puts "\n\n"
+        user.likes.include?(@postid) if user
     end
 
     # Increments/decrements score of post when user clicks arrow.
     def Post.likeClicked(postid, user)
+        puts "\n\n-------------------------Post.likeClicked\n\n"
         uid = DATABASE.find("users", "username", user)["userid"]
         thispost = Post.newFromDB(postid)
         if thispost.likedBy?(user)
@@ -68,11 +62,15 @@ class Post
     # sort_method - String of sort method for page
     # page_number - Integer page number
     def Post.page(sort_method,page_number)
-        pageIDs = Post.pageIDs(sort_method,page_number)
-        if pageIDs.nil? 
-            return nil
-        else
-            return Post.IDsToPosts(pageIDs)
+        if sort_method == "newest"
+            sorter = "ORDER BY postid DESC"
+        end
+
+        offset = (page_number - 1) * 25
+
+        sql = "SELECT * FROM posts #{sorter} OFFSET #{offset} LIMIT 25"
+        DATABASE.conn.exec(sql).map do |row|
+            Post.newFromInfo(row)
         end
     end
 
@@ -110,7 +108,7 @@ class Post
     def Post.top()
         result = {}
         Post.all.each do |k, v|
-            result[k] = Post.newFromDB(k).num_likes
+            result[k] = Post.newFromInfo(v).num_likes
         end
         result = result.sort_by {|k, v| v}.to_h
         return result.keys.reverse
@@ -120,7 +118,7 @@ class Post
     def Post.popular()
         result = {}
         Post.all.each do |k, v|
-            result[k] = Post.newFromDB(k).score.popular_value
+            result[k] = Post.newFromInfo(v).score.popular_value
         end
         result = result.sort_by {|k, v| v}.to_h
         return result.keys.reverse
