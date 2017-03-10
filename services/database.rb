@@ -25,7 +25,7 @@ class Database
 	# 
 	# Returns a Hash of the row's information, or Nil.
 	def find(table, key, key_value)
-		result = @conn.exec("SELECT * FROM " + table + " WHERE " + key + "='" + key_value + "';")[0]
+		result = @conn.exec("SELECT * FROM #{table} WHERE #{key}=#{key_value};")[0]
 		return result
 	end
 
