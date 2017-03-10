@@ -30,8 +30,9 @@ end
 post("/newPost") do
 	cur_page = params["pg"].nil? ? 1 : params["pg"].to_i
 	sort     = params["sort"].nil? ? SORTDEFAULT : params["sort"]
+	username = params["user"].nil? ? session[:user] : params["user"]
 
-	user = User.newFromDB(session[:user])
+	user = User.newFromDB(username)
 	post_info = {"userid" => user.userid, "title" => params["title"], "content" => params["content"]}
 	post = Post.newFromInfo(post_info)
 	post.save
