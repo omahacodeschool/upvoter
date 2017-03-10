@@ -83,8 +83,7 @@ class Post
     end
 
     def getAuthor
-        userid = DATABASE.find("posts", "postid", "'#{@postid}'")["userid"]
-        author = DATABASE.find("users", "userid", userid)["username"]
+        author = DATABASE.find("users", "userid", @userid)["username"]
         return author
     end
 
