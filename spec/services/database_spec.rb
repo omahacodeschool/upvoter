@@ -2,89 +2,89 @@ require "pry"
 
 # Testing the .newEntry Database method.
 RSpec.describe(Database, ".newEntry") do
-  it "adds new entry to database" do
-  	
-  	# Setup
-    tableCleaner
-  	newUser = Database.new("upvoter_test")
+	it "adds new entry to database" do
 
-    # Exercise
-  	newUser.newEntry("users", {"username" => "nennington", "email" => "barlsworth@gmail.com", "password"  => "nenners"})
+	# Setup
+	tableCleaner
+	newUser = Database.new("upvoter_test")
 
-    # Verification
-    actual = newUser.conn.exec("SELECT username FROM users WHERE username='nennington';")[0]["username"]
-    expect(actual).to eq('nennington')
+	# Exercise
+	newUser.newEntry("users", {"username" => "nennington", "email" => "barlsworth@gmail.com", "password"  => "nenners"})
 
-    # Teardown
-    # newUser.conn.exec("DELETE FROM users WHERE username='nennington';")
-    tableCleaner
+	# Verification
+	actual = newUser.conn.exec("SELECT username FROM users WHERE username='nennington';")[0]["username"]
+	expect(actual).to eq('nennington')
 
-  end
+	# Teardown
+	# newUser.conn.exec("DELETE FROM users WHERE username='nennington';")
+	tableCleaner
+
+	end
 end
 
 # Testing the .find Database method.
 RSpec.describe(Database, ".find") do
-  it "returns information on a single entry in a table" do
-  	
-  	# Setup
-    tableCleaner
-  	findUser = Database.new("upvoter_test")
-    findUser.conn.exec("INSERT INTO users(username, email, password) VALUES ('nennington', 'barlsworth@gmail.com', 'nenners');")
+it "returns information on a single entry in a table" do
 
-    # Exercise
-  	resultHash = findUser.find("users", "email", "barlsworth@gmail.com")
+	# Setup
+	tableCleaner
+	findUser = Database.new("upvoter_test")
+	findUser.conn.exec("INSERT INTO users(username, email, password) VALUES ('nennington', 'barlsworth@gmail.com', 'nenners');")
 
-    # Verify
-    expect(resultHash).to include("username" => "nennington", "email" => "barlsworth@gmail.com", "password" => "nenners")
+	# Exercise
+	resultHash = findUser.find("users", "email", "'barlsworth@gmail.com'")
 
-    # Teardown
-    # findUser.conn.exec("DELETE FROM users WHERE username='nennington';")
-    tableCleaner
+	# Verify
+	expect(resultHash).to include("username" => "nennington", "email" => "barlsworth@gmail.com", "password" => "nenners")
 
-  end
+	# Teardown
+	# findUser.conn.exec("DELETE FROM users WHERE username='nennington';")
+	tableCleaner
+
+	end
 end
 
 # Testing the .all Database method.
 RSpec.describe(Database, ".all") do
-  it "returns information on all entries in a table" do
-  	
-  	# Setup
-    tableCleaner
-    allUsers = Database.new("upvoter_test")
-    uf = UpvoteFaker.new
-    uf.fakeUsers(30)
+it "returns information on all entries in a table" do
 
-  	# Exercise
-    allHash = allUsers.all("users", "userid")
+	# Setup
+	tableCleaner
+	allUsers = Database.new("upvoter_test")
+	uf = UpvoteFaker.new
+	uf.fakeUsers(30)
 
-  	# Verify
-    expect(allHash.length).to eq(30)
+	# Exercise
+	allHash = allUsers.all("users", "userid")
 
-    # Teardown
-    tableCleaner
+	# Verify
+	expect(allHash.length).to eq(30)
 
-  end
+	# Teardown
+	tableCleaner
+
+	end
 end
 
 # Testing the .edit Database method.
 RSpec.describe(Database, ".edit") do
-  it "edits an entry in sql table" do
-  	
-  	# Setup
-    tableCleaner
-  	changePass = Database.new("upvoter_test")
-  	changePass.conn.exec("INSERT INTO users(username, email, password) VALUES ('nennington', 'barlsworth@gmail.com', 'nenners');")
+it "edits an entry in sql table" do
 
-  	# Exercise
-  	changePass.edit("users", "password", "'snails'", "username", "'nennington'")
+	# Setup
+	tableCleaner
+	changePass = Database.new("upvoter_test")
+	changePass.conn.exec("INSERT INTO users(username, email, password) VALUES ('nennington', 'barlsworth@gmail.com', 'nenners');")
 
-  	# Verify
-    actual = changePass.conn.exec("SELECT password FROM users WHERE username='nennington';")[0]["password"]
-    expect(actual).to eq('snails')
+	# Exercise
+	changePass.edit("users", "password", "'snails'", "username", "'nennington'")
 
-    # Teardown
-    # changePass.conn.exec("DELETE FROM users WHERE username='nennington';")
-    tableCleaner
+	# Verify
+	actual = changePass.conn.exec("SELECT password FROM users WHERE username='nennington';")[0]["password"]
+	expect(actual).to eq('snails')
 
-  end
+	# Teardown
+	# changePass.conn.exec("DELETE FROM users WHERE username='nennington';")
+	tableCleaner
+
+	end
 end

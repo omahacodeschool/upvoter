@@ -29,7 +29,7 @@ class Post
 
     def Post.newFromDB(postid)
         @postid = postid
-        info = DATABASE.find("posts", "postid", @postid)
+        info = DATABASE.find("posts", "postid", "'#{@postid}'")
         return newFromInfo(info)
     end
 
@@ -37,12 +37,14 @@ class Post
     # user - username as string
     # returns true if likes has an entry with both the wanted postid and userid
     def likedBy?(user)
-        uid = DATABASE.find("users", "username", user)["userid"]
-        hash = DATABASE.all("likes","likeid")
         liked = false
-        hash.each do |k, v|
-            if v["userid"] == uid && v["postid"] == @postid
-                liked = true
+        if user != ""
+            uid = DATABASE.find("users", "username", user)["userid"]
+            hash = DATABASE.all("likes","likeid")
+            hash.each do |k, v|
+                if v["userid"] == uid && v["postid"] == @postid
+                    liked = true
+                end
             end
         end
         return liked
@@ -53,9 +55,9 @@ class Post
         uid = DATABASE.find("users", "username", user)["userid"]
         thispost = Post.newFromDB(postid)
         if thispost.likedBy?(user)
-            thispost.removeLike(uid)
+            thispost.send(:removeLike, uid)
         elsif !uid.nil?
-            thispost.addLike(uid)
+            thispost.send(:addLike, uid)
         end
     end
 
@@ -80,6 +82,8 @@ class Post
         end
     end
 
+    private
+
     # CAN BE PRIVATE BUT BREAKS TESTS  ???
     def addLike(uid)
         entry = {"postid" => @postid, "userid" => uid}
@@ -98,7 +102,7 @@ class Post
         DATABASE.delete("likes","likeid", lid)
     end
 
-    private
+
 
     # Defines method to sort posts by age.
     # Returns array of postids sorted by newest first.

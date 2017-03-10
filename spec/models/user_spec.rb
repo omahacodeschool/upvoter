@@ -51,7 +51,7 @@ RSpec.describe(User,".loginValid?") do
 		DATABASE.conn.exec(query)
 
 		# Exercise / Verify
-		expect(User.loginValid?("Able","foxtrot")).to be true
+		expect(User.loginValid?("'Able'","foxtrot")).to be true
 		#TODO Should we also test an invalid combo?
 
 		# Teardown
