@@ -32,7 +32,7 @@ class Post
     # returns true if likes has an entry with both the wanted postid and userid
     def likedBy?(user)
         liked = false
-        if user != ""
+        if user != "''"
             uid = DATABASE.find("users", "username", user)["userid"]
             hash = DATABASE.all("likes","likeid")
             hash.each do |k, v|
