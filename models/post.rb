@@ -2,12 +2,6 @@ class Post
     attr_reader :postid, :userid, :title, :content, :score
     attr_writer  :postid, :userid, :title, :content, :score
 
-    # def initialize(id)
-    #   @id = id
-    #   @info = DATABASE.find("posts", "postid", id.to_s)
-    #   @score = Score.new(id)
-    # end
-
     def num_likes
         return DATABASE.conn.exec("SELECT * FROM likes WHERE postid='#{@postid}'").to_a.length
     end
@@ -29,7 +23,7 @@ class Post
 
     def Post.newFromDB(postid)
         @postid = postid
-        info = DATABASE.find("posts", "postid", "'#{@postid}'")
+        info = DATABASE.find("posts", "postid", @postid)
         return newFromInfo(info)
     end
 

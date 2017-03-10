@@ -16,7 +16,7 @@ class User
 	# Creates a new User from database info
 	def User.newFromDB(username)
 		@username = username
-		info = DATABASE.find("users", "username", "'#{@username}'")
+		info = DATABASE.find("users", "username", @username)
 		return User.newFromInfo(info)
 	end
 
