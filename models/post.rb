@@ -74,15 +74,19 @@ class Post
         end
     end
 
+    # Returns username string associated with Post's userID value.
+    def getAuthor
+        author = User.newFromDBbyID(userid).username
+        return author
+    end
+
     private
 
-    # CAN BE PRIVATE BUT BREAKS TESTS  ???
     def addLike(uid)
         entry = {"postid" => @postid, "userid" => uid}
         DATABASE.newEntry("likes", entry)
     end
 
-    # CAN BE PRIVATE BUT BREAKS TESTS ???
     def removeLike(uid)
         hash = DATABASE.all("likes","likeid")
         lid = nil
@@ -93,8 +97,6 @@ class Post
         end
         DATABASE.delete("likes","likeid", lid)
     end
-
-
 
     # Defines method to sort posts by age.
     # Returns array of postids sorted by newest first.

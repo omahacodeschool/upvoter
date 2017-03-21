@@ -20,15 +20,20 @@ class User
 
 	# Creates a new User from database info
 	def User.newFromDB(username)
-		puts "\n\n--------------------------FIND! User.newFromDB(username)\n\n"
 		@username = username
 		info = DATABASE.find("users", "username", @username)
 		return User.newFromInfo(info)
 	end
 
+	# Creates a new User using ID info
+	def User.newFromDBbyID(userid)
+		@userid = userid
+		info = DATABASE.find("users", "userid", @userid)
+		return User.newFromInfo(info)
+	end
+
 	# Check if a username/password combo is present in the database
 	def User.loginValid?(username,password)
-		puts "\n\n--------------------------FIND! User.loginValid?\n\n"
 		row = DATABASE.find("users","username",username)
 		if row.nil? then return false end
 		return row["password"] == password

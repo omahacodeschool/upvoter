@@ -14,7 +14,7 @@ class Database
 	# table - Table name as string
 	# entry - Hash of values to enter
 	def newEntry(table, entry)
-		@conn.exec("INSERT INTO " + table + insertQuery(entry) + ";")
+		@conn.exec("INSERT INTO #{table} " + insertQuery(entry) + ";")
 	end
 
 	# Get all rows based on a key and value.
@@ -49,7 +49,6 @@ class Database
 		result = @conn.exec(sql)
 
 		if result.ntuples == 0
-			binding.pry
 		else
 			return result[0]
 		end
@@ -63,7 +62,7 @@ class Database
 	# Returns a Hash containing each row's information
 	def all(table, key_result_by)
 		result = {}
-		the_hash = @conn.exec("SELECT * FROM " + table + ";")
+		the_hash = @conn.exec("SELECT * FROM #{table};")
 		the_hash.each do |row|
 			result[row[key_result_by]] = row
 		end
@@ -79,7 +78,7 @@ class Database
 	# Examples: - delete(users, username, "bruce")
 	#           - delete(users, userid, 1234567890.123456)
 	def delete(table, key_name, key_value)
-		@conn.exec("DELETE FROM " + table + " WHERE " + key_name + "=" + key_value + ";")
+		@conn.exec("DELETE FROM #{table} WHERE #{key_name}=" + key_value + ";")
 	end
 
 	# Edit a row from a table
@@ -92,7 +91,7 @@ class Database
 	#
 	# Example:  - edit(users, password, "chickennugs", username, "eggboi")
 	def edit(table, key_name, key_value, idkey, idval)
-		@conn.exec("UPDATE " + table + " SET " + key_name + "=" + key_value + " WHERE " + idkey + "=" + idval + ";")
+		@conn.exec("UPDATE #{table} SET #{key_name}=" + key_value + " WHERE #{idkey}=" + idval + ";")
 
 	end
 
