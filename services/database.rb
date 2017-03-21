@@ -49,7 +49,6 @@ class Database
 		result = @conn.exec(sql)
 
 		if result.ntuples == 0
-			binding.pry
 		else
 			return result[0]
 		end

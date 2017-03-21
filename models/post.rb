@@ -74,8 +74,9 @@ class Post
         end
     end
 
+    # Returns username string associated with Post's userID value.
     def getAuthor
-        author = DATABASE.find("users", "userid", @userid)["username"]
+        author = User.newFromDBbyID(userid).username
         return author
     end
 
