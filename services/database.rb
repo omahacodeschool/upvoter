@@ -6,7 +6,12 @@ class Database
 	attr_reader :conn
 
 	def initialize(database_path='upvoter_development')
-		@conn = PG.connect(dbname: database_path)
+		if ENV['DATABASE_URL']
+      uri = URI.parse(ENV['DATABASE_URL'])
+      @conn = PG.connect(uri.hostname, uri.port, nil, nil, uri.path[1..-1], uri.user, uri.password)
+    else
+      @conn = PG.connect( dbname: database_path )
+    end
 	end
 
 	# Writes new entry to database with self-generated ID.

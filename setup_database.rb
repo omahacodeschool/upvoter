@@ -10,11 +10,17 @@ require "pg"
 # When you need to set up the database, just UNCOMMENT the below.
 # Remember to comment it back out when you're done.
 
-conn = PG.connect( dbname: 'postgres' )
-conn.exec("CREATE DATABASE upvoter_development")
-conn.exec("CREATE DATABASE upvoter_test")
 
-conn = PG.connect( dbname: 'upvoter_development' )
+if ENV['DATABASE_URL']
+  uri = URI.parse(ENV['DATABASE_URL'])
+  conn = PG.connect(uri.hostname, uri.port, nil, nil, uri.path[1..-1], uri.user, uri.password)
+else
+  conn = PG.connect( dbname: 'postgres' )
+  conn.exec("CREATE DATABASE upvoter_development")
+  conn.exec("CREATE DATABASE upvoter_test")
+
+  conn = PG.connect( dbname: 'upvoter_development' )
+end
 
 # ONLY UNCOMMENT IF YOU WANT TO LOSE YOUR DATA
 # conn.exec("DROP TABLE likes")
