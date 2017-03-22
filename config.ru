@@ -6,9 +6,9 @@ end
 
 require './main'
 
-need_seed_data = ENV["NEED_SEED_DATA"]
-if need_seed_data == "true"
+# need_seed_data = ENV["NEED_SEED_DATA"]
+# if need_seed_data == "true"
   require_relative "./seed_data.rb"
-end
+# end
 
 run Sinatra::Application
