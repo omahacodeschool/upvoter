@@ -5,4 +5,10 @@ if database_needs_to_be_setup == "true"
 end
 
 require './main'
+
+database_needs_to_be_setup = ENV["NEED_SEED_DATA"]
+if need_seed_data == "true"
+  require_relative "./seed_data.rb"
+end
+
 run Sinatra::Application
