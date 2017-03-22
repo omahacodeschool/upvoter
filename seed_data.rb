@@ -1,3 +1,5 @@
+puts "\nMaking seed user.\n"
+
 user = User.newFromInfo({
   "username" => "sumeetjain",
   "email" => "sumeet@sumeetjain.com",
@@ -5,3 +7,5 @@ user = User.newFromInfo({
 })
 
 user.register
+
+puts "Seed user created! #{user.inspect}"
