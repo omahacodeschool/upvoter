@@ -40,7 +40,7 @@ class Post
     # Increments/decrements score of post when user clicks arrow.
     def Post.likeClicked(postid, user)
         puts "\n\n-------------------------Post.likeClicked\n\n"
-        uid = DATABASE.find("users", "username", user)["userid"]
+        uid = DATABASE.find("users", "username", user.username)["userid"]
         thispost = Post.newFromDB(postid)
         if thispost.likedBy?(user)
             thispost.send(:removeLike, uid)
